@@ -1,0 +1,11 @@
+qdisc mqprio 8001: root tc 4 map 0 1 2 3 3 3 3 3 3 3 3 3 3 3 3 3 
+             queues:(0:0) (1:1) (2:2) (3:3) 
+             mode:dcb
+             shaper:dcb
+             fp: E E E E E E E E E E E E E E E E
+
+qdisc fq_codel 0: parent 8001:3 limit 10240p flows 1024 quantum 1514 target 5ms interval 100ms memory_limit 32Mb ecn drop_batch 64 
+qdisc fq_codel 0: parent 8001:2 limit 10240p flows 1024 quantum 1514 target 5ms interval 100ms memory_limit 32Mb ecn drop_batch 64 
+qdisc fq_codel 0: parent 8001:1 limit 10240p flows 1024 quantum 1514 target 5ms interval 100ms memory_limit 32Mb ecn drop_batch 64 
+qdisc etf 8002: parent 8001:4 clockid TAI delta 500000 offload on deadline_mode off skip_sock_check off
+qdisc ingress ffff: parent ffff:fff1 ----------------

@@ -1,0 +1,21 @@
+ptp4l[574.276]: selected /dev/ptp1 as PTP clock
+ptp4l[574.293]: port 1 (enp2s0): INITIALIZING to LISTENING on INIT_COMPLETE
+ptp4l[574.293]: port 0 (/var/run/ptp4l): INITIALIZING to LISTENING on INIT_COMPLETE
+ptp4l[574.293]: port 0 (/var/run/ptp4lro): INITIALIZING to LISTENING on INIT_COMPLETE
+ptp4l[577.677]: port 1 (enp2s0): new foreign master aa00aa.fffe.00aa22-1
+ptp4l[578.281]: port 1 (enp2s0): LISTENING to MASTER on ANNOUNCE_RECEIPT_TIMEOUT_EXPIRES
+ptp4l[578.281]: selected local clock aa00aa.fffe.00aa11 as best master
+ptp4l[578.281]: port 1 (enp2s0): assuming the grand master role
+ptp4l[579.677]: selected best master clock aa00aa.fffe.00aa22
+ptp4l[579.677]: port 1 (enp2s0): assuming the grand master role
+ptp4l[604.385]: port 1 (enp2s0): link down
+ptp4l[604.385]: port 1 (enp2s0): MASTER to FAULTY on FAULT_DETECTED (FT_UNSPECIFIED)
+ptp4l[604.405]: selected local clock aa00aa.fffe.00aa11 as best master
+ptp4l[604.405]: port 1 (enp2s0): assuming the grand master role
+ptp4l[607.576]: port 1 (enp2s0): link up
+ptp4l[607.594]: port 1 (enp2s0): FAULTY to LISTENING on INIT_COMPLETE
+ptp4l[610.955]: port 1 (enp2s0): new foreign master aa00aa.fffe.00aa22-1
+ptp4l[611.426]: port 1 (enp2s0): LISTENING to MASTER on ANNOUNCE_RECEIPT_TIMEOUT_EXPIRES
+ptp4l[611.426]: port 1 (enp2s0): assuming the grand master role
+ptp4l[612.955]: selected best master clock aa00aa.fffe.00aa22
+ptp4l[612.955]: port 1 (enp2s0): assuming the grand master role

@@ -1,0 +1,4 @@
+Pause parameters for enp0s30f4:
+Autonegotiate:	off
+RX:		off
+TX:		off

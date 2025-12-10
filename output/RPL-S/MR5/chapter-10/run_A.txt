@@ -1,0 +1,63 @@
+Run.sh detected: opcua/json config
+
+/var/log folder for logging exists.
+Selected json-config: opcua-pkt1a
+Not running iperf3.
+
+Wait 20 sec for test environment to stabilize before running opcua server.
+[2024-11-25 22:07:10.735 (UTC+0000)] [33mwarn/server[0m	Username/Password configured, but no encrypting SecurityPolicy. This can leak credentials on the network.
+[2024-11-25 22:07:10.735 (UTC+0000)] [33mwarn/userland[0m	AcceptAll Certificate Verification. Any remote certificate will be accepted.
+[2024-11-25 22:07:10.735 (UTC+0000)] [32minfo/userland[0m	PubSub channel requested
+[2024-11-25 22:07:10.735 (UTC+0000)] [32minfo/server[0m	Open PubSub ethernet connection.
+[2024-11-25 22:07:10.735 (UTC+0000)] [32minfo/userland[0m	Publisher CPU CORE: 2
+
+[2024-11-25 22:07:10.735 (UTC+0000)] [32minfo/network[0m	TCP network layer listening on opc.tcp://intel-corei7-64:7784/
+[2024-11-25 22:23:53.004 (UTC+0000)] [32minfo/network[0m	Shutting down the TCP network layer
+[2024-11-25 22:23:53.009 (UTC+0000)] [32minfo/server[0m	PubSub cleanup was called.
+Transfer Complete
+---------------------------------------------------------------------------------------
+GATE CONFIGURATION LIST:
+
+Interface: enp2s0
+qdisc taprio 100: root tc 4 map 3 1 0 2 3 3 3 3 3 3 3 3 3 3 3 3
+queues offset 0 count 1 offset 1 count 1 offset 2 count 1 offset 3 count 1
+ flags 0x2	base-time 1732572282489661556 cycle-time 500000 cycle-time-extension 0
+	index 0 cmd S gatemask 0xf interval 500000
+max-sdu 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+fp E E E E E E E E E E E E E E E E
+
+ Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) 
+ backlog 0b 0p requeues 0
+ tx_overruns 0
+qdisc pfifo 0: parent 100:3 refcnt 2 limit 1000p
+ Sent 69000000 bytes 1000000 pkt (dropped 0, overlimits 0 requeues 0) 
+ backlog 0b 0p requeues 0
+qdisc pfifo 0: parent 100:2 refcnt 2 limit 1000p
+ Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) 
+ backlog 0b 0p requeues 0
+qdisc pfifo 0: parent 100:1 refcnt 2 limit 1000p
+ Sent 236408 bytes 3474 pkt (dropped 0, overlimits 0 requeues 0) 
+ backlog 0b 0p requeues 0
+qdisc etf 8004: parent 100:4 refcnt 2 clockid TAI delta 400000 offload on deadline_mode off skip_sock_check off
+ Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) 
+ backlog 0b 0p requeues 0
+qdisc ingress ffff: parent ffff:fff1 ---------------- 
+ Sent 1375148 bytes 22958 pkt (dropped 0, overlimits 0 requeues 0) 
+ backlog 0b 0p requeues 0
+---------------------------------------------------------------------------------------
+PHC2SYS offset 	min	 -29 
+		max	 23
+	delay  	min	 0 
+		max	 0
+	waiting:         0
+	failed:          0
+PTP4L   rms    	min	 0 
+		max	 7
+	MCLK_SELECTED:   0
+	INIT_COMPLETE:   0
+	FAULT_DETECTED:  0
+	UNCALIBRATED:    0
+	link down:       0
+	timed out:       0
+	temporal:       0
+	UTCoffset:       0

@@ -1,0 +1,119 @@
+Parameters configuration done
+/var/log folder for logging exists.
+
+BUILD.SH: Checking OS Distro
+OS Distro: "Ubuntu"
+
+BUILD.SH: Checking for Bash shell
+Bash shell: yes
+
+BUILD.SH: Configure
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether build environment is sane... yes
+checking for a race-free mkdir -p... /usr/bin/mkdir -p
+checking for gawk... gawk
+checking whether make sets $(MAKE)... yes
+checking whether make supports nested variables... yes
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether the compiler supports GNU C... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to enable C11 features... none needed
+checking whether gcc understands -c and -o together... yes
+checking whether make supports the include directive... yes (GNU style)
+checking dependency style of gcc... gcc3
+checking for pkg-config... /usr/bin/pkg-config
+checking pkg-config is at least version 0.9.0... yes
+checking for libelf... yes
+checking for libbpf... yes
+checking that generated files are newer than configure... done
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating config.h
+config.status: executing depfiles commands
+
+BUILD.SH: Compile
+make  all-am
+make[1]: Entering directory '/root/rtcp-xdp'
+depbase=`echo src/cache/cat_cpuid_main.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I.  -O2 -g -fstack-protector-strong -fPIE -fPIC -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Wformat-overflow -Wno-parentheses -Wno-missing-field-initializers -Wextra -Wall -fno-common -Iinclude     -g -O2 -MT src/cache/cat_cpuid_main.o -MD -MP -MF $depbase.Tpo -c -o src/cache/cat_cpuid_main.o src/cache/cat_cpuid_main.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo src/rtcp/rtcp_main.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I.  -O2 -g -fstack-protector-strong -fPIE -fPIC -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Wformat-overflow -Wno-parentheses -Wno-missing-field-initializers -Wextra -Wall -fno-common -Iinclude     -g -O2 -MT src/rtcp/rtcp_main.o -MD -MP -MF $depbase.Tpo -c -o src/rtcp/rtcp_main.o src/rtcp/rtcp_main.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo src/rtcp/txrx-afxdp.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I.  -O2 -g -fstack-protector-strong -fPIE -fPIC -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Wformat-overflow -Wno-parentheses -Wno-missing-field-initializers -Wextra -Wall -fno-common -Iinclude     -g -O2 -MT src/rtcp/txrx-afxdp.o -MD -MP -MF $depbase.Tpo -c -o src/rtcp/txrx-afxdp.o src/rtcp/txrx-afxdp.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo src/rtcp/rtcp_util.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I.  -O2 -g -fstack-protector-strong -fPIE -fPIC -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Wformat-overflow -Wno-parentheses -Wno-missing-field-initializers -Wextra -Wall -fno-common -Iinclude     -g -O2 -MT src/rtcp/rtcp_util.o -MD -MP -MF $depbase.Tpo -c -o src/rtcp/rtcp_util.o src/rtcp/rtcp_util.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo src/rtcp/cwlg.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I.  -O2 -g -fstack-protector-strong -fPIE -fPIC -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Wformat-overflow -Wno-parentheses -Wno-missing-field-initializers -Wextra -Wall -fno-common -Iinclude     -g -O2 -MT src/rtcp/cwlg.o -MD -MP -MF $depbase.Tpo -c -o src/rtcp/cwlg.o src/rtcp/cwlg.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo src/rtcp/cwlg_legacy.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I.  -O2 -g -fstack-protector-strong -fPIE -fPIC -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Wformat-overflow -Wno-parentheses -Wno-missing-field-initializers -Wextra -Wall -fno-common -Iinclude     -g -O2 -MT src/rtcp/cwlg_legacy.o -MD -MP -MF $depbase.Tpo -c -o src/rtcp/cwlg_legacy.o src/rtcp/cwlg_legacy.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo src/rtcp/cwlg_nohz_helper.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I.  -O2 -g -fstack-protector-strong -fPIE -fPIC -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Wformat-overflow -Wno-parentheses -Wno-missing-field-initializers -Wextra -Wall -fno-common -Iinclude     -g -O2 -MT src/rtcp/cwlg_nohz_helper.o -MD -MP -MF $depbase.Tpo -c -o src/rtcp/cwlg_nohz_helper.o src/rtcp/cwlg_nohz_helper.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo src/file_util.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I.  -O2 -g -fstack-protector-strong -fPIE -fPIC -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Wformat-overflow -Wno-parentheses -Wno-missing-field-initializers -Wextra -Wall -fno-common -Iinclude     -g -O2 -MT src/file_util.o -MD -MP -MF $depbase.Tpo -c -o src/file_util.o src/file_util.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo src/shm_util.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I.  -O2 -g -fstack-protector-strong -fPIE -fPIC -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Wformat-overflow -Wno-parentheses -Wno-missing-field-initializers -Wextra -Wall -fno-common -Iinclude     -g -O2 -MT src/shm_util.o -MD -MP -MF $depbase.Tpo -c -o src/shm_util.o src/shm_util.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo src/live_log/ll_main.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I.  -O2 -g -fstack-protector-strong -fPIE -fPIC -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Wformat-overflow -Wno-parentheses -Wno-missing-field-initializers -Wextra -Wall -fno-common -Iinclude     -g -O2 -MT src/live_log/ll_main.o -MD -MP -MF $depbase.Tpo -c -o src/live_log/ll_main.o src/live_log/ll_main.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo src/live_log/ll_util.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I.  -O2 -g -fstack-protector-strong -fPIE -fPIC -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Wformat-overflow -Wno-parentheses -Wno-missing-field-initializers -Wextra -Wall -fno-common -Iinclude     -g -O2 -MT src/live_log/ll_util.o -MD -MP -MF $depbase.Tpo -c -o src/live_log/ll_util.o src/live_log/ll_util.c &&\
+mv -f $depbase.Tpo $depbase.Po
+gcc  -g -O2 -Wl,-z,noexecstack,-z,relro,-z,now -pie  -o cat_cpuid_app src/cache/cat_cpuid_main.o  
+gcc  -g -O2 -Wl,-z,noexecstack,-z,relro,-z,now -pie  -o live_log_app src/live_log/ll_main.o src/live_log/ll_util.o src/file_util.o src/shm_util.o  
+gcc  -g -O2 -Wl,-z,noexecstack,-z,relro,-z,now -pie  -o rtcp_app src/rtcp/rtcp_main.o src/rtcp/txrx-afxdp.o src/rtcp/rtcp_util.o src/rtcp/cwlg.o src/rtcp/cwlg_legacy.o src/rtcp/cwlg_nohz_helper.o src/file_util.o src/shm_util.o -L/usr/lib64 -lbpf  -lelf  -lpthread -lnuma 
+make[1]: Leaving directory '/root/rtcp-xdp'
+
+BUILD.SH: Clean up automake artifacts.
+rm -f *.tab.c
+test -z "" || rm -f 
+test . = "." || test -z "" || rm -f 
+rm -f src/.deps/.dirstamp
+rm -f src/.dirstamp
+rm -f src/cache/.deps/.dirstamp
+rm -f src/cache/.dirstamp
+rm -f src/live_log/.deps/.dirstamp
+rm -f src/live_log/.dirstamp
+rm -f src/rtcp/.deps/.dirstamp
+rm -f src/rtcp/.dirstamp
+rm -f config.h stamp-h1
+rm -f TAGS ID GTAGS GRTAGS GSYMS GPATH tags
+rm -f cscope.out cscope.in.out cscope.po.out cscope.files
+rm -f *.o
+rm -f src/*.o
+rm -f src/cache/*.o
+rm -f src/live_log/*.o
+rm -f src/rtcp/*.o
+Mapping socket priority N to VLAN priority N for enp1s0
+Turning off vlan stripping
+Turning off EEE
+Setting IRQ affinity based on /root/rtcp-xdp/shell/common/irq_affinity_4c_4TxRx.map
+Echo-ing 0x01 > /proc/irq/184/smp_affinity --> enp1s0:TxRx-0 
+Echo-ing 0x04 > /proc/irq/186/smp_affinity --> enp1s0:TxRx-2 
+Echo-ing 0x08 > /proc/irq/187/smp_affinity --> enp1s0:TxRx-3 
+Running PTP4L & PHC2SYS
+Using gPTP_i225-1G.cfg
+Run: tc qdisc replace dev enp1s0 parent root handle 100 mqprio  num_tc 4 map 3 1 0 2 3 3 3 3 3 3 3 3 3 3 3 3 queues  1@0 1@1 1@2 1@3  hw 0
+Adding flow-type for ptp packet to q-0
+ethtool -N enp1s0 flow-type ether proto 0x88f7 queue 0
+Added rule with ID 63
+Adding flow-type for rtcp packet priority 0x4000 to q-2
+ethtool -N enp1s0 flow-type ether vlan 0x4000 vlan-mask 0x1FFF action 2
+Added rule with ID 62
+xdp:
+enp1s0(2) md_btf_id(1) md_btf_enabled(1)
+
+Wait 30 sec for PTP to sync

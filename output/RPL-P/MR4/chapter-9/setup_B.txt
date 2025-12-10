@@ -1,0 +1,25 @@
+Run.sh selected: vs1b
+
+/var/log folder for logging exists.
+Mapping socket priority N to VLAN priority N for enp1s0
+Turning off EEE
+Setting IRQ affinity based on /usr/share/iotg-tsn-ref-sw/shell/../common/irq_affinity_4c_4TxRx.map
+Echo-ing 0x01 > /proc/irq/164/smp_affinity --> enp1s0:TxRx-0 
+Echo-ing 0x04 > /proc/irq/166/smp_affinity --> enp1s0:TxRx-2 
+Echo-ing 0x08 > /proc/irq/167/smp_affinity --> enp1s0:TxRx-3 
+Running PTP4L & PHC2SYS
+Using gPTP_i225-1G.cfg
+Run: tc qdisc replace dev enp1s0 parent root handle 100 mqprio  num_tc 4 map 3 1 0 2 3 3 3 3 3 3 3 3 3 3 3 3 queues  1@0 1@1 1@2 1@3  hw 0
+Adding flow-type for ptp packet to q-0
+ethtool -N enp1s0 flow-type ether proto 0x88f7 queue 0
+Added rule with ID 63
+Adding flow-type for txrx-tsn packet vlan priority 0x6000 to q-2
+ethtool -N enp1s0 flow-type ether vlan 0x6000 vlan-mask 0x1FFF action 2
+Added rule with ID 62
+Adding flow-type for txrx-tsn packet priority 0x4000 to q-2
+ethtool -N enp1s0 flow-type ether vlan 0x4000 vlan-mask 0x1FFF action 2
+Added rule with ID 61
+Adding flow-type for iperf3 packet to q-3
+ethtool -N enp1s0 flow-type ether proto 0x0800 queue 3
+Added rule with ID 60
+Wait 30 sec for PTP to sync

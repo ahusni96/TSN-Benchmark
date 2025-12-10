@@ -1,0 +1,10 @@
+ptp4l[1452.434]: selected /dev/ptp2 as PTP clock
+ptp4l[1452.447]: port 1 (enp0s30f4): INITIALIZING to LISTENING on INIT_COMPLETE
+ptp4l[1452.447]: port 0 (/var/run/ptp4l): INITIALIZING to LISTENING on INIT_COMPLETE
+ptp4l[1452.447]: port 0 (/var/run/ptp4lro): INITIALIZING to LISTENING on INIT_COMPLETE
+ptp4l[1455.874]: port 1 (enp0s30f4): new foreign master aa00aa.fffe.00aa22-1
+ptp4l[1456.115]: port 1 (enp0s30f4): LISTENING to MASTER on ANNOUNCE_RECEIPT_TIMEOUT_EXPIRES
+ptp4l[1456.115]: selected local clock aa00aa.fffe.00aa11 as best master
+ptp4l[1456.115]: port 1 (enp0s30f4): assuming the grand master role
+ptp4l[1457.874]: selected best master clock aa00aa.fffe.00aa22
+ptp4l[1457.874]: port 1 (enp0s30f4): assuming the grand master role

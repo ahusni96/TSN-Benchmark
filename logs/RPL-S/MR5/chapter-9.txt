@@ -1,0 +1,23 @@
+
+==================== Setting up TXRX-TSN
+A-side:~$ cd /usr/share/iotg-tsn-ref-sw/ && ./run.sh i225 enp2s0 vs1a setup
+B-side:~$ cd /usr/share/iotg-tsn-ref-sw/ && ./run.sh i225 enp2s0 vs1b setup
+Setup B-side completed
+Setup A-side completed
+
+==================== Running TXRX-TSN
+B-side:~$ cd /usr/share/iotg-tsn-ref-sw/ && ./run.sh i225 enp2s0 vs1b run
+A-side:~$ cd /usr/share/iotg-tsn-ref-sw/ && ./run.sh i225 enp2s0 vs1a run
+Run A-side completed
+Run B-side completed
+
+==================== Validating results
+afpkt-rxtstamps.txt has 500000 lines
+Results  Max     Avg     Min     Expected  Received  Duplicates  Losses
+U2U      775847  739857  706567  500000    500000    0           0
+afxdp-rxtstamps.txt has 500000 lines
+Results  Max     Avg     Min     Expected  Received  Duplicates  Losses
+U2U      121173  109465  102477  500000    500000    0           0
+INFO: gnuplot is not available in this system. No graph will be created.
+
+PASSED

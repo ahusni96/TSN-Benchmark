@@ -1,0 +1,2 @@
+A-side:~$ ./rtcp.sh -p t -h i225 -i enp85s0 -c rtcp1a -n 2400000 -d 125000
+B-side:~$ ./rtcp.sh -p e -h i225 -i enp85s0 -c rtcp1b -n 2400000 -d 125000

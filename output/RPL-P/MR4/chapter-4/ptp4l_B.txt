@@ -1,0 +1,111 @@
+ptp4l[994.578]: selected /dev/ptp0 as PTP clock
+ptp4l[994.609]: port 1 (enp1s0): INITIALIZING to LISTENING on INIT_COMPLETE
+ptp4l[994.609]: port 0 (/var/run/ptp4l): INITIALIZING to LISTENING on INIT_COMPLETE
+ptp4l[994.609]: port 0 (/var/run/ptp4lro): INITIALIZING to LISTENING on INIT_COMPLETE
+ptp4l[998.069]: port 1 (enp1s0): new foreign master aa00aa.fffe.00aa11-1
+ptp4l[998.295]: port 1 (enp1s0): LISTENING to MASTER on ANNOUNCE_RECEIPT_TIMEOUT_EXPIRES
+ptp4l[998.295]: selected local clock aa00aa.fffe.00aa22 as best master
+ptp4l[998.295]: port 1 (enp1s0): assuming the grand master role
+ptp4l[1000.069]: selected best master clock aa00aa.fffe.00aa11
+ptp4l[1000.069]: port 1 (enp1s0): MASTER to UNCALIBRATED on RS_SLAVE
+ptp4l[1000.948]: port 1 (enp1s0): UNCALIBRATED to SLAVE on MASTER_CLOCK_SELECTED
+ptp4l[1001.569]: rms  120 max  150 freq  -1497 +/-  99 delay    15 +/-   0
+ptp4l[1002.570]: rms   21 max   33 freq  -1532 +/-  30 delay    15 +/-   0
+ptp4l[1003.570]: rms   35 max   39 freq  -1601 +/-  10 delay    15 +/-   0
+ptp4l[1004.571]: rms   22 max   28 freq  -1613 +/-   4 delay    15 +/-   0
+ptp4l[1005.571]: rms    8 max   12 freq  -1609 +/-   3 delay    15 +/-   0
+ptp4l[1006.572]: rms    7 max   10 freq  -1613 +/-   4 delay    15 +/-   0
+ptp4l[1007.573]: rms    1 max    3 freq  -1609 +/-   2 delay    15 +/-   0
+ptp4l[1008.588]: rms    7 max    9 freq  -1621 +/-   5 delay    15 +/-   0
+ptp4l[1009.588]: rms    8 max   12 freq  -1630 +/-   3 delay    15 +/-   0
+ptp4l[1010.588]: rms    6 max   12 freq  -1634 +/-   4 delay    15 +/-   0
+ptp4l[1011.588]: rms    2 max    3 freq  -1630 +/-   3 delay    15 +/-   0
+ptp4l[1012.588]: rms    3 max    5 freq  -1627 +/-   4 delay    15 +/-   0
+ptp4l[1013.588]: rms    2 max    4 freq  -1631 +/-   3 delay    15 +/-   0
+ptp4l[1014.588]: rms    3 max    6 freq  -1630 +/-   4 delay    15 +/-   0
+ptp4l[1015.588]: rms    6 max    9 freq  -1640 +/-   3 delay    15 +/-   0
+ptp4l[1016.588]: rms    4 max    6 freq  -1636 +/-   5 delay    15 +/-   0
+ptp4l[1017.588]: rms    3 max    6 freq  -1632 +/-   3 delay    15 +/-   0
+ptp4l[1018.588]: rms    8 max   10 freq  -1648 +/-   5 delay    15 +/-   0
+ptp4l[1019.588]: rms    6 max    8 freq  -1654 +/-   2 delay    14 +/-   0
+ptp4l[1020.588]: rms    4 max    7 freq  -1655 +/-   2 delay    15 +/-   0
+ptp4l[1021.588]: rms    2 max    4 freq  -1651 +/-   3 delay    15 +/-   0
+ptp4l[1022.588]: rms    2 max    4 freq  -1651 +/-   3 delay    15 +/-   0
+ptp4l[1023.588]: rms    3 max    6 freq  -1653 +/-   4 delay    15 +/-   0
+ptp4l[1024.588]: rms    5 max    9 freq  -1661 +/-   4 delay    15 +/-   0
+ptp4l[1025.588]: rms    4 max    6 freq  -1651 +/-   3 delay    14 +/-   0
+ptp4l[1026.588]: rms    2 max    5 freq  -1657 +/-   2 delay    15 +/-   0
+ptp4l[1027.588]: rms    8 max   12 freq  -1670 +/-   4 delay    14 +/-   0
+ptp4l[1028.588]: rms    7 max   12 freq  -1674 +/-   5 delay    14 +/-   0
+ptp4l[1029.588]: rms    4 max    8 freq  -1674 +/-   4 delay    14 +/-   0
+ptp4l[1030.588]: rms    3 max    5 freq  -1672 +/-   4 delay    14 +/-   0
+ptp4l[1031.588]: rms    4 max    8 freq  -1665 +/-   3 delay    14 +/-   0
+ptp4l[1032.588]: rms    4 max    6 freq  -1673 +/-   4 delay    14 +/-   0
+ptp4l[1033.588]: rms    2 max    3 freq  -1671 +/-   2 delay    14 +/-   0
+ptp4l[1034.588]: rms    4 max    7 freq  -1668 +/-   6 delay    14 +/-   0
+ptp4l[1035.588]: rms    4 max    5 freq  -1677 +/-   3 delay    15 +/-   0
+ptp4l[1036.588]: rms    2 max    4 freq  -1674 +/-   3 delay    14 +/-   0
+ptp4l[1037.588]: rms    2 max    3 freq  -1675 +/-   2 delay    14 +/-   0
+ptp4l[1038.588]: rms    2 max    3 freq  -1673 +/-   2 delay    14 +/-   0
+ptp4l[1039.589]: rms    2 max    3 freq  -1674 +/-   2 delay    14 +/-   0
+ptp4l[1040.590]: rms    3 max    5 freq  -1672 +/-   4 delay    14 +/-   0
+ptp4l[1041.590]: rms    2 max    4 freq  -1673 +/-   3 delay    14 +/-   0
+ptp4l[1042.591]: rms    4 max    7 freq  -1675 +/-   5 delay    14 +/-   0
+ptp4l[1043.591]: rms    8 max   14 freq  -1687 +/-   7 delay    14 +/-   0
+ptp4l[1044.592]: rms    7 max   12 freq  -1693 +/-   3 delay    14 +/-   0
+ptp4l[1045.592]: rms    2 max    5 freq  -1685 +/-   3 delay    14 +/-   0
+ptp4l[1046.608]: rms    4 max    9 freq  -1690 +/-   5 delay    14 +/-   0
+ptp4l[1047.608]: rms    5 max    8 freq  -1697 +/-   3 delay    14 +/-   0
+ptp4l[1048.608]: rms    4 max    8 freq  -1686 +/-   3 delay    14 +/-   0
+ptp4l[1049.608]: rms    2 max    3 freq  -1690 +/-   2 delay    14 +/-   0
+ptp4l[1050.608]: rms    2 max    4 freq  -1691 +/-   3 delay    14 +/-   0
+ptp4l[1051.608]: rms    3 max    5 freq  -1695 +/-   3 delay    14 +/-   0
+ptp4l[1052.608]: rms    4 max    7 freq  -1687 +/-   3 delay    14 +/-   0
+ptp4l[1053.608]: rms    5 max    8 freq  -1681 +/-   1 delay    14 +/-   0
+ptp4l[1054.678]: port 1 (enp1s0): link down
+ptp4l[1054.678]: port 1 (enp1s0): SLAVE to FAULTY on FAULT_DETECTED (FT_UNSPECIFIED)
+ptp4l[1054.698]: selected local clock aa00aa.fffe.00aa22 as best master
+ptp4l[1054.698]: port 1 (enp1s0): assuming the grand master role
+ptp4l[1060.077]: port 1 (enp1s0): link up
+ptp4l[1060.103]: port 1 (enp1s0): FAULTY to LISTENING on INIT_COMPLETE
+ptp4l[1063.816]: port 1 (enp1s0): new foreign master aa00aa.fffe.00aa11-1
+ptp4l[1063.978]: port 1 (enp1s0): LISTENING to MASTER on ANNOUNCE_RECEIPT_TIMEOUT_EXPIRES
+ptp4l[1063.978]: port 1 (enp1s0): assuming the grand master role
+ptp4l[1065.816]: selected best master clock aa00aa.fffe.00aa11
+ptp4l[1065.816]: port 1 (enp1s0): MASTER to UNCALIBRATED on RS_SLAVE
+ptp4l[1066.180]: rms 1574 max 4452 freq   -885 +/- 2115 delay    14 +/-   0
+ptp4l[1066.180]: port 1 (enp1s0): UNCALIBRATED to SLAVE on MASTER_CLOCK_SELECTED
+ptp4l[1067.180]: rms 1974 max 3586 freq  +2235 +/- 1165 delay    12 +/-   0
+ptp4l[1068.180]: rms  839 max 1064 freq   -895 +/- 593 delay    12 +/-   0
+ptp4l[1069.180]: rms  931 max 1066 freq  -2074 +/- 132 delay    12 +/-   0
+ptp4l[1070.196]: rms  464 max  661 freq  -2136 +/-  62 delay    13 +/-   0
+ptp4l[1071.196]: rms  105 max  196 freq  -1891 +/-  68 delay    13 +/-   0
+ptp4l[1072.196]: rms   50 max   65 freq  -1716 +/-  35 delay    12 +/-   0
+ptp4l[1073.196]: rms   49 max   62 freq  -1658 +/-   5 delay    12 +/-   0
+ptp4l[1074.196]: rms   21 max   32 freq  -1662 +/-   4 delay    12 +/-   0
+ptp4l[1075.196]: rms    5 max    8 freq  -1673 +/-   3 delay    12 +/-   0
+ptp4l[1076.196]: rms    4 max    6 freq  -1671 +/-   4 delay    12 +/-   0
+ptp4l[1077.196]: rms    2 max    5 freq  -1674 +/-   3 delay    13 +/-   0
+ptp4l[1078.196]: rms    3 max    6 freq  -1677 +/-   4 delay    12 +/-   0
+ptp4l[1079.196]: rms    2 max    2 freq  -1676 +/-   2 delay    11 +/-   0
+ptp4l[1080.196]: rms    2 max    2 freq  -1677 +/-   2 delay    11 +/-   0
+ptp4l[1081.196]: rms    2 max    5 freq  -1678 +/-   3 delay    12 +/-   0
+ptp4l[1082.196]: rms    3 max    5 freq  -1681 +/-   3 delay    12 +/-   0
+ptp4l[1083.196]: rms    3 max    4 freq  -1678 +/-   3 delay    12 +/-   0
+ptp4l[1084.196]: rms    3 max    5 freq  -1682 +/-   3 delay    12 +/-   0
+ptp4l[1085.196]: rms    3 max    7 freq  -1683 +/-   3 delay    11 +/-   0
+ptp4l[1086.196]: rms    3 max    7 freq  -1686 +/-   3 delay    11 +/-   0
+ptp4l[1087.196]: rms    5 max    9 freq  -1691 +/-   5 delay    11 +/-   0
+ptp4l[1088.196]: rms    4 max    6 freq  -1694 +/-   3 delay    11 +/-   0
+ptp4l[1089.196]: rms    3 max    5 freq  -1688 +/-   3 delay    12 +/-   0
+ptp4l[1090.196]: rms    4 max    7 freq  -1689 +/-   5 delay    11 +/-   0
+ptp4l[1091.196]: rms    5 max    8 freq  -1682 +/-   4 delay    11 +/-   0
+ptp4l[1092.196]: rms    6 max   10 freq  -1695 +/-   5 delay    11 +/-   0
+ptp4l[1093.196]: rms    6 max   12 freq  -1700 +/-   5 delay    11 +/-   0
+ptp4l[1094.196]: rms    5 max   10 freq  -1688 +/-   4 delay    11 +/-   0
+ptp4l[1095.196]: rms    6 max   11 freq  -1683 +/-   5 delay    11 +/-   0
+ptp4l[1096.196]: rms    2 max    3 freq  -1689 +/-   2 delay    11 +/-   0
+ptp4l[1097.196]: rms    3 max    7 freq  -1691 +/-   3 delay    11 +/-   0
+ptp4l[1098.196]: rms    4 max    7 freq  -1694 +/-   4 delay    11 +/-   0
+ptp4l[1099.196]: rms    4 max    8 freq  -1694 +/-   6 delay    11 +/-   0
+ptp4l[1100.196]: rms    5 max    9 freq  -1698 +/-   6 delay    11 +/-   0

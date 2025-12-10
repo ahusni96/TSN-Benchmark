@@ -1,0 +1,7 @@
+/var/log folder for logging exists.
+pid 4904's current affinity mask: ff3
+pid 4904's new affinity mask: 8
+
+RTCP app is transmitting packets. Please wait for 365 seconds.
+
+Done!

@@ -1,0 +1,259 @@
+ptp4l[782432.319]: selected /dev/ptp2 as PTP clock
+ptp4l[782432.336]: port 1 (enp2s0): INITIALIZING to LISTENING on INIT_COMPLETE
+ptp4l[782432.336]: port 0 (/var/run/ptp4l): INITIALIZING to LISTENING on INIT_COMPLETE
+ptp4l[782432.336]: port 0 (/var/run/ptp4lro): INITIALIZING to LISTENING on INIT_COMPLETE
+ptp4l[782432.379]: raw: switching to VLAN mode
+ptp4l[782432.379]: raw: disabling VLAN mode
+ptp4l[782433.192]: port 1 (enp2s0): LISTENING to FAULTY on FAULT_DETECTED (FT_UNSPECIFIED)
+ptp4l[782449.221]: port 1 (enp2s0): FAULTY to LISTENING on INIT_COMPLETE
+ptp4l[782449.379]: raw: switching to VLAN mode
+ptp4l[782449.379]: raw: disabling VLAN mode
+ptp4l[782449.507]: port 1 (enp2s0): LISTENING to FAULTY on FAULT_DETECTED (FT_UNSPECIFIED)
+ptp4l[782465.539]: port 1 (enp2s0): FAULTY to LISTENING on INIT_COMPLETE
+ptp4l[782466.199]: raw: switching to VLAN mode
+ptp4l[782466.249]: raw: disabling VLAN mode
+ptp4l[782466.379]: raw: switching to VLAN mode
+ptp4l[782466.379]: raw: disabling VLAN mode
+ptp4l[782467.199]: raw: switching to VLAN mode
+ptp4l[782467.249]: raw: disabling VLAN mode
+ptp4l[782467.379]: raw: switching to VLAN mode
+ptp4l[782467.379]: raw: disabling VLAN mode
+ptp4l[782468.200]: raw: switching to VLAN mode
+ptp4l[782468.249]: raw: disabling VLAN mode
+ptp4l[782468.379]: raw: switching to VLAN mode
+ptp4l[782468.379]: raw: disabling VLAN mode
+ptp4l[782469.007]: port 1 (enp2s0): LISTENING to MASTER on ANNOUNCE_RECEIPT_TIMEOUT_EXPIRES
+ptp4l[782469.007]: selected local clock aa00aa.fffe.00aa00 as best master
+ptp4l[782469.007]: port 1 (enp2s0): assuming the grand master role
+ptp4l[782469.200]: raw: switching to VLAN mode
+ptp4l[782469.249]: raw: disabling VLAN mode
+ptp4l[782469.256]: port 1 (enp2s0): new foreign master 22bb22.fffe.bb22bb-1
+ptp4l[782469.379]: raw: switching to VLAN mode
+ptp4l[782469.379]: raw: disabling VLAN mode
+ptp4l[782470.200]: raw: switching to VLAN mode
+ptp4l[782470.249]: raw: disabling VLAN mode
+ptp4l[782470.379]: raw: switching to VLAN mode
+ptp4l[782470.379]: raw: disabling VLAN mode
+ptp4l[782471.201]: raw: switching to VLAN mode
+ptp4l[782471.249]: raw: disabling VLAN mode
+ptp4l[782471.256]: selected best master clock 22bb22.fffe.bb22bb
+ptp4l[782471.256]: port 1 (enp2s0): MASTER to UNCALIBRATED on RS_SLAVE
+ptp4l[782471.379]: raw: switching to VLAN mode
+ptp4l[782471.379]: raw: disabling VLAN mode
+ptp4l[782472.201]: raw: switching to VLAN mode
+ptp4l[782472.249]: raw: disabling VLAN mode
+ptp4l[782472.379]: raw: switching to VLAN mode
+ptp4l[782472.379]: raw: disabling VLAN mode
+ptp4l[782473.201]: raw: switching to VLAN mode
+ptp4l[782473.249]: raw: disabling VLAN mode
+ptp4l[782473.379]: raw: switching to VLAN mode
+ptp4l[782473.379]: raw: disabling VLAN mode
+ptp4l[782474.201]: raw: switching to VLAN mode
+ptp4l[782474.249]: raw: disabling VLAN mode
+ptp4l[782474.379]: raw: switching to VLAN mode
+ptp4l[782474.379]: raw: disabling VLAN mode
+ptp4l[782475.202]: raw: switching to VLAN mode
+ptp4l[782475.249]: raw: disabling VLAN mode
+ptp4l[782475.379]: raw: switching to VLAN mode
+ptp4l[782475.379]: raw: disabling VLAN mode
+ptp4l[782475.874]: port 1 (enp2s0): UNCALIBRATED to MASTER on ANNOUNCE_RECEIPT_TIMEOUT_EXPIRES
+ptp4l[782475.874]: selected local clock aa00aa.fffe.00aa00 as best master
+ptp4l[782475.874]: port 1 (enp2s0): assuming the grand master role
+ptp4l[782476.202]: raw: switching to VLAN mode
+ptp4l[782476.249]: raw: disabling VLAN mode
+ptp4l[782476.379]: raw: switching to VLAN mode
+ptp4l[782476.379]: raw: disabling VLAN mode
+ptp4l[782477.202]: raw: switching to VLAN mode
+ptp4l[782477.249]: raw: disabling VLAN mode
+ptp4l[782477.379]: raw: switching to VLAN mode
+ptp4l[782477.379]: raw: disabling VLAN mode
+ptp4l[782478.202]: raw: switching to VLAN mode
+ptp4l[782478.249]: raw: disabling VLAN mode
+ptp4l[782478.379]: raw: switching to VLAN mode
+ptp4l[782478.379]: raw: disabling VLAN mode
+ptp4l[782479.202]: raw: switching to VLAN mode
+ptp4l[782479.249]: raw: disabling VLAN mode
+ptp4l[782479.379]: raw: switching to VLAN mode
+ptp4l[782479.379]: raw: disabling VLAN mode
+ptp4l[782480.203]: raw: switching to VLAN mode
+ptp4l[782480.249]: raw: disabling VLAN mode
+ptp4l[782480.379]: raw: switching to VLAN mode
+ptp4l[782480.379]: raw: disabling VLAN mode
+ptp4l[782481.203]: raw: switching to VLAN mode
+ptp4l[782481.249]: raw: disabling VLAN mode
+ptp4l[782481.379]: raw: switching to VLAN mode
+ptp4l[782481.379]: raw: disabling VLAN mode
+ptp4l[782482.203]: raw: switching to VLAN mode
+ptp4l[782482.249]: raw: disabling VLAN mode
+ptp4l[782482.379]: raw: switching to VLAN mode
+ptp4l[782482.379]: raw: disabling VLAN mode
+ptp4l[782483.203]: raw: switching to VLAN mode
+ptp4l[782483.249]: raw: disabling VLAN mode
+ptp4l[782483.379]: raw: switching to VLAN mode
+ptp4l[782483.379]: raw: disabling VLAN mode
+ptp4l[782484.204]: raw: switching to VLAN mode
+ptp4l[782484.249]: raw: disabling VLAN mode
+ptp4l[782484.379]: raw: switching to VLAN mode
+ptp4l[782484.379]: raw: disabling VLAN mode
+ptp4l[782485.204]: raw: switching to VLAN mode
+ptp4l[782485.249]: raw: disabling VLAN mode
+ptp4l[782485.379]: raw: switching to VLAN mode
+ptp4l[782485.379]: raw: disabling VLAN mode
+ptp4l[782486.204]: raw: switching to VLAN mode
+ptp4l[782486.249]: raw: disabling VLAN mode
+ptp4l[782486.379]: raw: switching to VLAN mode
+ptp4l[782486.379]: raw: disabling VLAN mode
+ptp4l[782487.204]: raw: switching to VLAN mode
+ptp4l[782487.250]: raw: disabling VLAN mode
+ptp4l[782487.379]: raw: switching to VLAN mode
+ptp4l[782487.379]: raw: disabling VLAN mode
+ptp4l[782488.199]: raw: switching to VLAN mode
+ptp4l[782488.250]: raw: disabling VLAN mode
+ptp4l[782488.379]: raw: switching to VLAN mode
+ptp4l[782488.379]: raw: disabling VLAN mode
+ptp4l[782489.199]: raw: switching to VLAN mode
+ptp4l[782489.250]: raw: disabling VLAN mode
+ptp4l[782489.379]: raw: switching to VLAN mode
+ptp4l[782489.379]: raw: disabling VLAN mode
+ptp4l[782490.199]: raw: switching to VLAN mode
+ptp4l[782490.250]: raw: disabling VLAN mode
+ptp4l[782490.379]: raw: switching to VLAN mode
+ptp4l[782490.379]: raw: disabling VLAN mode
+ptp4l[782491.199]: raw: switching to VLAN mode
+ptp4l[782491.250]: raw: disabling VLAN mode
+ptp4l[782491.379]: raw: switching to VLAN mode
+ptp4l[782491.379]: raw: disabling VLAN mode
+ptp4l[782492.200]: raw: switching to VLAN mode
+ptp4l[782492.250]: raw: disabling VLAN mode
+ptp4l[782492.379]: raw: switching to VLAN mode
+ptp4l[782492.379]: raw: disabling VLAN mode
+ptp4l[782493.200]: raw: switching to VLAN mode
+ptp4l[782493.250]: raw: disabling VLAN mode
+ptp4l[782493.379]: raw: switching to VLAN mode
+ptp4l[782493.379]: raw: disabling VLAN mode
+ptp4l[782494.200]: raw: switching to VLAN mode
+ptp4l[782494.250]: raw: disabling VLAN mode
+ptp4l[782494.379]: raw: switching to VLAN mode
+ptp4l[782494.379]: raw: disabling VLAN mode
+ptp4l[782495.200]: raw: switching to VLAN mode
+ptp4l[782495.250]: raw: disabling VLAN mode
+ptp4l[782495.379]: raw: switching to VLAN mode
+ptp4l[782495.379]: raw: disabling VLAN mode
+ptp4l[782496.201]: raw: switching to VLAN mode
+ptp4l[782496.250]: raw: disabling VLAN mode
+ptp4l[782496.379]: raw: switching to VLAN mode
+ptp4l[782496.379]: raw: disabling VLAN mode
+ptp4l[782497.201]: raw: switching to VLAN mode
+ptp4l[782497.250]: raw: disabling VLAN mode
+ptp4l[782497.379]: raw: switching to VLAN mode
+ptp4l[782497.379]: raw: disabling VLAN mode
+ptp4l[782498.201]: raw: switching to VLAN mode
+ptp4l[782498.250]: raw: disabling VLAN mode
+ptp4l[782498.379]: raw: switching to VLAN mode
+ptp4l[782498.379]: raw: disabling VLAN mode
+ptp4l[782499.201]: raw: switching to VLAN mode
+ptp4l[782499.250]: raw: disabling VLAN mode
+ptp4l[782499.379]: raw: switching to VLAN mode
+ptp4l[782499.379]: raw: disabling VLAN mode
+ptp4l[782500.201]: raw: switching to VLAN mode
+ptp4l[782500.250]: raw: disabling VLAN mode
+ptp4l[782500.379]: raw: switching to VLAN mode
+ptp4l[782500.379]: raw: disabling VLAN mode
+ptp4l[782501.202]: raw: switching to VLAN mode
+ptp4l[782501.250]: raw: disabling VLAN mode
+ptp4l[782501.379]: raw: switching to VLAN mode
+ptp4l[782501.379]: raw: disabling VLAN mode
+ptp4l[782502.202]: raw: switching to VLAN mode
+ptp4l[782502.250]: raw: disabling VLAN mode
+ptp4l[782502.379]: raw: switching to VLAN mode
+ptp4l[782502.379]: raw: disabling VLAN mode
+ptp4l[782503.202]: raw: switching to VLAN mode
+ptp4l[782503.250]: raw: disabling VLAN mode
+ptp4l[782503.379]: raw: switching to VLAN mode
+ptp4l[782503.379]: raw: disabling VLAN mode
+ptp4l[782504.202]: raw: switching to VLAN mode
+ptp4l[782504.250]: raw: disabling VLAN mode
+ptp4l[782504.379]: raw: switching to VLAN mode
+ptp4l[782504.379]: raw: disabling VLAN mode
+ptp4l[782505.203]: raw: switching to VLAN mode
+ptp4l[782505.250]: raw: disabling VLAN mode
+ptp4l[782505.379]: raw: switching to VLAN mode
+ptp4l[782505.379]: raw: disabling VLAN mode
+ptp4l[782506.203]: raw: switching to VLAN mode
+ptp4l[782506.250]: raw: disabling VLAN mode
+ptp4l[782506.379]: raw: switching to VLAN mode
+ptp4l[782506.379]: raw: disabling VLAN mode
+ptp4l[782507.203]: raw: switching to VLAN mode
+ptp4l[782507.250]: raw: disabling VLAN mode
+ptp4l[782507.379]: raw: switching to VLAN mode
+ptp4l[782507.379]: raw: disabling VLAN mode
+ptp4l[782508.203]: raw: switching to VLAN mode
+ptp4l[782508.250]: raw: disabling VLAN mode
+ptp4l[782508.379]: raw: switching to VLAN mode
+ptp4l[782508.379]: raw: disabling VLAN mode
+ptp4l[782509.203]: raw: switching to VLAN mode
+ptp4l[782509.250]: raw: disabling VLAN mode
+ptp4l[782509.379]: raw: switching to VLAN mode
+ptp4l[782509.379]: raw: disabling VLAN mode
+ptp4l[782510.204]: raw: switching to VLAN mode
+ptp4l[782510.250]: raw: disabling VLAN mode
+ptp4l[782510.379]: raw: switching to VLAN mode
+ptp4l[782510.379]: raw: disabling VLAN mode
+ptp4l[782511.204]: raw: switching to VLAN mode
+ptp4l[782511.250]: raw: disabling VLAN mode
+ptp4l[782511.379]: raw: switching to VLAN mode
+ptp4l[782511.379]: raw: disabling VLAN mode
+ptp4l[782512.204]: raw: switching to VLAN mode
+ptp4l[782512.250]: raw: disabling VLAN mode
+ptp4l[782512.379]: raw: switching to VLAN mode
+ptp4l[782512.379]: raw: disabling VLAN mode
+ptp4l[782513.204]: raw: switching to VLAN mode
+ptp4l[782513.250]: raw: disabling VLAN mode
+ptp4l[782513.379]: raw: switching to VLAN mode
+ptp4l[782513.379]: raw: disabling VLAN mode
+ptp4l[782514.199]: raw: switching to VLAN mode
+ptp4l[782514.250]: raw: disabling VLAN mode
+ptp4l[782514.379]: raw: switching to VLAN mode
+ptp4l[782514.379]: raw: disabling VLAN mode
+ptp4l[782515.199]: raw: switching to VLAN mode
+ptp4l[782515.250]: raw: disabling VLAN mode
+ptp4l[782515.379]: raw: switching to VLAN mode
+ptp4l[782515.379]: raw: disabling VLAN mode
+ptp4l[782516.199]: raw: switching to VLAN mode
+ptp4l[782516.250]: raw: disabling VLAN mode
+ptp4l[782516.379]: raw: switching to VLAN mode
+ptp4l[782516.379]: raw: disabling VLAN mode
+ptp4l[782517.200]: raw: switching to VLAN mode
+ptp4l[782517.250]: raw: disabling VLAN mode
+ptp4l[782517.379]: raw: switching to VLAN mode
+ptp4l[782517.379]: raw: disabling VLAN mode
+ptp4l[782518.200]: raw: switching to VLAN mode
+ptp4l[782518.250]: raw: disabling VLAN mode
+ptp4l[782518.379]: raw: switching to VLAN mode
+ptp4l[782518.379]: raw: disabling VLAN mode
+ptp4l[782519.200]: raw: switching to VLAN mode
+ptp4l[782519.250]: raw: disabling VLAN mode
+ptp4l[782519.379]: raw: switching to VLAN mode
+ptp4l[782519.379]: raw: disabling VLAN mode
+ptp4l[782520.200]: raw: switching to VLAN mode
+ptp4l[782520.250]: raw: disabling VLAN mode
+ptp4l[782520.379]: raw: switching to VLAN mode
+ptp4l[782520.379]: raw: disabling VLAN mode
+ptp4l[782521.200]: raw: switching to VLAN mode
+ptp4l[782521.251]: raw: disabling VLAN mode
+ptp4l[782521.379]: raw: switching to VLAN mode
+ptp4l[782521.379]: raw: disabling VLAN mode
+ptp4l[782522.201]: raw: switching to VLAN mode
+ptp4l[782522.251]: raw: disabling VLAN mode
+ptp4l[782522.379]: raw: switching to VLAN mode
+ptp4l[782522.379]: raw: disabling VLAN mode
+ptp4l[782523.201]: raw: switching to VLAN mode
+ptp4l[782523.251]: raw: disabling VLAN mode
+ptp4l[782523.379]: raw: switching to VLAN mode
+ptp4l[782523.379]: raw: disabling VLAN mode
+ptp4l[782524.201]: raw: switching to VLAN mode
+ptp4l[782524.251]: raw: disabling VLAN mode
+ptp4l[782524.379]: raw: switching to VLAN mode
+ptp4l[782524.379]: raw: disabling VLAN mode
+ptp4l[782525.201]: raw: switching to VLAN mode
+ptp4l[782525.251]: raw: disabling VLAN mode

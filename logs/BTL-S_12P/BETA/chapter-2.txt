@@ -1,0 +1,163 @@
+###	Chapter 2 - gPTP and System Time Synchronization
+
+
+==================== Start ptp4l
+A-side:~$ ptp4l -P2Hi enp1s0 -f ~/gPTP.cfg --step_threshold=1 -m --first_step_threshold=0.0
+B-side:~$ ptp4l -P2Hi enp1s0 -f ~/gPTP.cfg --step_threshold=1 -m --first_step_threshold=0.0
+
+==================== Configure hardware clock
+A-side:~$ pmc -u -b 0 -t 1 "SET GRANDMASTER_SETTINGS_NP clockClass 248 clockAccuracy 0xfe offsetScaledLogVariance 0xffff currentUtcOffset 37 leap61 0 leap59 0 currentUtcOffsetValid 1 ptpTimescale 1 timeTraceable 1 frequencyTraceable 0 timeSource 0xa0"
+sending: SET GRANDMASTER_SETTINGS_NP
+	aa00aa.fffe.00aa11-0 seq 0 RESPONSE MANAGEMENT GRANDMASTER_SETTINGS_NP 
+		clockClass              248
+		clockAccuracy           0xfe
+		offsetScaledLogVariance 0xffff
+		currentUtcOffset        37
+		leap61                  0
+		leap59                  0
+		currentUtcOffsetValid   1
+		ptpTimescale            1
+		timeTraceable           1
+		frequencyTraceable      0
+		timeSource              0xa0
+
+B-side:~$ pmc -u -b 0 -t 1 "SET GRANDMASTER_SETTINGS_NP clockClass 248 clockAccuracy 0xfe offsetScaledLogVariance 0xffff currentUtcOffset 37 leap61 0 leap59 0 currentUtcOffsetValid 1 ptpTimescale 1 timeTraceable 1 frequencyTraceable 0 timeSource 0xa0"
+sending: SET GRANDMASTER_SETTINGS_NP
+	aa00aa.fffe.00aa22-0 seq 0 RESPONSE MANAGEMENT GRANDMASTER_SETTINGS_NP 
+		clockClass              248
+		clockAccuracy           0xfe
+		offsetScaledLogVariance 0xffff
+		currentUtcOffset        37
+		leap61                  0
+		leap59                  0
+		currentUtcOffsetValid   1
+		ptpTimescale            1
+		timeTraceable           1
+		frequencyTraceable      0
+		timeSource              0xa0
+
+==================== Start phc2sys
+A-side:~$ phc2sys -s enp1s0 -O 0 -c CLOCK_REALTIME --step_threshold=1 --transportSpecific=1 -w -m --first_step_threshold=0.0
+B-side:~$ phc2sys -s enp1s0 -O 0 -c CLOCK_REALTIME --step_threshold=1 --transportSpecific=1 -w -m --first_step_threshold=0.0
+
+==================== Kill running processes
+A-side:~$ pkill phc2sys
+A-side:~$ pkill ptp4l
+B-side:~$ pkill phc2sys
+B-side:~$ pkill ptp4l
+
+=== PTP4L ===
+
+┌──────────────────────────────────────────────────────────────────────────────────────────┬──────────────────────────────────────────────────────────────────────────────────────┐
+│ A-side                                                                                   │ B-side                                                                               │
+├──────────────────────────────────────────────────────────────────────────────────────────┼──────────────────────────────────────────────────────────────────────────────────────┤
+│ ptp4l[761.631]: selected /dev/ptp0 as PTP clock                                          │ ptp4l[789.916]: rms 9298697 max 9729905 freq +172701 +/- 2972661 delay    15 +/-   0 │
+│ ptp4l[761.651]: port 1 (enp1s0): INITIALIZING to LISTENING on INIT_COMPLETE              │ ptp4l[790.916]: rms 6463976 max 8357457 freq +4678177 +/- 200624 delay    15 +/-   0 │
+│ ptp4l[761.651]: port 0 (/var/run/ptp4l): INITIALIZING to LISTENING on INIT_COMPLETE      │ ptp4l[791.916]: rms 2307260 max 3681883 freq +3167535 +/- 685862 delay    15 +/-   0 │
+│ ptp4l[761.651]: port 0 (/var/run/ptp4lro): INITIALIZING to LISTENING on INIT_COMPLETE    │ ptp4l[792.912]: rms 339031 max 516979 freq +1049800 +/- 477824 delay    15 +/-   0   │
+│ ptp4l[765.017]: port 1 (enp1s0): LISTENING to MASTER on ANNOUNCE_RECEIPT_TIMEOUT_EXPIRES │ ptp4l[793.911]: rms 558073 max 584157 freq -39328 +/- 164550 delay    15 +/-   0     │
+│ ptp4l[765.017]: selected local clock aa00aa.fffe.00aa11 as best master                   │ ptp4l[794.912]: rms 372850 max 487475 freq -277410 +/- 11600 delay    15 +/-   0     │
+│ ptp4l[765.017]: port 1 (enp1s0): assuming the grand master role                          │ ptp4l[795.913]: rms 127877 max 206948 freq -179030 +/- 41234 delay    14 +/-   0     │
+│ ptp4l[766.446]: port 1 (enp1s0): new foreign master aa00aa.fffe.00aa22-1                 │ ptp4l[796.914]: rms 19982 max 30252 freq -54392 +/- 27542 delay    14 +/-   0        │
+│ ptp4l[771.438]: port 1 (enp1s0): assuming the grand master role                          │ ptp4l[797.915]: rms 33398 max 34961 freq  +7430 +/- 9076 delay    14 +/-   0         │
+│                                                                                          │ ptp4l[798.915]: rms 21473 max 28384 freq +19885 +/- 783 delay    13 +/-   0          │
+│                                                                                          │ ptp4l[799.915]: rms 7066 max 11605 freq +13571 +/- 2471 delay    14 +/-   0          │
+│                                                                                          │ ptp4l[800.915]: rms 1218 max 1887 freq  +6247 +/- 1587 delay    14 +/-   0           │
+│                                                                                          │ ptp4l[801.915]: rms 1995 max 2101 freq  +2742 +/- 498 delay    15 +/-   0            │
+│                                                                                          │ ptp4l[802.915]: rms 1235 max 1649 freq  +2100 +/-  56 delay    15 +/-   0            │
+│                                                                                          │ ptp4l[803.915]: rms  391 max  652 freq  +2497 +/- 146 delay    15 +/-   0            │
+│                                                                                          │ ptp4l[804.915]: rms   73 max  115 freq  +2923 +/-  89 delay    14 +/-   0            │
+│                                                                                          │ ptp4l[805.916]: rms  117 max  125 freq  +3119 +/-  29 delay    15 +/-   0            │
+│                                                                                          │ ptp4l[806.916]: rms   70 max   95 freq  +3153 +/-   4 delay    15 +/-   0            │
+│                                                                                          │ ptp4l[807.916]: rms   20 max   35 freq  +3126 +/-  10 delay    15 +/-   0            │
+│                                                                                          │ ptp4l[808.916]: rms    4 max    6 freq  +3104 +/-   5 delay    15 +/-   0            │
+│                                                                                          │ ptp4l[809.916]: rms    5 max   10 freq  +3097 +/-   4 delay    15 +/-   0            │
+│                                                                                          │ ptp4l[810.916]: rms    3 max    6 freq  +3098 +/-   4 delay    15 +/-   0            │
+│                                                                                          │ ptp4l[811.916]: rms    3 max    4 freq  +3100 +/-   4 delay    15 +/-   0            │
+│                                                                                          │ ptp4l[812.916]: rms    4 max    5 freq  +3100 +/-   5 delay    15 +/-   0            │
+│                                                                                          │ ptp4l[813.916]: rms    2 max    4 freq  +3097 +/-   2 delay    15 +/-   0            │
+│                                                                                          │ ptp4l[814.916]: rms    3 max    6 freq  +3096 +/-   4 delay    15 +/-   0            │
+│                                                                                          │ ptp4l[815.916]: rms    3 max    5 freq  +3092 +/-   3 delay    15 +/-   0            │
+│                                                                                          │ ptp4l[816.916]: rms    4 max    5 freq  +3088 +/-   3 delay    15 +/-   0            │
+│                                                                                          │ ptp4l[817.916]: rms    3 max    5 freq  +3087 +/-   2 delay    15 +/-   0            │
+│                                                                                          │ ptp4l[818.916]: rms    2 max    5 freq  +3086 +/-   2 delay    14 +/-   0            │
+│                                                                                          │ ptp4l[819.916]: rms    3 max    5 freq  +3088 +/-   4 delay    14 +/-   0            │
+│                                                                                          │ ptp4l[820.916]: rms    2 max    4 freq  +3089 +/-   3 delay    14 +/-   0            │
+│                                                                                          │ ptp4l[821.916]: rms    2 max    3 freq  +3088 +/-   3 delay    15 +/-   0            │
+│                                                                                          │ ptp4l[822.916]: rms    4 max    6 freq  +3094 +/-   3 delay    15 +/-   0            │
+│                                                                                          │ ptp4l[823.916]: rms    2 max    4 freq  +3092 +/-   2 delay    15 +/-   0            │
+│                                                                                          │ ptp4l[824.916]: rms    4 max    5 freq  +3095 +/-   4 delay    15 +/-   0            │
+│                                                                                          │ ptp4l[825.916]: rms    3 max    5 freq  +3098 +/-   2 delay    15 +/-   0            │
+│                                                                                          │ ptp4l[826.916]: rms    1 max    2 freq  +3096 +/-   2 delay    15 +/-   0            │
+│                                                                                          │ ptp4l[827.916]: rms    2 max    5 freq  +3096 +/-   3 delay    15 +/-   0            │
+│                                                                                          │ ptp4l[828.916]: rms    3 max    8 freq  +3098 +/-   4 delay    15 +/-   0            │
+│                                                                                          │ ptp4l[829.917]: rms    4 max    6 freq  +3091 +/-   4 delay    15 +/-   0            │
+│                                                                                          │ ptp4l[830.917]: rms    3 max    4 freq  +3094 +/-   3 delay    15 +/-   0            │
+│                                                                                          │ ptp4l[831.917]: rms    2 max    5 freq  +3096 +/-   3 delay    15 +/-   0            │
+│                                                                                          │ ptp4l[832.917]: rms    3 max    4 freq  +3097 +/-   3 delay    15 +/-   0            │
+│                                                                                          │ ptp4l[833.917]: rms    3 max    5 freq  +3100 +/-   3 delay    15 +/-   0            │
+│                                                                                          │ ptp4l[834.917]: rms    2 max    4 freq  +3100 +/-   3 delay    14 +/-   0            │
+│                                                                                          │ ptp4l[835.917]: rms    2 max    5 freq  +3096 +/-   2 delay    14 +/-   0            │
+│                                                                                          │ ptp4l[836.917]: rms    3 max    4 freq  +3093 +/-   2 delay    14 +/-   0            │
+│                                                                                          │ ptp4l[837.917]: rms    3 max    5 freq  +3092 +/-   3 delay    14 +/-   0            │
+│                                                                                          │ ptp4l[838.917]: rms    3 max    6 freq  +3090 +/-   4 delay    15 +/-   0            │
+└──────────────────────────────────────────────────────────────────────────────────────────┴──────────────────────────────────────────────────────────────────────────────────────┘
+
+
+
+=== PHC2SYS ===
+
+┌─────────────────────────────────────────────────────────────────────────────────────────────┬──────────────────────────────────────────────────────────────────────────────────────────────┐
+│ A-side                                                                                      │ B-side                                                                                       │
+├─────────────────────────────────────────────────────────────────────────────────────────────┼──────────────────────────────────────────────────────────────────────────────────────────────┤
+│ phc2sys[773.687]: CLOCK_REALTIME phc offset 868474779911785157 s1 freq  -66538 delay      0 │ phc2sys[791.857]: CLOCK_REALTIME phc offset 868474797856789082 s1 freq +3520370 delay      0 │
+│ phc2sys[774.687]: CLOCK_REALTIME phc offset       -16 s2 freq  -66554 delay      0          │ phc2sys[792.857]: CLOCK_REALTIME phc offset  -2223794 s2 freq +1296576 delay      0          │
+│ phc2sys[775.687]: CLOCK_REALTIME phc offset        10 s2 freq  -66533 delay      0          │ phc2sys[793.857]: CLOCK_REALTIME phc offset  -3511193 s2 freq -657962 delay      0           │
+│ phc2sys[776.687]: CLOCK_REALTIME phc offset        26 s2 freq  -66514 delay      0          │ phc2sys[794.857]: CLOCK_REALTIME phc offset  -3194965 s2 freq -1395092 delay      0          │
+│ phc2sys[777.687]: CLOCK_REALTIME phc offset        12 s2 freq  -66520 delay      0          │ phc2sys[795.857]: CLOCK_REALTIME phc offset  -2074981 s2 freq -1233597 delay      0          │
+│ phc2sys[778.687]: CLOCK_REALTIME phc offset        33 s2 freq  -66496 delay      0          │ phc2sys[796.857]: CLOCK_REALTIME phc offset   -985157 s2 freq -766267 delay      0           │
+│ phc2sys[779.687]: CLOCK_REALTIME phc offset        15 s2 freq  -66504 delay      0          │ phc2sys[797.857]: CLOCK_REALTIME phc offset   -288189 s2 freq -364846 delay      0           │
+│ phc2sys[780.687]: CLOCK_REALTIME phc offset        22 s2 freq  -66492 delay      0          │ phc2sys[798.857]: CLOCK_REALTIME phc offset     26823 s2 freq -136291 delay      0           │
+│ phc2sys[781.687]: CLOCK_REALTIME phc offset        -6 s2 freq  -66514 delay      0          │ phc2sys[799.857]: CLOCK_REALTIME phc offset    108712 s2 freq  -46355 delay      0           │
+│ phc2sys[782.687]: CLOCK_REALTIME phc offset        20 s2 freq  -66490 delay      0          │ phc2sys[800.858]: CLOCK_REALTIME phc offset     92893 s2 freq  -29561 delay      0           │
+│ phc2sys[783.688]: CLOCK_REALTIME phc offset         6 s2 freq  -66498 delay      0          │ phc2sys[801.858]: CLOCK_REALTIME phc offset     56076 s2 freq  -38510 delay      0           │
+│ phc2sys[784.688]: CLOCK_REALTIME phc offset       -11 s2 freq  -66513 delay      0          │ phc2sys[802.858]: CLOCK_REALTIME phc offset     27174 s2 freq  -50589 delay      0           │
+│ phc2sys[785.688]: CLOCK_REALTIME phc offset       -25 s2 freq  -66530 delay      0          │ phc2sys[803.858]: CLOCK_REALTIME phc offset     10687 s2 freq  -58924 delay      0           │
+│ phc2sys[786.688]: CLOCK_REALTIME phc offset        -1 s2 freq  -66514 delay      0          │ phc2sys[804.858]: CLOCK_REALTIME phc offset      2974 s2 freq  -63431 delay      0           │
+│ phc2sys[787.688]: CLOCK_REALTIME phc offset        13 s2 freq  -66500 delay      0          │ phc2sys[805.858]: CLOCK_REALTIME phc offset        18 s2 freq  -65494 delay      0           │
+│ phc2sys[788.688]: CLOCK_REALTIME phc offset        30 s2 freq  -66479 delay      0          │ phc2sys[806.858]: CLOCK_REALTIME phc offset      -823 s2 freq  -66330 delay      0           │
+│ phc2sys[789.688]: CLOCK_REALTIME phc offset         6 s2 freq  -66494 delay      0          │ phc2sys[807.858]: CLOCK_REALTIME phc offset      -830 s2 freq  -66584 delay      0           │
+│ phc2sys[790.688]: CLOCK_REALTIME phc offset        -2 s2 freq  -66500 delay      0          │ phc2sys[808.858]: CLOCK_REALTIME phc offset      -613 s2 freq  -66616 delay      0           │
+│ phc2sys[791.688]: CLOCK_REALTIME phc offset       -10 s2 freq  -66509 delay      0          │ phc2sys[809.858]: CLOCK_REALTIME phc offset      -373 s2 freq  -66560 delay      0           │
+│ phc2sys[792.688]: CLOCK_REALTIME phc offset       -13 s2 freq  -66515 delay      0          │ phc2sys[810.859]: CLOCK_REALTIME phc offset      -184 s2 freq  -66483 delay      0           │
+│ phc2sys[793.689]: CLOCK_REALTIME phc offset        30 s2 freq  -66476 delay      0          │ phc2sys[811.859]: CLOCK_REALTIME phc offset       -80 s2 freq  -66434 delay      0           │
+│ phc2sys[794.689]: CLOCK_REALTIME phc offset        35 s2 freq  -66462 delay      0          │ phc2sys[812.859]: CLOCK_REALTIME phc offset       -19 s2 freq  -66397 delay      0           │
+│ phc2sys[795.689]: CLOCK_REALTIME phc offset        25 s2 freq  -66461 delay      0          │ phc2sys[813.859]: CLOCK_REALTIME phc offset         2 s2 freq  -66382 delay      0           │
+│ phc2sys[796.689]: CLOCK_REALTIME phc offset         4 s2 freq  -66475 delay      0          │ phc2sys[814.859]: CLOCK_REALTIME phc offset        19 s2 freq  -66364 delay      0           │
+│ phc2sys[797.689]: CLOCK_REALTIME phc offset       -21 s2 freq  -66498 delay      0          │ phc2sys[815.859]: CLOCK_REALTIME phc offset        -4 s2 freq  -66381 delay      0           │
+│ phc2sys[798.689]: CLOCK_REALTIME phc offset        -8 s2 freq  -66492 delay      0          │ phc2sys[816.859]: CLOCK_REALTIME phc offset         5 s2 freq  -66374 delay      0           │
+│ phc2sys[799.689]: CLOCK_REALTIME phc offset         7 s2 freq  -66479 delay      0          │ phc2sys[817.859]: CLOCK_REALTIME phc offset         9 s2 freq  -66368 delay      0           │
+│ phc2sys[800.689]: CLOCK_REALTIME phc offset        -3 s2 freq  -66487 delay      0          │ phc2sys[818.859]: CLOCK_REALTIME phc offset        -7 s2 freq  -66381 delay      0           │
+│ phc2sys[801.689]: CLOCK_REALTIME phc offset         5 s2 freq  -66480 delay      0          │ phc2sys[819.859]: CLOCK_REALTIME phc offset        -4 s2 freq  -66380 delay      0           │
+│ phc2sys[802.689]: CLOCK_REALTIME phc offset        11 s2 freq  -66472 delay      0          │ phc2sys[820.860]: CLOCK_REALTIME phc offset       -13 s2 freq  -66391 delay      0           │
+│ phc2sys[803.689]: CLOCK_REALTIME phc offset        25 s2 freq  -66455 delay      0          │ phc2sys[821.860]: CLOCK_REALTIME phc offset        16 s2 freq  -66366 delay      0           │
+│ phc2sys[804.690]: CLOCK_REALTIME phc offset         9 s2 freq  -66464 delay      0          │ phc2sys[822.860]: CLOCK_REALTIME phc offset        10 s2 freq  -66367 delay      0           │
+│ phc2sys[805.690]: CLOCK_REALTIME phc offset         9 s2 freq  -66461 delay      0          │ phc2sys[823.860]: CLOCK_REALTIME phc offset         0 s2 freq  -66374 delay      0           │
+│ phc2sys[806.690]: CLOCK_REALTIME phc offset         4 s2 freq  -66463 delay      0          │ phc2sys[824.860]: CLOCK_REALTIME phc offset         9 s2 freq  -66365 delay      0           │
+│ phc2sys[807.690]: CLOCK_REALTIME phc offset        -2 s2 freq  -66468 delay      0          │ phc2sys[825.860]: CLOCK_REALTIME phc offset         9 s2 freq  -66362 delay      0           │
+│ phc2sys[808.690]: CLOCK_REALTIME phc offset        -2 s2 freq  -66469 delay      0          │ phc2sys[826.860]: CLOCK_REALTIME phc offset        17 s2 freq  -66351 delay      0           │
+│ phc2sys[809.690]: CLOCK_REALTIME phc offset         9 s2 freq  -66458 delay      0          │ phc2sys[827.860]: CLOCK_REALTIME phc offset        13 s2 freq  -66350 delay      0           │
+│ phc2sys[810.690]: CLOCK_REALTIME phc offset         3 s2 freq  -66462 delay      0          │ phc2sys[828.860]: CLOCK_REALTIME phc offset        11 s2 freq  -66348 delay      0           │
+│ phc2sys[811.690]: CLOCK_REALTIME phc offset       -10 s2 freq  -66474 delay      0          │ phc2sys[829.860]: CLOCK_REALTIME phc offset       -21 s2 freq  -66377 delay      0           │
+│ phc2sys[812.690]: CLOCK_REALTIME phc offset       -15 s2 freq  -66482 delay      0          │ phc2sys[830.861]: CLOCK_REALTIME phc offset         0 s2 freq  -66362 delay      0           │
+│ phc2sys[813.690]: CLOCK_REALTIME phc offset        -5 s2 freq  -66476 delay      0          │ phc2sys[831.861]: CLOCK_REALTIME phc offset        12 s2 freq  -66350 delay      0           │
+│ phc2sys[814.690]: CLOCK_REALTIME phc offset       -14 s2 freq  -66487 delay      0          │ phc2sys[832.861]: CLOCK_REALTIME phc offset        -7 s2 freq  -66366 delay      0           │
+│ phc2sys[815.691]: CLOCK_REALTIME phc offset        14 s2 freq  -66463 delay      0          │ phc2sys[833.861]: CLOCK_REALTIME phc offset        -4 s2 freq  -66365 delay      0           │
+│ phc2sys[816.691]: CLOCK_REALTIME phc offset        14 s2 freq  -66459 delay      0          │ phc2sys[834.861]: CLOCK_REALTIME phc offset         1 s2 freq  -66361 delay      0           │
+│ phc2sys[817.691]: CLOCK_REALTIME phc offset        17 s2 freq  -66451 delay      0          │ phc2sys[835.861]: CLOCK_REALTIME phc offset         3 s2 freq  -66359 delay      0           │
+│ phc2sys[818.691]: CLOCK_REALTIME phc offset        16 s2 freq  -66447 delay      0          │ phc2sys[836.861]: CLOCK_REALTIME phc offset        -8 s2 freq  -66369 delay      0           │
+│ phc2sys[819.691]: CLOCK_REALTIME phc offset         2 s2 freq  -66457 delay      0          │ phc2sys[837.861]: CLOCK_REALTIME phc offset        -5 s2 freq  -66368 delay      0           │
+│ phc2sys[820.691]: CLOCK_REALTIME phc offset        -2 s2 freq  -66460 delay      0          │ phc2sys[838.861]: CLOCK_REALTIME phc offset       -12 s2 freq  -66377 delay      0           │
+│ phc2sys[821.691]: CLOCK_REALTIME phc offset        -3 s2 freq  -66462 delay      0          │ phc2sys[839.861]: CLOCK_REALTIME phc offset        15 s2 freq  -66353 delay      0           │
+│ phc2sys[821.719]: CLOCK_REALTIME phc offset        -9 s2 freq  -66468 delay      0          │ phc2sys[839.881]: CLOCK_REALTIME phc offset        20 s2 freq  -66344 delay      0           │
+└─────────────────────────────────────────────────────────────────────────────────────────────┴──────────────────────────────────────────────────────────────────────────────────────────────┘

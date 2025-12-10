@@ -1,0 +1,25 @@
+###	Chapter 9 - Bounded Low-latency Transmit/Receive
+
+
+==================== Setting up TXRX-TSN
+A-side:~$ cd /usr/share/iotg-tsn-ref-sw/ && ./run.sh i225 enp1s0 vs1a setup
+B-side:~$ cd /usr/share/iotg-tsn-ref-sw/ && ./run.sh i225 enp1s0 vs1b setup
+Setup B-side completed
+Setup A-side completed
+
+==================== Running TXRX-TSN
+B-side:~$ cd /usr/share/iotg-tsn-ref-sw/ && ./run.sh i225 enp1s0 vs1b run
+A-side:~$ cd /usr/share/iotg-tsn-ref-sw/ && ./run.sh i225 enp1s0 vs1a run
+Run A-side completed
+Run B-side completed
+
+==================== Validating results
+afpkt-rxtstamps.txt has 500000 lines
+Results  Max     Avg     Min     Expected  Received  Duplicates  Losses
+U2U      807691  725678  680521  500000    500000    0           0
+afxdp-rxtstamps.txt has 500000 lines
+Results  Max     Avg     Min    Expected  Received  Duplicates  Losses
+U2U      238002  111385  89294  500000    500000    0           0
+---------------------------------------------------------------------------------------
+
+PASSED

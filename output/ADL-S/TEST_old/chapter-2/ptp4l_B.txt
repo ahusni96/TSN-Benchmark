@@ -1,0 +1,13 @@
+ptp4l[526595.053]: selected /dev/ptp0 as PTP clock
+ptp4l[526595.065]: port 1 (enp1s0): INITIALIZING to LISTENING on INIT_COMPLETE
+ptp4l[526595.065]: port 0 (/var/run/ptp4l): INITIALIZING to LISTENING on INIT_COMPLETE
+ptp4l[526595.065]: port 0 (/var/run/ptp4lro): INITIALIZING to LISTENING on INIT_COMPLETE
+ptp4l[526595.757]: port 1 (enp1s0): LISTENING to FAULTY on FAULT_DETECTED (FT_UNSPECIFIED)
+ptp4l[526604.804]: selected local clock aa00aa.fffe.00aa22 as best master
+ptp4l[526604.804]: port 1 (enp1s0): assuming the grand master role
+ptp4l[526611.786]: port 1 (enp1s0): FAULTY to LISTENING on INIT_COMPLETE
+ptp4l[526612.757]: port 1 (enp1s0): LISTENING to FAULTY on FAULT_DETECTED (FT_UNSPECIFIED)
+ptp4l[526628.783]: port 1 (enp1s0): FAULTY to LISTENING on INIT_COMPLETE
+ptp4l[526629.757]: port 1 (enp1s0): LISTENING to FAULTY on FAULT_DETECTED (FT_UNSPECIFIED)
+ptp4l[526645.781]: port 1 (enp1s0): FAULTY to LISTENING on INIT_COMPLETE
+ptp4l[526646.757]: port 1 (enp1s0): LISTENING to FAULTY on FAULT_DETECTED (FT_UNSPECIFIED)

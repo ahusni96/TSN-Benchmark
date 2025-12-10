@@ -1,0 +1,37 @@
+Run.sh detected: opcua/json config
+
+/var/log folder for logging exists.
+Selected json-config: opcua-pkt1b
+Not running iperf3.
+'./afpkt-rxtstamps.txt' -> '/tmp/afpkt-rxtstamps.txt'
+
+Wait 20 sec for test environment to stabilize before running opcua server.
+[2025-10-31 12:58:14.216 (UTC+0800)] [33mwarn/server[0m	Username/Password configured, but no encrypting SecurityPolicy. This can leak credentials on the network.
+[2025-10-31 12:58:14.216 (UTC+0800)] [33mwarn/userland[0m	AcceptAll Certificate Verification. Any remote certificate will be accepted.
+[2025-10-31 12:58:14.216 (UTC+0800)] [32minfo/userland[0m	PubSub channel requested
+[2025-10-31 12:58:14.216 (UTC+0800)] [32minfo/server[0m	Open PubSub ethernet connection.
+[2025-10-31 12:58:14.216 (UTC+0800)] [32minfo/userland[0m	Subscriber CPU CORE: 3
+
+[2025-10-31 12:58:14.217 (UTC+0800)] [32minfo/network[0m	TCP network layer listening on opc.tcp://adl-s2-Alder-Lake-Client-Platform:4968/
+[2025-10-31 13:15:03.002 (UTC+0800)] [32minfo/network[0m	Shutting down the TCP network layer
+[2025-10-31 13:15:03.004 (UTC+0800)] [32minfo/server[0m	PubSub cleanup was called.
+Transfer Complete
+afpkt-rxtstamps.txt has 1000000 lines
+---------------------------------------------------------------------------------------
+Results  Max    Avg      Min   Stddev   CV       Expected  Received  Duplicates  Losses
+U2U      60956  10735.1  9571  453.444  0.04224  1000000   1000000   0           0
+---------------------------------------------------------------------------------------
+Results	Avg	StdDev	CV 
+TBS	1e+06	621.513	0.00062
+---------------------------------------------------------------------------------------
+GATE CONFIGURATION LIST:
+
+Interface: enp1s0
+No taprio set for this interface.
+---------------------------------------------------------------------------------------
+PHC2SYS offset 	min	 -30 
+		max	 29
+	delay  	min	 0 
+		max	 0
+	waiting:         0
+	failed:          0

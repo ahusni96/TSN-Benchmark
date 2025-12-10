@@ -1,0 +1,37 @@
+Run.sh detected: opcua/json config
+
+/var/log folder for logging exists.
+Selected json-config: opcua-pkt1a
+Running tc qdisc del dev enp1s0 parent root 2> /dev/null
+Running sleep 5
+Running tc -d qdisc replace dev enp1s0 parent root handle 100 taprio num_tc 4 map 3 1 0 2 3 3 3 3 3 3 3 3 3 3 3 3 queues 1@0 1@1 1@2 1@3 base-time 1761905845881649308 sched-entry S 0f 500000   flags 0x2
+Running HANDLE_ID=100
+Running tc qdisc replace dev enp1s0 parent 100:4 etf  clockid CLOCK_TAI delta 400000 offload
+Running tc qdisc del dev enp1s0 parent ffff:
+Running tc qdisc add dev enp1s0 ingress
+Running tc filter add dev enp1s0 parent ffff: protocol 802.1Q flower vlan_prio 1 hw_tc 1 
+Running tc filter add dev enp1s0 parent ffff: protocol 802.1Q flower vlan_prio 2 hw_tc 2 
+Running tc filter add dev enp1s0 parent ffff: protocol 802.1Q flower vlan_prio 3 hw_tc 3 
+Running pkill ptp4l
+Running (async) taskset -c 1 ptp4l -mP2Hi enp1s0.vlan --step_threshold=2 -f common/gPTP_i225-1G.cfg --socket_priority 2 &> /var/log/ptp4l.log &
+
+Running sleep 30
+Running pkill phc2sys
+Running sleep 2
+Running (async) pmc -u -b 0 -t 1  SET GRANDMASTER_SETTINGS_NP clockClass 248 clockAccuracy 0xfe offsetScaledLogVariance 0xffff currentUtcOffset 37 leap61 0 leap59 0 currentUtcOffsetValid 0 ptpTimescale 1 timeTraceable 1 frequencyTraceable 0 timeSource 0xa0  &> /var/log/pmc.log &
+
+Running sleep 30
+Running (async) taskset -c 1 phc2sys -c CLOCK_REALTIME --step_threshold=1 -s enp1s0 --transportSpecific=1 -O 0 -w -ml 7 &> /var/log/phc2sys.log &
+
+Running ethtool -N enp1s0 delete 60 2> /dev/null
+Running sleep 1
+Running ethtool -N enp1s0 delete 61 2> /dev/null
+Running sleep 1
+Running ethtool -N enp1s0 delete 62 2> /dev/null
+Running sleep 1
+Running ethtool -N enp1s0 delete 63 2> /dev/null
+Running sleep 1
+Running ethtool -N enp1s0 flow-type ether proto 0x88f7 queue 0 
+Added rule with ID 63
+Running sleep 1
+Wait 60 sec for gPTP to sync properly after setting the queues.

@@ -1,0 +1,31 @@
+Run.sh selected: vs1b
+
+/var/log folder for logging exists.
+'./afpkt-rxtstamps.txt' -> '/tmp/afpkt-rxtstamps.txt'
+'./afxdp-rxtstamps.txt' -> '/tmp/afxdp-rxtstamps.txt'
+[Kernel_6.12rt-intel_XDP] De-activate napi busy polling.
+PHASE 1: AF_PACKET receive (510 seconds)
+CMD: ./txrx-tsn -Pri enp1s0 -q 2 -n 500000
+pid 4481's current affinity mask: ff3
+pid 4481's new affinity mask: 8
+PHASE 2: AF_XDP receive 200 seconds)
+[Kernel_6.12rt-intel_XDP_i225] Disable coalescence.
+[Kernel_6.12rt-intel_XDP] Napi polling is not needed.
+CMD: ./txrx-tsn -X -z -w -ri enp1s0 -q 2 -n 500000
+pid 4510's current affinity mask: ff3
+pid 4510's new affinity mask: 8
+[Kernel_6.12rt-intel_XDP] De-activate napi busy polling.
+PHASE 3: Calculating..
+afpkt-rxtstamps.txt has 500000 lines
+Results  Max     Avg     Min     Expected  Received  Duplicates  Losses
+U2U      784237  731030  701916  500000    500000    0           0
+afxdp-rxtstamps.txt has 500000 lines
+Results  Max      Avg     Min     Expected  Received  Duplicates  Losses
+U2U      1106333  414215  100729  500000    500000    0           0
+---------------------------------------------------------------------------------------
+PHC2SYS offset 	min	 -23 
+		max	 25
+	delay  	min	 0 
+		max	 0
+	waiting:         0
+	failed:          0

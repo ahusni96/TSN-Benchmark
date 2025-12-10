@@ -1,0 +1,38 @@
+Run.sh detected: opcua/json config
+
+/var/log folder for logging exists.
+Selected json-config: opcua-pkt1b
+Not running iperf3.
+'./afpkt-rxtstamps.txt' -> '/tmp/afpkt-rxtstamps.txt'
+
+Wait 20 sec for test environment to stabilize before running opcua server.
+[2025-03-27 04:37:42.928 (UTC+0000)] [33mwarn/server[0m	Username/Password configured, but no encrypting SecurityPolicy. This can leak credentials on the network.
+[2025-03-27 04:37:42.928 (UTC+0000)] [33mwarn/userland[0m	AcceptAll Certificate Verification. Any remote certificate will be accepted.
+[2025-03-27 04:37:42.928 (UTC+0000)] [32minfo/userland[0m	PubSub channel requested
+[2025-03-27 04:37:42.928 (UTC+0000)] [32minfo/server[0m	Open PubSub ethernet connection.
+[2025-03-27 04:37:42.928 (UTC+0000)] [32minfo/userland[0m	Subscriber CPU CORE: 3
+
+[2025-03-27 04:37:42.929 (UTC+0000)] [32minfo/network[0m	TCP network layer listening on opc.tcp://intel-corei7-64:8958/
+[2025-03-27 04:54:33.046 (UTC+0000)] [32minfo/network[0m	Shutting down the TCP network layer
+[2025-03-27 04:54:33.049 (UTC+0000)] [32minfo/server[0m	PubSub cleanup was called.
+Transfer Complete
+afpkt-rxtstamps.txt has 1000000 lines
+---------------------------------------------------------------------------------------
+Results  Max     Avg      Min    Stddev   CV       Expected  Received  Duplicates  Losses
+U2U      123963  26531.2  13540  882.356  0.03326  1000000   1000000   0           0
+---------------------------------------------------------------------------------------
+Results	Avg	StdDev	CV 
+TBS	1e+06	1064.96	0.00106
+---------------------------------------------------------------------------------------
+GATE CONFIGURATION LIST:
+
+Interface: enp2s0
+No taprio set for this interface.
+INFO: gnuplot is not available in this system. No graph will be created.
+---------------------------------------------------------------------------------------
+PHC2SYS offset 	min	 -48 
+		max	 51
+	delay  	min	 0 
+		max	 0
+	waiting:         0
+	failed:          0

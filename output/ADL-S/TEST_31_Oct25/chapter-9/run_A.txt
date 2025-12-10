@@ -1,0 +1,34 @@
+Run.sh selected: vs1a
+
+/var/log folder for logging exists.
+'./afpkt-txtstamps.txt' -> '/tmp/afpkt-txtstamps.txt'
+'./afxdp-txtstamps.txt' -> '/tmp/afxdp-txtstamps.txt'
+PHASE 1: AF_PACKET transmit (510 seconds)
+[CMD] iperf3 -c 169.254.1.22 -u -b 200M -l 1440 -f m -i 10 -t 30000 -A 3 &
+CMD: ./txrx-tsn -i enp1s0 -PtTq 3 -n 500000 -l 64 -y 1000000 -e 700000 -o 20000
+pid 4599's current affinity mask: ff3
+pid 4599's new affinity mask: 4
+PHASE 2: AF_XDP transmit 150 seconds)
+[CMD] iperf3 -c 169.254.1.22 -u -b 200M -l 1440 -f m -i 10 -t 30000 -A 3 &
+[Kernel_6.12rt-intel_XDP_i225] Disable coalescence.
+CMD: ./txrx-tsn -X -zT -w -ti enp1s0 -q 2 -n 500000 -l 64 -y 200000 -e 100000 -o 20000
+pid 4630's current affinity mask: ff3
+pid 4630's new affinity mask: 4
+Done!
+---------------------------------------------------------------------------------------
+PHC2SYS offset 	min	 -16 
+		max	 30
+	delay  	min	 0 
+		max	 0
+	waiting:         0
+	failed:          0
+PTP4L   rms    	min	 1 
+		max	 7
+	MCLK_SELECTED:   0
+	INIT_COMPLETE:   0
+	FAULT_DETECTED:  0
+	UNCALIBRATED:    0
+	link down:       0
+	timed out:       0
+	temporal:       0
+	UTCoffset:       0

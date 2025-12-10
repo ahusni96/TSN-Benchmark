@@ -1,0 +1,7 @@
+Local time: Thu 2025-10-23 11:31:55 +08
+           Universal time: Thu 2025-10-23 03:31:55 UTC
+                 RTC time: Thu 2025-10-23 03:31:55
+                Time zone: Asia/Kuala_Lumpur (+08, +0800)
+System clock synchronized: no
+              NTP service: inactive
+          RTC in local TZ: no

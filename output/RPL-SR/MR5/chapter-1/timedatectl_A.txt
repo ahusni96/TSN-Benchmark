@@ -1,0 +1,7 @@
+Local time: Wed 2025-08-27 04:46:01 UTC
+           Universal time: Wed 2025-08-27 04:46:01 UTC
+                 RTC time: Wed 2025-08-27 04:46:02
+                Time zone: Universal (UTC, +0000)
+System clock synchronized: no
+              NTP service: inactive
+          RTC in local TZ: no

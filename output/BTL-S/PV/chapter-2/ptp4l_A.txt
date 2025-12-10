@@ -1,0 +1,22 @@
+ptp4l[1529.305]: selected /dev/ptp2 as PTP clock
+ptp4l[1529.321]: port 1: INITIALIZING to LISTENING on INIT_COMPLETE
+ptp4l[1529.321]: port 0: INITIALIZING to LISTENING on INIT_COMPLETE
+ptp4l[1529.394]: raw: switching to VLAN mode
+ptp4l[1530.004]: raw: disabling VLAN mode
+ptp4l[1530.004]: port 1: LISTENING to FAULTY on FAULT_DETECTED (FT_UNSPECIFIED)
+ptp4l[1539.315]: selected local clock aa00aa.fffe.00aa11 as best master
+ptp4l[1539.315]: port 1: assuming the grand master role
+ptp4l[1546.031]: port 1: FAULTY to LISTENING on INIT_COMPLETE
+ptp4l[1546.043]: raw: switching to VLAN mode
+ptp4l[1546.043]: raw: disabling VLAN mode
+ptp4l[1546.144]: raw: switching to VLAN mode
+ptp4l[1547.004]: raw: disabling VLAN mode
+ptp4l[1547.004]: port 1: LISTENING to FAULTY on FAULT_DETECTED (FT_UNSPECIFIED)
+ptp4l[1563.033]: port 1: FAULTY to LISTENING on INIT_COMPLETE
+ptp4l[1563.043]: raw: switching to VLAN mode
+ptp4l[1563.043]: raw: disabling VLAN mode
+ptp4l[1563.145]: raw: switching to VLAN mode
+ptp4l[1564.004]: raw: disabling VLAN mode
+ptp4l[1564.004]: port 1: LISTENING to FAULTY on FAULT_DETECTED (FT_UNSPECIFIED)
+ptp4l[1580.033]: port 1: FAULTY to LISTENING on INIT_COMPLETE
+ptp4l[1580.144]: port 1: LISTENING to FAULTY on FAULT_DETECTED (FT_UNSPECIFIED)

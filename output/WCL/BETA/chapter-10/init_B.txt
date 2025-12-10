@@ -1,0 +1,13 @@
+Run.sh detected: opcua/json config
+
+/var/log folder for logging exists.
+Selected json-config: opcua-pkt1b
+Actual changes:
+tx-vlan-hw-insert: off [not requested]
+rx-vlan-hw-parse: off
+Setting IRQ affinity based on /usr/share/iotg-tsn-ref-sw/json/../common/irq_affinity_4c_4TxRx.map
+Echo-ing 0x01 > /proc/irq/138/smp_affinity enp2s0:TxRx-0 
+Echo-ing 0x04 > /proc/irq/140/smp_affinity enp2s0:TxRx-2 
+Echo-ing 0x08 > /proc/irq/141/smp_affinity enp2s0:TxRx-3 
+[Kernel_6.17rt-intel] Disable coalescence for inf:enp2s0
+[Kernel_6.17rt-intel_XDP] De-activate napi busy polling for inf:enp2s0.

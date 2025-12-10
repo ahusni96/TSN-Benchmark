@@ -1,0 +1,123 @@
+Run.sh selected: vs1b
+
+/var/log folder for logging exists.
+'./afpkt-rxtstamps.txt' -> '/tmp/afpkt-rxtstamps.txt'
+'./afxdp-rxtstamps.txt' -> '/tmp/afxdp-rxtstamps.txt'
+[Kernel_6.6_XDP] De-activate napi busy polling.
+PHASE 1: AF_PACKET receive (510 seconds)
+CMD: ./txrx-tsn -Pri enp2s0 -q 2 -n 500000
+pid 323673's current affinity mask: fffff1
+pid 323673's new affinity mask: 8
+-----------------------------------------------------------
+Server listening on 5201 (test #1)
+-----------------------------------------------------------
+Accepted connection from 169.254.1.11, port 52386
+[  5] local 169.254.1.22 port 5201 connected to 169.254.1.11 port 52140
+[ ID] Interval           Transfer     Bitrate         Jitter    Lost/Total Datagrams
+[  5]   0.00-10.00  sec   238 MBytes   200 Mbits/sec  0.014 ms  0/173596 (0%)  
+[  5]  10.00-20.00  sec   238 MBytes   200 Mbits/sec  0.014 ms  0/173611 (0%)  
+[  5]  20.00-30.00  sec   238 MBytes   200 Mbits/sec  0.014 ms  0/173611 (0%)  
+[  5]  30.00-40.00  sec   238 MBytes   200 Mbits/sec  0.014 ms  0/173611 (0%)  
+[  5]  40.00-50.00  sec   238 MBytes   200 Mbits/sec  0.014 ms  0/173611 (0%)  
+[  5]  50.00-60.00  sec   238 MBytes   200 Mbits/sec  0.014 ms  0/173611 (0%)  
+[  5]  60.00-70.00  sec   238 MBytes   200 Mbits/sec  0.014 ms  0/173611 (0%)  
+[  5]  70.00-80.00  sec   238 MBytes   200 Mbits/sec  0.014 ms  0/173612 (0%)  
+[  5]  80.00-90.00  sec   238 MBytes   200 Mbits/sec  0.014 ms  0/173611 (0%)  
+[  5]  90.00-100.00 sec   238 MBytes   200 Mbits/sec  0.014 ms  0/173611 (0%)  
+[  5] 100.00-110.00 sec   238 MBytes   200 Mbits/sec  0.014 ms  0/173611 (0%)  
+[  5] 110.00-120.00 sec   238 MBytes   200 Mbits/sec  0.014 ms  0/173611 (0%)  
+[  5] 120.00-130.00 sec   238 MBytes   200 Mbits/sec  0.014 ms  0/173611 (0%)  
+[  5] 130.00-140.00 sec   238 MBytes   200 Mbits/sec  0.014 ms  0/173611 (0%)  
+[  5] 140.00-150.00 sec   238 MBytes   200 Mbits/sec  0.014 ms  0/173611 (0%)  
+[  5] 150.00-160.00 sec   238 MBytes   200 Mbits/sec  0.014 ms  0/173611 (0%)  
+[  5] 160.00-170.00 sec   238 MBytes   200 Mbits/sec  0.014 ms  0/173612 (0%)  
+[  5] 170.00-180.00 sec   238 MBytes   200 Mbits/sec  0.014 ms  0/173611 (0%)  
+[  5] 180.00-190.00 sec   238 MBytes   200 Mbits/sec  0.014 ms  0/173611 (0%)  
+[  5] 190.00-200.00 sec   238 MBytes   200 Mbits/sec  0.014 ms  0/173611 (0%)  
+[  5] 200.00-210.00 sec   238 MBytes   200 Mbits/sec  0.014 ms  0/173611 (0%)  
+[  5] 210.00-220.00 sec   238 MBytes   200 Mbits/sec  0.014 ms  0/173611 (0%)  
+[  5] 220.00-230.00 sec   238 MBytes   200 Mbits/sec  0.014 ms  0/173611 (0%)  
+[  5] 230.00-240.00 sec   238 MBytes   200 Mbits/sec  0.014 ms  0/173611 (0%)  
+[  5] 240.00-250.00 sec   238 MBytes   200 Mbits/sec  0.014 ms  0/173612 (0%)  
+[  5] 250.00-260.00 sec   238 MBytes   200 Mbits/sec  0.014 ms  0/173611 (0%)  
+[  5] 260.00-270.00 sec   238 MBytes   200 Mbits/sec  0.014 ms  0/173611 (0%)  
+[  5] 270.00-280.00 sec   238 MBytes   200 Mbits/sec  0.014 ms  0/173611 (0%)  
+[  5] 280.00-290.00 sec   238 MBytes   200 Mbits/sec  0.015 ms  0/173611 (0%)  
+[  5] 290.00-300.00 sec   238 MBytes   200 Mbits/sec  0.014 ms  0/173611 (0%)  
+[  5] 300.00-310.00 sec   238 MBytes   200 Mbits/sec  0.014 ms  0/173611 (0%)  
+[  5] 310.00-320.00 sec   238 MBytes   200 Mbits/sec  0.014 ms  0/173611 (0%)  
+[  5] 320.00-330.00 sec   238 MBytes   200 Mbits/sec  0.014 ms  0/173611 (0%)  
+[  5] 330.00-340.00 sec   238 MBytes   200 Mbits/sec  0.014 ms  0/173611 (0%)  
+[  5] 340.00-350.00 sec   238 MBytes   200 Mbits/sec  0.014 ms  0/173612 (0%)  
+[  5] 350.00-360.00 sec   238 MBytes   200 Mbits/sec  0.014 ms  0/173611 (0%)  
+[  5] 360.00-370.00 sec   238 MBytes   200 Mbits/sec  0.014 ms  0/173611 (0%)  
+[  5] 370.00-380.00 sec   238 MBytes   200 Mbits/sec  0.014 ms  0/173611 (0%)  
+[  5] 380.00-390.00 sec   238 MBytes   200 Mbits/sec  0.014 ms  0/173611 (0%)  
+[  5] 390.00-400.00 sec   238 MBytes   200 Mbits/sec  0.014 ms  0/173611 (0%)  
+[  5] 400.00-410.00 sec   238 MBytes   200 Mbits/sec  0.014 ms  0/173611 (0%)  
+[  5] 410.00-420.00 sec   238 MBytes   200 Mbits/sec  0.014 ms  0/173611 (0%)  
+[  5] 420.00-430.00 sec   238 MBytes   200 Mbits/sec  0.014 ms  0/173612 (0%)  
+[  5] 430.00-440.00 sec   238 MBytes   200 Mbits/sec  0.014 ms  0/173611 (0%)  
+[  5] 440.00-450.00 sec   238 MBytes   200 Mbits/sec  0.014 ms  0/173611 (0%)  
+[  5] 450.00-460.00 sec   238 MBytes   200 Mbits/sec  0.014 ms  0/173611 (0%)  
+[  5] 460.00-470.00 sec   238 MBytes   200 Mbits/sec  0.014 ms  0/173611 (0%)  
+[  5] 470.00-480.00 sec   238 MBytes   200 Mbits/sec  0.014 ms  0/173611 (0%)  
+[  5] 480.00-490.00 sec   238 MBytes   200 Mbits/sec  0.015 ms  0/173611 (0%)  
+[  5] 490.00-500.00 sec   238 MBytes   200 Mbits/sec  0.014 ms  0/173611 (0%)  
+[  5] 500.00-508.52 sec   203 MBytes   200 Mbits/sec  0.014 ms  0/147865 (0%)  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bitrate         Jitter    Lost/Total Datagrams
+[  5]   0.00-508.52 sec  11.8 GBytes   200 Mbits/sec  0.014 ms  0/8828405 (0%)  receiver
+PHASE 2: AF_XDP receive 200 seconds)
+[Kernel_6.6_XDP_i225] Disable coalescence.
+[Kernel_6.6_XDP] Napi polling is not needed.
+CMD: ./txrx-tsn -X -z -w -ri enp2s0 -q 2 -n 500000
+pid 324192's current affinity mask: fffff1
+pid 324192's new affinity mask: 8
+-----------------------------------------------------------
+Server listening on 5201 (test #1)
+-----------------------------------------------------------
+Accepted connection from 169.254.1.11, port 43506
+[  5] local 169.254.1.22 port 5201 connected to 169.254.1.11 port 41231
+[ ID] Interval           Transfer     Bitrate         Jitter    Lost/Total Datagrams
+[  5]   0.00-10.00  sec   238 MBytes   200 Mbits/sec  0.014 ms  0/173596 (0%)  
+[  5]  10.00-20.00  sec   238 MBytes   200 Mbits/sec  0.014 ms  0/173611 (0%)  
+[  5]  20.00-30.00  sec   238 MBytes   200 Mbits/sec  0.015 ms  0/173611 (0%)  
+[  5]  30.00-40.01  sec  56.0 MBytes  47.0 Mbits/sec  0.026 ms  0/40799 (0%)  
+[  5]  40.01-50.00  sec   419 MBytes   352 Mbits/sec  0.014 ms  1059/306423 (0.35%)  
+[  5]  50.00-60.00  sec   238 MBytes   200 Mbits/sec  0.023 ms  99/173612 (0.057%)  
+[  5]  60.00-70.00  sec   238 MBytes   200 Mbits/sec  0.014 ms  0/173610 (0%)  
+[  5]  70.00-80.00  sec   238 MBytes   200 Mbits/sec  0.014 ms  0/173612 (0%)  
+[  5]  80.00-90.00  sec   238 MBytes   200 Mbits/sec  0.014 ms  0/173611 (0%)  
+[  5]  90.00-100.00 sec   238 MBytes   200 Mbits/sec  0.016 ms  0/173611 (0%)  
+[  5] 100.00-110.00 sec   238 MBytes   200 Mbits/sec  0.024 ms  0/173611 (0%)  
+[  5] 110.00-120.00 sec   238 MBytes   200 Mbits/sec  0.023 ms  0/173612 (0%)  
+[  5] 120.00-130.00 sec   238 MBytes   200 Mbits/sec  0.015 ms  0/173610 (0%)  
+[  5] 130.00-140.00 sec   238 MBytes   200 Mbits/sec  0.024 ms  0/173611 (0%)  
+[  5] 140.00-150.00 sec   238 MBytes   200 Mbits/sec  0.015 ms  0/173611 (0%)  
+[  5] 150.00-160.00 sec   238 MBytes   200 Mbits/sec  0.024 ms  0/173611 (0%)  
+[  5] 160.00-170.00 sec   238 MBytes   200 Mbits/sec  0.023 ms  0/173612 (0%)  
+[  5] 170.00-180.00 sec   238 MBytes   200 Mbits/sec  0.016 ms  0/173611 (0%)  
+[  5] 180.00-190.00 sec   238 MBytes   200 Mbits/sec  0.024 ms  0/173611 (0%)  
+[  5] 190.00-200.00 sec   183 MBytes   153 Mbits/sec  0.000 ms  133/133184 (0.1%)  
+[  5] 190.00-200.00 sec   183 MBytes   153 Mbits/sec  0.000 ms  133/133184 (0.1%)  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bitrate         Jitter    Lost/Total Datagrams
+[SUM]  0.0-200.0 sec  117 datagrams received out-of-order
+[  5]   0.00-200.00 sec  4.77 GBytes   205 Mbits/sec  0.014 ms  1291/3559742 (0.036%)  receiver
+[Kernel_6.6_XDP] De-activate napi busy polling.
+PHASE 3: Calculating..
+afpkt-rxtstamps.txt has 500000 lines
+Results  Max     Avg     Min     Expected  Received  Duplicates  Losses
+U2U      766128  735751  703576  500000    500000    0           0
+afxdp-rxtstamps.txt has 500000 lines
+Results  Max     Avg     Min     Expected  Received  Duplicates  Losses
+U2U      124913  110608  101580  500000    500000    0           0
+INFO: gnuplot is not available in this system. No graph will be created.
+---------------------------------------------------------------------------------------
+PHC2SYS offset 	min	 -27 
+		max	 39
+	delay  	min	 0 
+		max	 0
+	waiting:         0
+	failed:          0

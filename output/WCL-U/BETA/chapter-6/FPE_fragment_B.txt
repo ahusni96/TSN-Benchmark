@@ -1,0 +1,5 @@
+MACMergeFrameAssErrorCount: 0
+  MACMergeFrameSmdErrorCount: 0
+  MACMergeFrameAssOkCount: 0
+  MACMergeFragCountRx: 0
+  MACMergeFragCountTx: 0

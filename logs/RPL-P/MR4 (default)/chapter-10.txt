@@ -1,0 +1,30 @@
+###	Chapter 10 - OPCUA Simple Publish-Subscribe
+
+
+==================== Initiating OPCUA-PACKET
+A-side:~$ cd /usr/share/iotg-tsn-ref-sw/ && ./run.sh i225 enp1s0 opcua-pkt1a init
+B-side:~$ cd /usr/share/iotg-tsn-ref-sw/ && ./run.sh i225 enp1s0 opcua-pkt1b init
+Init B-side completed
+Init A-side completed
+
+==================== Setting up OPCUA-PACKET
+A-side:~$ cd /usr/share/iotg-tsn-ref-sw/ && ./run.sh i225 enp1s0 opcua-pkt1a setup
+B-side:~$ cd /usr/share/iotg-tsn-ref-sw/ && ./run.sh i225 enp1s0 opcua-pkt1b setup
+Setup B-side completed
+Setup A-side completed
+
+==================== Running OPCUA-PACKET
+B-side:~$ cd /usr/share/iotg-tsn-ref-sw/ && ./run.sh i225 enp1s0 opcua-pkt1b run
+A-side:~$ cd /usr/share/iotg-tsn-ref-sw/ && ./run.sh i225 enp1s0 opcua-pkt1a run
+Run A-side completed
+Run B-side completed
+
+==================== Validate results
+Results  Max     Avg     Min    Stddev  CV       Expected  Received  Duplicates  Losses
+U2U      863744  730790  10926  236495  0.32362  1000000   1000000   0           0
+---------------------------------------------------------------------------------------
+Results	Avg	StdDev	CV
+TBS	1e+06	13266.3	0.01327
+---------------------------------------------------------------------------------------
+
+PASSED

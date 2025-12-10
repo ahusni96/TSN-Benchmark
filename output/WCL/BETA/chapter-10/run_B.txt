@@ -1,0 +1,31 @@
+Run.sh detected: opcua/json config
+
+/var/log folder for logging exists.
+Selected json-config: opcua-pkt1b
+Not running iperf3.
+'./afpkt-rxtstamps.txt' -> '/tmp/afpkt-rxtstamps.txt'
+
+Wait 20 sec for test environment to stabilize before running opcua server.
+[2025-12-02 11:35:31.402 (UTC+0800)] [33mwarn/server[0m	Username/Password configured, but no encrypting SecurityPolicy. This can leak credentials on the network.
+[2025-12-02 11:35:31.402 (UTC+0800)] [33mwarn/userland[0m	AcceptAll Certificate Verification. Any remote certificate will be accepted.
+[2025-12-02 11:35:31.402 (UTC+0800)] [32minfo/userland[0m	PubSub channel requested
+[2025-12-02 11:35:31.402 (UTC+0800)] [32minfo/server[0m	Open PubSub ethernet connection.
+[2025-12-02 11:35:31.403 (UTC+0800)] [32minfo/userland[0m	Subscriber CPU CORE: 3
+
+[2025-12-02 11:35:31.404 (UTC+0800)] [32minfo/network[0m	TCP network layer listening on opc.tcp://intel-Wildcat-Lake-Client-Platform:6873/
+[2025-12-02 11:52:23.033 (UTC+0800)] [32minfo/network[0m	Shutting down the TCP network layer
+[2025-12-02 11:52:23.034 (UTC+0800)] [32minfo/server[0m	PubSub cleanup was called.
+Transfer Complete
+afpkt-rxtstamps.txt has 1000000 lines
+---------------------------------------------------------------------------------------
+Results  Max     Avg     Min    Stddev   CV       Expected  Received  Duplicates  Losses
+U2U      479199  245669  60017  20515.9  0.08351  1000000   1000000   0           0
+---------------------------------------------------------------------------------------
+Results	Avg	StdDev	CV 
+TBS	1e+06	6277.27	0.00628
+---------------------------------------------------------------------------------------
+GATE CONFIGURATION LIST:
+
+Interface: enp2s0
+No taprio set for this interface.
+---------------------------------------------------------------------------------------

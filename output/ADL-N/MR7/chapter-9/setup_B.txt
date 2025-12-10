@@ -1,0 +1,29 @@
+Run.sh selected: vs1b
+
+/var/log folder for logging exists.
+Mapping socket priority N to VLAN priority N for enp0s30f4
+Turning off vlan stripping
+Turning off EEE
+Setting IRQ affinity based on /usr/share/iotg-tsn-ref-sw/shell/../common/irq_affinity_4c_4tx_4rx.map
+Echo-ing 0x01 > /proc/irq/157/smp_affinity --> enp0s30f4:tx-0 
+Echo-ing 0x01 > /proc/irq/156/smp_affinity --> enp0s30f4:rx-0 
+Echo-ing 0x02 > /proc/irq/161/smp_affinity --> enp0s30f4:tx-2 
+Echo-ing 0x02 > /proc/irq/160/smp_affinity --> enp0s30f4:rx-2 
+Echo-ing 0x04 > /proc/irq/163/smp_affinity --> enp0s30f4:tx-3 
+Echo-ing 0x04 > /proc/irq/162/smp_affinity --> enp0s30f4:rx-3 
+Echo-ing 0x04 > /proc/irq/158/smp_affinity --> enp0s30f4:rx-1 
+Echo-ing 0x04 > /proc/irq/159/smp_affinity --> enp0s30f4:tx-1 
+Running PTP4L & PHC2SYS
+Using gPTP_TI-1G.cfg
+Run: tc qdisc replace dev enp0s30f4 parent root handle 100 mqprio  num_tc 4 map 0 1 2 3 0 0 0 0 0 0 0 0 0 0 0 0 queues  1@0 1@1 1@2 1@3  hw 0
+Run: tc filter add dev enp0s30f4 parent ffff:  protocol 802.1Q flower vlan_prio 3 hw_tc 1
+Run: tc filter add dev enp0s30f4 parent ffff:  protocol 802.1Q flower vlan_prio 2 hw_tc 2
+filter parent ffff: protocol 802.1Q pref 49151 flower chain 0 
+filter parent ffff: protocol 802.1Q pref 49151 flower chain 0 handle 0x1 hw_tc 2 
+  vlan_prio 2
+  in_hw in_hw_count 1
+filter parent ffff: protocol 802.1Q pref 49152 flower chain 0 
+filter parent ffff: protocol 802.1Q pref 49152 flower chain 0 handle 0x1 hw_tc 1 
+  vlan_prio 3
+  in_hw in_hw_count 1
+Wait 30 sec for PTP to sync

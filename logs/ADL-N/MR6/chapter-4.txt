@@ -1,0 +1,57 @@
+
+==================== Start sync
+A-side:~$ ptp4l -P2Hi enp0s30f4 -f ~/gPTP.cfg --step_threshold=1 -m
+B-side:~$ ptp4l -P2Hi enp0s30f4 -f ~/gPTP.cfg --step_threshold=1 -m
+A-side:~$ phc2sys -s enp0s30f4 -O 0 -c CLOCK_REALTIME --step_threshold=1 --transportSpecific=1 -w -m
+B-side:~$ phc2sys -s enp0s30f4 -O 0 -c CLOCK_REALTIME --step_threshold=1 --transportSpecific=1 -w -m
+
+==================== Clear qdisc
+A-side:~$ tc qdisc del dev enp0s30f4 root
+B-side:~$ tc qdisc del dev enp0s30f4 root
+
+==================== Setup traffic
+A-side:~$ BASE=$(expr $(date +%s) + 5)000000000 && sleep 1 && echo "$BASE"
+A-side:~$ tc qdisc add dev enp0s30f4 parent root stab overhead 24 handle 100 taprio num_tc 4 map 0 1 2 3 3 3 3 3 3 3 3 3 3 3 3 3 queues 1@0 1@1 1@2 1@3 base-time 1732519588000000000 sched-entry S 01 5000000 sched-entry S 03 5000000 sched-entry S 05 5000000 sched-entry S 09 5000000 flags 0x2 txtime-delay 0
+
+==================== Setup net_prio
+A-side:~$ mkdir -p /sys/fs/cgroup/net_prio
+A-side:~$ mount -t cgroup -onet_prio none /sys/fs/cgroup/net_prio
+A-side:~$ mkdir -p /sys/fs/cgroup/net_prio/grp1 && mkdir -p /sys/fs/cgroup/net_prio/grp2 && mkdir -p /sys/fs/cgroup/net_prio/grp3 && mkdir -p /sys/fs/cgroup/net_prio/grp4
+A-side:~$ echo "enp0s30f4 1" > /sys/fs/cgroup/net_prio/grp1/net_prio.ifpriomap && echo "enp0s30f4 2" > /sys/fs/cgroup/net_prio/grp2/net_prio.ifpriomap && echo "enp0s30f4 3" > /sys/fs/cgroup/net_prio/grp3/net_prio.ifpriomap && echo "enp0s30f4 4" > /sys/fs/cgroup/net_prio/grp4/net_prio.ifpriomap
+
+==================== Set IP address
+A-side:~$ ifconfig enp0s30f4 169.254.1.11
+A-side:~$ ip -4 addr show enp0s30f4 | grep -oP "(?<=inet\s)\d+(\.\d+){3}"
+IP Address: 169.254.1.11
+
+B-side:~$ ifconfig enp0s30f4 169.254.1.22
+B-side:~$ ip -4 addr show enp0s30f4 | grep -oP "(?<=inet\s)\d+(\.\d+){3}"
+IP Address: 169.254.1.22
+
+==================== Start IPERF3 client
+B-side:~$ iperf3 -s -p 5100 & iperf3 -s -p 5101 & iperf3 -s -p 5102 & iperf3 -s -p 5103
+
+==================== Start IPERF3 server
+A-side:~$ iperf3 -u -l1000 -b0 -p 5100 -c 169.254.1.22 -t 150 >> /dev/null & echo $! > /sys/fs/cgroup/net_prio/grp1/cgroup.procs && iperf3 -u -l1000 -b0 -p 5101 -c 169.254.1.22 -t 150 >> /dev/null & echo $! > /sys/fs/cgroup/net_prio/grp2/cgroup.procs && iperf3 -u -l1000 -b0 -p 5102 -c 169.254.1.22 -t 150 >> /dev/null & echo $! > /sys/fs/cgroup/net_prio/grp3/cgroup.procs
+
+==================== Start TCPDUMP
+B-side:~$ tcpdump -Q in -nvvvXXi enp0s30f4 --time-stamp-precision=nano -j adapter_unsynced -B 524288 -s 54 -w chp4_script.pcap -c 1000000
+
+Waiting for TCPDUMP to finish...
+TCPDUMP Completed!
+Waiting for IPERF3 server to finish...
+
+Force closing iperf on A-side in 5 seconds
+A-side:~$ pkill iperf3
+
+IPERF3 Completed!
+IPERF3 command has ended without error(s)
+
+==================== Clear remaining processes
+B-side:~$ pkill iperf3
+
+==================== Stop sync
+A-side:~$ pkill phc2sys
+A-side:~$ pkill ptp4l
+B-side:~$ pkill phc2sys
+B-side:~$ pkill ptp4l

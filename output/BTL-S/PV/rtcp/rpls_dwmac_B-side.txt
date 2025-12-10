@@ -1,0 +1,218 @@
+/var/log folder for logging exists.
+Getting initial state of all CAT registers
+If L2 is not supported, L2_HIGHEST_COS_NUMBER should be set to zero.
+L2 Waymasks:
+reg: d10 = ffff
+reg: d11 = ffff
+reg: d12 = ffff
+reg: d13 = ffff
+reg: d14 = ffff
+reg: d15 = ffff
+reg: d16 = ffff
+reg: d17 = ffff
+If L3 is not supported, L3_HIGHEST_COS_NUMBER should be set to zero.
+L3 Waymasks:
+reg: c90 = fff
+reg: c91 = fff
+reg: c92 = fff
+reg: c93 = fff
+reg: c94 = fff
+reg: c95 = fff
+reg: c96 = fff
+reg: c97 = fff
+reg: c98 = fff
+reg: c99 = fff
+reg: c9a = fff
+reg: c9b = fff
+reg: c9c = fff
+reg: c9d = fff
+reg: c9e = fff
+reg: c9f = fff
+L2/L3 Core Associativity:
+core: 0 reg: c8f = 0
+core: 1 reg: c8f = 0
+core: 2 reg: c8f = 0
+core: 3 reg: c8f = 0
+core: 4 reg: c8f = 0
+core: 5 reg: c8f = 0
+core: 6 reg: c8f = 0
+core: 7 reg: c8f = 0
+core: 8 reg: c8f = 0
+core: 9 reg: c8f = 0
+core: 10 reg: c8f = 0
+core: 11 reg: c8f = 0
+core: 12 reg: c8f = 0
+core: 13 reg: c8f = 0
+core: 14 reg: c8f = 0
+core: 15 reg: c8f = 0
+core: 16 reg: c8f = 0
+core: 17 reg: c8f = 0
+core: 18 reg: c8f = 0
+core: 19 reg: c8f = 0
+core: 20 reg: c8f = 0
+core: 21 reg: c8f = 0
+core: 22 reg: c8f = 0
+core: 23 reg: c8f = 0
+Initalizing all L2 waymasks to 0xffff.
+reg: d10 = ffff
+reg: d11 = ffff
+reg: d12 = ffff
+reg: d13 = ffff
+reg: d14 = ffff
+reg: d15 = ffff
+reg: d16 = ffff
+reg: d17 = ffff
+Initalizing all L3 waymasks to 0x3ff.
+reg: c90 = fff
+reg: c91 = fff
+reg: c92 = fff
+reg: c93 = fff
+reg: c94 = fff
+reg: c95 = fff
+reg: c96 = fff
+reg: c97 = fff
+reg: c98 = fff
+reg: c99 = fff
+reg: c9a = fff
+reg: c9b = fff
+reg: c9c = fff
+reg: c9d = fff
+reg: c9e = fff
+reg: c9f = fff
+Initalizing all core associativity registers to default
+Big Core default assoiativity: 0
+Atom default assoiativity: 0
+core: 0, reg: 0xc8f = 0
+core: 1, reg: 0xc8f = 0
+core: 2, reg: 0xc8f = 0
+core: 3, reg: 0xc8f = 0
+core: 4, reg: 0xc8f = 0
+core: 5, reg: 0xc8f = 0
+core: 6, reg: 0xc8f = 0
+core: 7, reg: 0xc8f = 0
+core: 8, reg: 0xc8f = 0
+core: 9, reg: 0xc8f = 0
+core: 10, reg: 0xc8f = 0
+core: 11, reg: 0xc8f = 0
+core: 12, reg: 0xc8f = 0
+core: 13, reg: 0xc8f = 0
+core: 14, reg: 0xc8f = 0
+core: 15, reg: 0xc8f = 0
+core: 16, reg: 0xc8f = 0
+core: 17, reg: 0xc8f = 0
+core: 18, reg: 0xc8f = 0
+core: 19, reg: 0xc8f = 0
+core: 20, reg: 0xc8f = 0
+core: 21, reg: 0xc8f = 0
+core: 22, reg: 0xc8f = 0
+core: 23, reg: 0xc8f = 0
+Configuring RT and Best Effort waymasks for L2
+reg: d11 = ffff
+reg: d10 = ffff
+reg: d11 = ffff
+reg: d10 = ffff
+Configuring RT and Best Effort waymasks for L3
+reg: c91 = fc0
+reg: c90 = 3f
+reg: c91 = fc0
+reg: c90 = 3f
+Configuring all core associativity registers to Best-Effort...
+Big Core best effort mask: 0
+Atom best effort mask: 0
+core: 0, reg: 0xc8f = 0
+core: 1, reg: 0xc8f = 0
+core: 4, reg: 0xc8f = 0
+core: 5, reg: 0xc8f = 0
+core: 6, reg: 0xc8f = 0
+core: 7, reg: 0xc8f = 0
+core: 8, reg: 0xc8f = 0
+core: 9, reg: 0xc8f = 0
+core: 10, reg: 0xc8f = 0
+core: 11, reg: 0xc8f = 0
+core: 12, reg: 0xc8f = 0
+core: 13, reg: 0xc8f = 0
+core: 14, reg: 0xc8f = 0
+core: 15, reg: 0xc8f = 0
+core: 16, reg: 0xc8f = 0
+core: 17, reg: 0xc8f = 0
+core: 18, reg: 0xc8f = 0
+core: 19, reg: 0xc8f = 0
+core: 20, reg: 0xc8f = 0
+core: 21, reg: 0xc8f = 0
+core: 22, reg: 0xc8f = 0
+core: 23, reg: 0xc8f = 0
+Configuring all core associativity registers to Real-Time...
+Big Core RT mask: 100000000
+Atom RT mask: 100000000
+core: 2, reg: 0xc8f = 100000000
+core: 3, reg: 0xc8f = 100000000
+CAT Config Done.
+RTCP app is receiving and forwarding packets. Please wait for 365 seconds.
+Will output runtime statistic in file /tmp/rtcp_statistic
+Initalizing all L2 waymasks to 0xffff.
+reg: d10 = ffff
+reg: d11 = ffff
+reg: d12 = ffff
+reg: d13 = ffff
+reg: d14 = ffff
+reg: d15 = ffff
+reg: d16 = ffff
+reg: d17 = ffff
+Initalizing all L3 waymasks to 0x3ff.
+reg: c90 = fff
+reg: c91 = fff
+reg: c92 = fff
+reg: c93 = fff
+reg: c94 = fff
+reg: c95 = fff
+reg: c96 = fff
+reg: c97 = fff
+reg: c98 = fff
+reg: c99 = fff
+reg: c9a = fff
+reg: c9b = fff
+reg: c9c = fff
+reg: c9d = fff
+reg: c9e = fff
+reg: c9f = fff
+Initalizing all core associativity registers to default
+Big Core default assoiativity: 0
+Atom default assoiativity: 0
+core: 0, reg: 0xc8f = 0
+core: 1, reg: 0xc8f = 0
+core: 2, reg: 0xc8f = 0
+core: 3, reg: 0xc8f = 0
+core: 4, reg: 0xc8f = 0
+core: 5, reg: 0xc8f = 0
+core: 6, reg: 0xc8f = 0
+core: 7, reg: 0xc8f = 0
+core: 8, reg: 0xc8f = 0
+core: 9, reg: 0xc8f = 0
+core: 10, reg: 0xc8f = 0
+core: 11, reg: 0xc8f = 0
+core: 12, reg: 0xc8f = 0
+core: 13, reg: 0xc8f = 0
+core: 14, reg: 0xc8f = 0
+core: 15, reg: 0xc8f = 0
+core: 16, reg: 0xc8f = 0
+core: 17, reg: 0xc8f = 0
+core: 18, reg: 0xc8f = 0
+core: 19, reg: 0xc8f = 0
+core: 20, reg: 0xc8f = 0
+core: 21, reg: 0xc8f = 0
+core: 22, reg: 0xc8f = 0
+core: 23, reg: 0xc8f = 0
+CAT Config Done.
+Calculating RTCP results...
+
+Results	IFD	RTCP	PRL	CWLG	PTL
+Avg	124999	41537	15039	21236	5262
+Max	148140	68769	35139	29495	28169
+Min	105624	28098	3632	19865	2902
+
+RTCP cycle: 125000
+Total packets forwarded: 2400000
+Total outlier: 0
+
+Generating graph ... 
+Graph generated

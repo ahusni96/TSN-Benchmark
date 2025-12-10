@@ -1,0 +1,103 @@
+###	Chapter 3 - Credit-Based Shaper
+
+
+==================== Start sync
+A-side:~$ ptp4l -P2Hi enp1s0 -f ~/gPTP.cfg --step_threshold=1 -m --first_step_threshold=0.0
+B-side:~$ ptp4l -P2Hi enp1s0 -f ~/gPTP.cfg --step_threshold=1 -m --first_step_threshold=0.0
+A-side:~$ phc2sys -s enp1s0 -O 0 -c CLOCK_REALTIME --step_threshold=1 --transportSpecific=1 -w -m --first_step_threshold=0.0
+B-side:~$ phc2sys -s enp1s0 -O 0 -c CLOCK_REALTIME --step_threshold=1 --transportSpecific=1 -w -m --first_step_threshold=0.0
+
+==================== Check queues
+A-side:~$ ls /sys/class/net/enp1s0/queues
+rx-0 rx-1 rx-2 rx-3 tx-0 tx-1 tx-2 tx-3 
+
+==================== Clear qdisc
+A-side:~$ tc qdisc del dev enp1s0 root
+B-side:~$ tc qdisc del dev enp1s0 root
+
+==================== Map traffic
+A-side:~$ tc qdisc replace dev enp1s0 handle 100: parent root mqprio num_tc 4 map 0 1 2 3 3 3 3 3 3 3 3 3 3 3 3 3 queues 1@0 1@1 1@2 1@3 hw 0
+A-side:~$ tc -g class show dev enp1s0
++---(100:ffe3) mqprio 
+|    +---(100:4) mqprio 
+|    
++---(100:ffe2) mqprio 
+|    +---(100:3) mqprio 
+|    
++---(100:ffe1) mqprio 
+|    +---(100:2) mqprio 
+|    
++---(100:ffe0) mqprio 
+     +---(100:1) mqprio
+
+==================== Set traffic
+A-side:~$ tc qdisc replace dev enp1s0 parent 100:1 cbs locredit -1350 hicredit 150 sendslope -900000 idleslope 100000 offload 1
+A-side:~$ tc qdisc show dev enp1s0
+qdisc mqprio 100: root tc 4 map 0 1 2 3 3 3 3 3 3 3 3 3 3 3 3 3 
+             queues:(0:0) (1:1) (2:2) (3:3) 
+             mode:dcb
+             shaper:dcb
+             fp: E E E E E E E E E E E E E E E E
+
+qdisc cbs 8001: parent 100:1 hicredit 150 locredit -1350 sendslope -900000 idleslope 100000 offload 1 
+qdisc pfifo 0: parent 8001: limit 1000p
+qdisc fq_codel 0: parent 100:4 limit 10240p flows 1024 quantum 1514 target 5ms interval 100ms memory_limit 32Mb ecn drop_batch 64 
+qdisc fq_codel 0: parent 100:3 limit 10240p flows 1024 quantum 1514 target 5ms interval 100ms memory_limit 32Mb ecn drop_batch 64 
+qdisc fq_codel 0: parent 100:2 limit 10240p flows 1024 quantum 1514 target 5ms interval 100ms memory_limit 32Mb ecn drop_batch 64
+
+==================== Start TCPDUMP
+B-side:~$ tcpdump -Q in -nvvvXXi enp1s0 --time-stamp-precision=nano -j adapter_unsynced -B 524288 -s 54 -w chapter_03.pcap
+
+==================== Start talker
+A-side:~$ ./tsn-talker -d 01:AA:AA:AA:AA:AA -i enp1s0 -p 0 -s 1500
+
+==================== Start listener
+B-side:~$ ./tsn-listener -d 01:AA:AA:AA:AA:AA -i enp1s0 -s 1500
+
+==================== Verify packets
+A-side:~$ tc -s qdisc show dev enp1s0 | grep 100:1 -A3
+qdisc cbs 8001: parent 100:1 hicredit 150 locredit -1350 sendslope -900000 idleslope 100000 offload 1 
+ Sent 108913880 bytes 72052 pkt (dropped 0, overlimits 0 requeues 0) 
+ backlog 115064b 76p requeues 0
+qdisc pfifo 0: parent 8001: limit 1000p
+A-side:~$ tc -s qdisc show dev enp1s0 | grep 100:1 -A3
+qdisc cbs 8001: parent 100:1 hicredit 150 locredit -1350 sendslope -900000 idleslope 100000 offload 1 
+ Sent 232306844 bytes 153754 pkt (dropped 0, overlimits 0 requeues 0) 
+ backlog 75758b 51p requeues 0
+qdisc pfifo 0: parent 8001: limit 1000p
+A-side:~$ tc -s qdisc show dev enp1s0 | grep 100:1 -A3
+qdisc cbs 8001: parent 100:1 hicredit 150 locredit -1350 sendslope -900000 idleslope 100000 offload 1 
+ Sent 355628728 bytes 235410 pkt (dropped 0, overlimits 0 requeues 0) 
+ backlog 83270b 55p requeues 0
+qdisc pfifo 0: parent 8001: limit 1000p
+A-side:~$ tc -s qdisc show dev enp1s0 | grep 100:1 -A3
+qdisc cbs 8001: parent 100:1 hicredit 150 locredit -1350 sendslope -900000 idleslope 100000 offload 1 
+ Sent 478992856 bytes 317092 pkt (dropped 0, overlimits 0 requeues 0) 
+ backlog 95382b 63p requeues 0
+qdisc pfifo 0: parent 8001: limit 1000p
+A-side:~$ tc -s qdisc show dev enp1s0 | grep 100:1 -A3
+qdisc cbs 8001: parent 100:1 hicredit 150 locredit -1350 sendslope -900000 idleslope 100000 offload 1 
+ Sent 602475076 bytes 398852 pkt (dropped 0, overlimits 0 requeues 0) 
+ backlog 71158b 47p requeues 0
+qdisc pfifo 0: parent 8001: limit 1000p
+A-side:~$ tc -s qdisc show dev enp1s0 | grep 100:1 -A3
+qdisc cbs 8001: parent 100:1 hicredit 150 locredit -1350 sendslope -900000 idleslope 100000 offload 1 
+ Sent 725840718 bytes 480535 pkt (dropped 0, overlimits 0 requeues 0) 
+ backlog 66616b 44p requeues 0
+qdisc pfifo 0: parent 8001: limit 1000p
+
+==================== Stop TCPDUMP
+B-side:~$ pkill tcpdump
+
+==================== Validate bit rate
+Data bit rate:       98 Mbps
+
+==================== Stop sync
+A-side:~$ pkill tsn-
+B-side:~$ pkill tsn-
+A-side:~$ pkill iperf3
+B-side:~$ pkill iperf3
+A-side:~$ pkill phc2sys
+A-side:~$ pkill ptp4l
+B-side:~$ pkill phc2sys
+B-side:~$ pkill ptp4l

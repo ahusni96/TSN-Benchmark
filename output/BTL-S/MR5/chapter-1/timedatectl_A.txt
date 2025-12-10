@@ -1,0 +1,7 @@
+Local time: Tue 2024-12-10 06:42:31 UTC
+           Universal time: Tue 2024-12-10 06:42:31 UTC
+                 RTC time: Tue 2024-12-10 06:42:31
+                Time zone: Universal (UTC, +0000)
+System clock synchronized: no
+              NTP service: inactive
+          RTC in local TZ: no

@@ -1,0 +1,15 @@
+Run.sh detected: opcua/json config
+
+/var/log folder for logging exists.
+Selected json-config: opcua-pkt1a
+Setting IRQ affinity based on /usr/share/iotg-tsn-ref-sw/json/../common/irq_affinity_4c_4tx_4rx.map
+Echo-ing 0x01 > /proc/irq/147/smp_affinity enp0s30f4:tx-0 
+Echo-ing 0x01 > /proc/irq/146/smp_affinity enp0s30f4:rx-0 
+Echo-ing 0x02 > /proc/irq/151/smp_affinity enp0s30f4:tx-2 
+Echo-ing 0x02 > /proc/irq/150/smp_affinity enp0s30f4:rx-2 
+Echo-ing 0x04 > /proc/irq/153/smp_affinity enp0s30f4:tx-3 
+Echo-ing 0x04 > /proc/irq/152/smp_affinity enp0s30f4:rx-3 
+Echo-ing 0x04 > /proc/irq/148/smp_affinity enp0s30f4:rx-1 
+Echo-ing 0x04 > /proc/irq/149/smp_affinity enp0s30f4:tx-1 
+[Kernel_6.12rt-intel] Disable coalescence for inf:enp0s30f4
+[Kernel_6.12rt-intel_XDP] De-activate napi busy polling for inf:enp0s30f4.

@@ -1,0 +1,5 @@
+MACMergeFrameAssErrorCount: 0
+  MACMergeFrameSmdErrorCount: 0
+  MACMergeFrameAssOkCount: 119237
+  MACMergeFragCountRx: 138326
+  MACMergeFragCountTx: 0

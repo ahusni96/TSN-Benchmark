@@ -1,0 +1,105 @@
+###	Chapter 5 - Time-Based Scheduling (TBS)
+
+
+==================== Start sync
+A-side:~$ ptp4l -P2Hi enp2s0 -f ~/gPTP.cfg --step_threshold=1 -m --first_step_threshold=0.0
+B-side:~$ ptp4l -P2Hi enp2s0 -f ~/gPTP.cfg --step_threshold=1 -m --first_step_threshold=0.0
+A-side:~$ phc2sys -s enp2s0 -O 0 -c CLOCK_REALTIME --step_threshold=1 --transportSpecific=1 -w -m --first_step_threshold=0.0
+B-side:~$ phc2sys -s enp2s0 -O 0 -c CLOCK_REALTIME --step_threshold=1 --transportSpecific=1 -w -m --first_step_threshold=0.0
+
+==================== Clear qdisc
+A-side:~$ tc qdisc del dev enp2s0 root
+B-side:~$ tc qdisc del dev enp2s0 root
+
+==================== Add qdisc
+A-side:~$ tc qdisc add dev enp2s0 handle 8001: parent root mqprio num_tc 4 map 0 1 2 3 3 3 3 3 3 3 3 3 3 3 3 3 queues 1@0 1@1 1@2 1@3 hw 0
+
+==================== Replace qdisc
+A-side:~$ tc qdisc replace dev enp2s0 parent 8001:4 etf offload clockid CLOCK_TAI delta 500000
+
+==================== Show qdisc
+A-side:~$ tc qdisc show dev enp2s0
+qdisc mqprio 8001: root tc 4 map 0 1 2 3 3 3 3 3 3 3 3 3 3 3 3 3 
+             queues:(0:0) (1:1) (2:2) (3:3) 
+             mode:dcb
+             shaper:dcb
+qdisc fq_codel 0: parent 8001:3 limit 10240p flows 1024 quantum 1514 target 5ms interval 100ms memory_limit 32Mb ecn drop_batch 64 
+qdisc fq_codel 0: parent 8001:2 limit 10240p flows 1024 quantum 1514 target 5ms interval 100ms memory_limit 32Mb ecn drop_batch 64 
+qdisc fq_codel 0: parent 8001:1 limit 10240p flows 1024 quantum 1514 target 5ms interval 100ms memory_limit 32Mb ecn drop_batch 64 
+qdisc etf 8002: parent 8001:4 clockid TAI delta 500000 offload on deadline_mode off skip_sock_check off
+
+==================== Start UDP_TAI
+A-side:~$ ./udp_tai -c 3 -i enp2s0 -P 1000000 -p 90 -d 600000
+
+==================== Run TCPDUMP
+B-side:~$ tcpdump -Q in -ttt -ni enp2s0 --time-stamp-precision=nano -j adapter_unsynced port 7788 -c 100000
+
+==================== Stop UDP_TAI
+A-side:~$ pkill udp_tai
+
+==================== Stop sync
+A-side:~$ pkill phc2sys
+A-side:~$ pkill ptp4l
+B-side:~$ pkill phc2sys
+B-side:~$ pkill ptp4l
+
+==================== Validate results
+┌────────────────────────────────────────────────────────────────────────────┐
+│ B-side                                                                     │
+├────────────────────────────────────────────────────────────────────────────┤
+│ 00:00:00.001000015 IP 169.254.1.11.7788 > 239.1.1.1.7788: UDP, length 256  │
+│  00:00:00.000999993 IP 169.254.1.11.7788 > 239.1.1.1.7788: UDP, length 256 │
+│  00:00:00.000999986 IP 169.254.1.11.7788 > 239.1.1.1.7788: UDP, length 256 │
+│  00:00:00.001000018 IP 169.254.1.11.7788 > 239.1.1.1.7788: UDP, length 256 │
+│  00:00:00.000999989 IP 169.254.1.11.7788 > 239.1.1.1.7788: UDP, length 256 │
+│  00:00:00.001000015 IP 169.254.1.11.7788 > 239.1.1.1.7788: UDP, length 256 │
+│  00:00:00.000999993 IP 169.254.1.11.7788 > 239.1.1.1.7788: UDP, length 256 │
+│  00:00:00.000999989 IP 169.254.1.11.7788 > 239.1.1.1.7788: UDP, length 256 │
+│  00:00:00.001000015 IP 169.254.1.11.7788 > 239.1.1.1.7788: UDP, length 256 │
+│  00:00:00.001000018 IP 169.254.1.11.7788 > 239.1.1.1.7788: UDP, length 256 │
+│  00:00:00.000999963 IP 169.254.1.11.7788 > 239.1.1.1.7788: UDP, length 256 │
+│  00:00:00.001000015 IP 169.254.1.11.7788 > 239.1.1.1.7788: UDP, length 256 │
+│  00:00:00.000999990 IP 169.254.1.11.7788 > 239.1.1.1.7788: UDP, length 256 │
+│  00:00:00.000999992 IP 169.254.1.11.7788 > 239.1.1.1.7788: UDP, length 256 │
+│  00:00:00.001000015 IP 169.254.1.11.7788 > 239.1.1.1.7788: UDP, length 256 │
+│  00:00:00.000999989 IP 169.254.1.11.7788 > 239.1.1.1.7788: UDP, length 256 │
+│  00:00:00.001000018 IP 169.254.1.11.7788 > 239.1.1.1.7788: UDP, length 256 │
+│  00:00:00.000999990 IP 169.254.1.11.7788 > 239.1.1.1.7788: UDP, length 256 │
+│  00:00:00.001000018 IP 169.254.1.11.7788 > 239.1.1.1.7788: UDP, length 256 │
+│  00:00:00.000999989 IP 169.254.1.11.7788 > 239.1.1.1.7788: UDP, length 256 │
+│  00:00:00.000999986 IP 169.254.1.11.7788 > 239.1.1.1.7788: UDP, length 256 │
+│  00:00:00.000999996 IP 169.254.1.11.7788 > 239.1.1.1.7788: UDP, length 256 │
+│  00:00:00.001000011 IP 169.254.1.11.7788 > 239.1.1.1.7788: UDP, length 256 │
+│  00:00:00.000999996 IP 169.254.1.11.7788 > 239.1.1.1.7788: UDP, length 256 │
+│  00:00:00.001000012 IP 169.254.1.11.7788 > 239.1.1.1.7788: UDP, length 256 │
+│  00:00:00.001000014 IP 169.254.1.11.7788 > 239.1.1.1.7788: UDP, length 256 │
+│  00:00:00.000999967 IP 169.254.1.11.7788 > 239.1.1.1.7788: UDP, length 256 │
+│  00:00:00.001000041 IP 169.254.1.11.7788 > 239.1.1.1.7788: UDP, length 256 │
+│  00:00:00.000999967 IP 169.254.1.11.7788 > 239.1.1.1.7788: UDP, length 256 │
+│  00:00:00.000999989 IP 169.254.1.11.7788 > 239.1.1.1.7788: UDP, length 256 │
+│  00:00:00.001000015 IP 169.254.1.11.7788 > 239.1.1.1.7788: UDP, length 256 │
+│  00:00:00.000999992 IP 169.254.1.11.7788 > 239.1.1.1.7788: UDP, length 256 │
+│  00:00:00.001000038 IP 169.254.1.11.7788 > 239.1.1.1.7788: UDP, length 256 │
+│  00:00:00.000999966 IP 169.254.1.11.7788 > 239.1.1.1.7788: UDP, length 256 │
+│  00:00:00.001000015 IP 169.254.1.11.7788 > 239.1.1.1.7788: UDP, length 256 │
+│  00:00:00.000999990 IP 169.254.1.11.7788 > 239.1.1.1.7788: UDP, length 256 │
+│  00:00:00.000999992 IP 169.254.1.11.7788 > 239.1.1.1.7788: UDP, length 256 │
+│  00:00:00.001000015 IP 169.254.1.11.7788 > 239.1.1.1.7788: UDP, length 256 │
+│  00:00:00.000999989 IP 169.254.1.11.7788 > 239.1.1.1.7788: UDP, length 256 │
+│  00:00:00.000999993 IP 169.254.1.11.7788 > 239.1.1.1.7788: UDP, length 256 │
+│  00:00:00.001000011 IP 169.254.1.11.7788 > 239.1.1.1.7788: UDP, length 256 │
+│  00:00:00.001000022 IP 169.254.1.11.7788 > 239.1.1.1.7788: UDP, length 256 │
+│  00:00:00.000999986 IP 169.254.1.11.7788 > 239.1.1.1.7788: UDP, length 256 │
+│  00:00:00.001000018 IP 169.254.1.11.7788 > 239.1.1.1.7788: UDP, length 256 │
+│  00:00:00.000999963 IP 169.254.1.11.7788 > 239.1.1.1.7788: UDP, length 256 │
+│  00:00:00.001000022 IP 169.254.1.11.7788 > 239.1.1.1.7788: UDP, length 256 │
+│  00:00:00.000999986 IP 169.254.1.11.7788 > 239.1.1.1.7788: UDP, length 256 │
+│  00:00:00.000999989 IP 169.254.1.11.7788 > 239.1.1.1.7788: UDP, length 256 │
+│  00:00:00.001000041 IP 169.254.1.11.7788 > 239.1.1.1.7788: UDP, length 256 │
+│  00:00:00.000999966 IP 169.254.1.11.7788 > 239.1.1.1.7788: UDP, length 256 │
+└────────────────────────────────────────────────────────────────────────────┘
+
+
+Total Lines: 100000
+Passed (+/-500ns): 100.0%
+Failed: 0.0%

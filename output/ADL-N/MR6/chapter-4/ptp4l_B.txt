@@ -1,0 +1,114 @@
+ptp4l[188.051]: selected /dev/ptp2 as PTP clock
+ptp4l[188.068]: port 1 (enp0s30f4): INITIALIZING to LISTENING on INIT_COMPLETE
+ptp4l[188.069]: port 0 (/var/run/ptp4l): INITIALIZING to LISTENING on INIT_COMPLETE
+ptp4l[188.069]: port 0 (/var/run/ptp4lro): INITIALIZING to LISTENING on INIT_COMPLETE
+ptp4l[191.766]: port 1 (enp0s30f4): LISTENING to MASTER on ANNOUNCE_RECEIPT_TIMEOUT_EXPIRES
+ptp4l[191.766]: selected local clock aa00aa.fffe.00aa22 as best master
+ptp4l[191.766]: port 1 (enp0s30f4): assuming the grand master role
+ptp4l[191.952]: port 1 (enp0s30f4): new foreign master aa00aa.fffe.00aa11-1
+ptp4l[193.952]: selected best master clock aa00aa.fffe.00aa11
+ptp4l[193.952]: port 1 (enp0s30f4): MASTER to UNCALIBRATED on RS_SLAVE
+ptp4l[194.215]: port 1 (enp0s30f4): UNCALIBRATED to SLAVE on MASTER_CLOCK_SELECTED
+ptp4l[194.966]: rms  229 max  293 freq  +6107 +/- 159 delay   184 +/-   0
+ptp4l[195.967]: rms   37 max   59 freq  +5986 +/-  52 delay   184 +/-   0
+ptp4l[196.968]: rms   64 max   77 freq  +5863 +/-  22 delay   185 +/-   0
+ptp4l[197.970]: rms   38 max   52 freq  +5844 +/-   9 delay   187 +/-   0
+ptp4l[198.971]: rms   18 max   35 freq  +5852 +/-  16 delay   188 +/-   0
+ptp4l[199.973]: rms    9 max   19 freq  +5872 +/-  11 delay   188 +/-   0
+ptp4l[200.974]: rms    6 max    9 freq  +5874 +/-   8 delay   189 +/-   0
+ptp4l[201.976]: rms    5 max    9 freq  +5873 +/-   7 delay   189 +/-   0
+ptp4l[202.977]: rms   10 max   19 freq  +5886 +/-   9 delay   188 +/-   0
+ptp4l[203.978]: rms    5 max    9 freq  +5885 +/-   6 delay   189 +/-   0
+ptp4l[204.980]: rms    6 max    9 freq  +5884 +/-   9 delay   189 +/-   0
+ptp4l[205.981]: rms    7 max    9 freq  +5880 +/-   9 delay   189 +/-   0
+ptp4l[206.983]: rms    8 max   10 freq  +5884 +/-  11 delay   188 +/-   0
+ptp4l[207.984]: rms    8 max   10 freq  +5891 +/-  10 delay   188 +/-   0
+ptp4l[208.986]: rms   13 max   30 freq  +5901 +/-  16 delay   186 +/-   0
+ptp4l[209.987]: rms   10 max   17 freq  +5886 +/-  12 delay   188 +/-   0
+ptp4l[210.989]: rms    4 max    6 freq  +5892 +/-   5 delay   186 +/-   0
+ptp4l[211.990]: rms    6 max    8 freq  +5888 +/-   7 delay   188 +/-   0
+ptp4l[212.991]: rms   13 max   18 freq  +5889 +/-  17 delay   189 +/-   0
+ptp4l[213.993]: rms   11 max   18 freq  +5876 +/-  13 delay   189 +/-   0
+ptp4l[214.994]: rms   12 max   18 freq  +5873 +/-  16 delay   189 +/-   0
+ptp4l[215.995]: rms    8 max   17 freq  +5869 +/-   9 delay   188 +/-   0
+ptp4l[216.997]: rms   10 max   18 freq  +5882 +/-  11 delay   189 +/-   0
+ptp4l[217.998]: rms    9 max   15 freq  +5879 +/-  13 delay   189 +/-   0
+ptp4l[219.000]: rms    8 max    9 freq  +5866 +/-   6 delay   189 +/-   0
+ptp4l[220.001]: rms    7 max   12 freq  +5869 +/-   9 delay   189 +/-   0
+ptp4l[221.003]: rms    6 max    9 freq  +5868 +/-   7 delay   189 +/-   0
+ptp4l[222.004]: rms    9 max   13 freq  +5861 +/-  10 delay   190 +/-   0
+ptp4l[223.006]: rms    9 max   17 freq  +5865 +/-  13 delay   190 +/-   0
+ptp4l[224.007]: rms    6 max   12 freq  +5867 +/-   8 delay   192 +/-   0
+ptp4l[225.009]: rms    7 max   12 freq  +5861 +/-   9 delay   192 +/-   0
+ptp4l[226.010]: rms   10 max   14 freq  +5875 +/-  10 delay   193 +/-   0
+ptp4l[227.012]: rms   10 max   21 freq  +5869 +/-  14 delay   192 +/-   0
+ptp4l[228.013]: rms    9 max   15 freq  +5878 +/-  10 delay   192 +/-   0
+ptp4l[229.015]: rms   11 max   20 freq  +5881 +/-  15 delay   193 +/-   0
+ptp4l[230.016]: rms    8 max   14 freq  +5872 +/-  11 delay   191 +/-   0
+ptp4l[231.017]: rms    9 max   18 freq  +5882 +/-  11 delay   189 +/-   0
+ptp4l[232.019]: rms    8 max   18 freq  +5884 +/-  11 delay   189 +/-   0
+ptp4l[233.020]: rms    9 max   21 freq  +5890 +/-  11 delay   186 +/-   0
+ptp4l[234.022]: rms   10 max   14 freq  +5891 +/-  14 delay   184 +/-   0
+ptp4l[235.023]: rms    8 max   14 freq  +5887 +/-  10 delay   184 +/-   0
+ptp4l[236.025]: rms    8 max   14 freq  +5887 +/-  11 delay   184 +/-   0
+ptp4l[237.026]: rms    9 max   13 freq  +5882 +/-  12 delay   184 +/-   0
+ptp4l[238.028]: rms    5 max   12 freq  +5889 +/-   7 delay   186 +/-   0
+ptp4l[239.029]: rms   11 max   21 freq  +5897 +/-  13 delay   186 +/-   0
+ptp4l[240.031]: rms    4 max    6 freq  +5894 +/-   6 delay   186 +/-   0
+ptp4l[241.032]: rms   11 max   21 freq  +5895 +/-  15 delay   186 +/-   0
+ptp4l[242.033]: rms    7 max   15 freq  +5885 +/-   7 delay   186 +/-   0
+ptp4l[243.035]: rms    3 max    7 freq  +5889 +/-   5 delay   191 +/-   0
+ptp4l[244.036]: rms    5 max    6 freq  +5892 +/-   6 delay   192 +/-   0
+ptp4l[245.038]: rms    8 max   12 freq  +5891 +/-  10 delay   192 +/-   0
+ptp4l[246.039]: rms    9 max   15 freq  +5896 +/-  13 delay   192 +/-   0
+ptp4l[247.041]: rms    7 max   14 freq  +5901 +/-   8 delay   193 +/-   0
+ptp4l[248.042]: rms    8 max   15 freq  +5897 +/-  10 delay   192 +/-   0
+ptp4l[249.044]: rms   14 max   24 freq  +5890 +/-  18 delay   192 +/-   0
+ptp4l[250.045]: rms    8 max   15 freq  +5898 +/-  10 delay   192 +/-   0
+ptp4l[251.046]: rms    8 max   12 freq  +5895 +/-  10 delay   192 +/-   0
+ptp4l[252.048]: rms    8 max   14 freq  +5900 +/-  10 delay   190 +/-   0
+ptp4l[253.049]: rms    8 max   10 freq  +5896 +/-  10 delay   188 +/-   0
+ptp4l[254.054]: rms    7 max   11 freq  +5901 +/-  10 delay   187 +/-   0
+ptp4l[255.052]: rms   10 max   17 freq  +5888 +/-  11 delay   187 +/-   0
+ptp4l[256.042]: rms   10 max   17 freq  +5899 +/-  14 delay   187 +/-   0
+ptp4l[257.054]: rms    9 max   17 freq  +5892 +/-  11 delay   185 +/-   0
+ptp4l[258.053]: rms    8 max   10 freq  +5901 +/-   9 delay   187 +/-   0
+ptp4l[259.054]: rms    8 max   17 freq  +5903 +/-  10 delay   187 +/-   0
+ptp4l[260.055]: rms    9 max   19 freq  +5903 +/-  12 delay   187 +/-   0
+ptp4l[261.055]: rms    8 max   15 freq  +5905 +/-  12 delay   185 +/-   0
+ptp4l[262.056]: rms   13 max   28 freq  +5916 +/-  17 delay   185 +/-   0
+ptp4l[263.056]: rms    5 max   10 freq  +5909 +/-   7 delay   187 +/-   0
+ptp4l[264.056]: rms   12 max   19 freq  +5897 +/-  13 delay   187 +/-   0
+ptp4l[265.046]: rms    9 max   10 freq  +5899 +/-  12 delay   187 +/-   0
+ptp4l[266.057]: rms    7 max   10 freq  +5911 +/-   6 delay   187 +/-   0
+ptp4l[267.047]: rms    8 max   17 freq  +5901 +/-  11 delay   187 +/-   0
+ptp4l[268.057]: rms    6 max   10 freq  +5906 +/-   8 delay   187 +/-   0
+ptp4l[269.058]: rms    6 max    9 freq  +5904 +/-   8 delay   187 +/-   0
+ptp4l[270.047]: rms   14 max   28 freq  +5885 +/-  14 delay   187 +/-   0
+ptp4l[271.059]: rms    6 max   10 freq  +5887 +/-   6 delay   187 +/-   0
+ptp4l[272.059]: rms    9 max   17 freq  +5898 +/-  11 delay   187 +/-   0
+ptp4l[273.060]: rms    8 max   10 freq  +5895 +/-  11 delay   187 +/-   0
+ptp4l[274.059]: rms    7 max   10 freq  +5893 +/-  10 delay   187 +/-   0
+ptp4l[275.060]: rms    9 max   19 freq  +5893 +/-  12 delay   187 +/-   0
+ptp4l[276.059]: rms    6 max    8 freq  +5897 +/-   7 delay   187 +/-   0
+ptp4l[277.049]: rms    8 max   17 freq  +5896 +/-  10 delay   187 +/-   0
+ptp4l[278.060]: rms    9 max   17 freq  +5892 +/-  11 delay   187 +/-   0
+ptp4l[279.060]: rms    6 max   10 freq  +5897 +/-   8 delay   187 +/-   0
+ptp4l[280.050]: rms    7 max   10 freq  +5891 +/-   9 delay   187 +/-   0
+ptp4l[281.050]: rms   10 max   19 freq  +5896 +/-  14 delay   187 +/-   0
+ptp4l[282.061]: rms    9 max   17 freq  +5886 +/-  11 delay   187 +/-   0
+ptp4l[283.061]: rms    7 max   13 freq  +5882 +/-   8 delay   190 +/-   0
+ptp4l[284.062]: rms    9 max   15 freq  +5888 +/-  13 delay   190 +/-   0
+ptp4l[285.063]: rms    5 max    8 freq  +5888 +/-   7 delay   190 +/-   0
+ptp4l[286.062]: rms    5 max   11 freq  +5881 +/-   5 delay   190 +/-   0
+ptp4l[287.062]: rms    7 max   12 freq  +5891 +/-   8 delay   186 +/-   0
+ptp4l[288.063]: rms   11 max   24 freq  +5888 +/-  15 delay   189 +/-   0
+ptp4l[289.064]: rms   10 max   17 freq  +5885 +/-  13 delay   189 +/-   0
+ptp4l[290.064]: rms    8 max   12 freq  +5880 +/-  10 delay   189 +/-   0
+ptp4l[291.052]: rms   10 max   15 freq  +5875 +/-  12 delay   191 +/-   0
+ptp4l[292.065]: rms    6 max   12 freq  +5876 +/-   8 delay   191 +/-   0
+ptp4l[293.054]: rms    7 max   15 freq  +5874 +/-   9 delay   189 +/-   0
+ptp4l[294.065]: rms    9 max   15 freq  +5877 +/-  12 delay   189 +/-   0
+ptp4l[295.065]: rms    8 max   15 freq  +5884 +/-  10 delay   191 +/-   0
+ptp4l[296.066]: rms    8 max   15 freq  +5880 +/-  11 delay   191 +/-   0
+ptp4l[297.066]: rms    9 max   14 freq  +5868 +/-   8 delay   191 +/-   0

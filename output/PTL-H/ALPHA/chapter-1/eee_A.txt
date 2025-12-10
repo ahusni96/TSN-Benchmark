@@ -1,0 +1,8 @@
+EEE settings for enp85s0:
+	EEE status: disabled
+	Tx LPI: disabled
+	Supported EEE link modes:  100baseT/Full
+	                           1000baseT/Full
+	                           2500baseT/Full
+	Advertised EEE link modes:  Not reported
+	Link partner advertised EEE link modes:  2500baseT/Full

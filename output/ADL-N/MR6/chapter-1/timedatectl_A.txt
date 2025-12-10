@@ -1,0 +1,7 @@
+Local time: Tue 2024-11-26 09:45:19 +08
+           Universal time: Tue 2024-11-26 01:45:19 UTC
+                 RTC time: Tue 2024-11-26 01:45:19
+                Time zone: Asia/Kuala_Lumpur (+08, +0800)
+System clock synchronized: yes
+              NTP service: inactive
+          RTC in local TZ: no

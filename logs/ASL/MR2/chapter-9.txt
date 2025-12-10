@@ -1,0 +1,23 @@
+
+==================== Setting up TXRX-TSN
+A-side:~$ cd /usr/share/iotg-tsn-ref-sw/ && ./run.sh adln enp0s30f4 vs1a setup
+B-side:~$ cd /usr/share/iotg-tsn-ref-sw/ && ./run.sh adln enp0s30f4 vs1b setup
+Setup B-side completed
+Setup A-side completed
+
+==================== Running TXRX-TSN
+B-side:~$ cd /usr/share/iotg-tsn-ref-sw/ && ./run.sh adln enp0s30f4 vs1b run
+A-side:~$ cd /usr/share/iotg-tsn-ref-sw/ && ./run.sh adln enp0s30f4 vs1a run
+Run A-side completed
+Run B-side completed
+
+==================== Validating results
+afpkt-rxtstamps.txt has 1000000 lines
+Results  Max      Avg     Min     Expected  Received  Duplicates  Losses
+U2U      1050373  965401  887940  1000000   1000000   0           0
+afxdp-rxtstamps.txt has 1000000 lines
+Results  Max     Avg     Min    Expected  Received  Duplicates  Losses
+U2U      256279  153207  85223  1000000   1000000   0           0
+---------------------------------------------------------------------------------------
+
+PASSED
