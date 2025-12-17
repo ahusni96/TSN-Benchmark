@@ -72,7 +72,7 @@
 
 /* The API for SO_TXTIME is the below struct and enum, which will be
  * provided by uapi/linux/net_tstamp.h in the near future.
- */
+
 struct sock_txtime {
 	clockid_t clockid;
 	uint16_t flags;
@@ -86,7 +86,7 @@ enum txtime_flags {
 	SOF_TXTIME_FLAGS_MASK = (SOF_TXTIME_FLAGS_LAST - 1) |
 				 SOF_TXTIME_FLAGS_LAST
 };
-
+*/
 
 static int running = 1, use_so_txtime = 1;
 static int period_nsec = DEFAULT_PERIOD;
@@ -278,7 +278,7 @@ static int udp_send(int fd, void *buf, int len, __u64 txtime)
 	return cnt;
 }
 
-static unsigned char tx_buffer[256];
+static unsigned char tx_buffer[<BUFFER>];
 
 static int process_socket_error_queue(int fd)
 {

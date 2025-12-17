@@ -1,5 +1,0 @@
-Frame preemption settings for enp1s0:
-	enabled: enabled
-	additional fragment size: 68
-	verified: 0
-	verification disabled: 1

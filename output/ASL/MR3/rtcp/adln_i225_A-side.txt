@@ -1,7 +1,0 @@
-/var/log folder for logging exists.
-pid 6764's current affinity mask: 3
-pid 6764's new affinity mask: 8
-
-RTCP app is transmitting packets. Please wait for 96 seconds.
-
-Done!

@@ -1,7 +1,0 @@
-EEE settings for enp0s30f4:
-	EEE status: disabled
-	Tx LPI: 0 (us)
-	Supported EEE link modes:  100baseT/Full
-	                           1000baseT/Full
-	Advertised EEE link modes:  Not reported
-	Link partner advertised EEE link modes:  Not reported

@@ -7,6 +7,7 @@ from modules.logger import Log
 from modules.sync import Sync
 
 import modules.directories as dir
+import modules.setup as setup
 import modules.shared as shared
 
 HOMEDIR = dir.get_homedir()
@@ -167,6 +168,8 @@ def configure_cgroup(board: Board):
 #    except:
 #        LOGGER.error(f'Unable to start client from {board.side}')
 
+def compile_udp_tai(board: Board, tx_buffers: list[int]):
+    setup.setup_udp_tai(board, tx_buffers)
 
 def run_udp_tai(board: Board):
     try:
@@ -199,7 +202,7 @@ def legacy_case(kernel: float):
     LOGGER.info(result.stdout.strip())
 
     # Enable multicast (Side-B)
-    
+
 
 
 # For 5.10 - 6.12 (ADL/RPL)
@@ -316,6 +319,8 @@ def run_test(A: Board, B: Board, platform: str, milestone: str) -> str:
 
     # valid param values: [ethtool/lldptool] [taprio/mqprio]
     case_current('ethtool', 'taprio')
+
+    #compile_udp_tai(A, [1250, 1250, 68, 68])
 
     # Split functions here
 

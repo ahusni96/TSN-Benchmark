@@ -119,23 +119,13 @@ PARSER.add_argument(
 )
 
 
-def clear_temp():
-    files = glob.glob(f'{HOMEDIR}/temp/*', recursive=True)
-    for item in files:
-        if os.path.isdir(item):
-            shutil.rmtree(item)
-
-        if os.path.isfile(item):
-            os.remove(item)
-
-
 def main():
     options: Options = PARSER.parse_args(
         namespace = Options
     )
 
     # Clear temp folder
-    clear_temp()
+    shared.clear_folder(f'{HOMEDIR}/temp/')
 
     if not bool(options.flipped):
         A: Board = Board(

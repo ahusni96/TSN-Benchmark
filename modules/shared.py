@@ -1,5 +1,5 @@
 from modules.board import Board
-import math
+import glob, math, os, shutil
 
 def duration(start, end):
     delta = end - start
@@ -33,3 +33,15 @@ def read_last(filename: str, lines: int):
             lines = len(data)
 
         return ''.join(data[-lines:])
+
+def clear_folder(directory: str):
+    if not directory.endswith('/'):
+        directory += '/'
+
+    files = glob.glob(f'{directory}*', recursive=True)
+    for item in files:
+        if os.path.isdir(item):
+            shutil.rmtree(item)
+
+        if os.path.isfile(item):
+            os.remove(item)

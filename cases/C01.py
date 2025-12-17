@@ -287,18 +287,18 @@ def run_test(A: Board, B: Board, platform: str, milestone: str, workaround: bool
     time.sleep(1)
 
 
-    LOGGER.header('Copy executable files')
-    move_files(A)
-    LOGGER.info('')
-    move_files(B)
-    time.sleep(1)
+    #LOGGER.header('Copy executable files')
+    #move_files(A)
+    #LOGGER.info('')
+    #move_files(B)
+    #time.sleep(1)
 
 
-    LOGGER.header('Build IOTG-TSN-REF-SW')
-    build_ref_sw(A)
-    LOGGER.info('')
-    build_ref_sw(B)
-    time.sleep(1)
+    #LOGGER.header('Build IOTG-TSN-REF-SW')
+    #build_ref_sw(A)
+    #LOGGER.info('')
+    #build_ref_sw(B)
+    #time.sleep(1)
 
     if workaround:
         LOGGER.header('TEMP: Kernel Workaround')

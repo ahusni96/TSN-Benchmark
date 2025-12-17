@@ -1,7 +1,0 @@
-Local time: Thu 1998-01-01 09:37:36 +08
-           Universal time: Thu 1998-01-01 01:37:36 UTC
-                 RTC time: Thu 1998-01-01 01:37:36
-                Time zone: Asia/Kuala_Lumpur (+08, +0800)
-System clock synchronized: yes
-              NTP service: inactive
-          RTC in local TZ: no

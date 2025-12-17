@@ -1,4 +1,0 @@
-Pause parameters for enp85s0:
-Autonegotiate:	off
-RX:		off
-TX:		off

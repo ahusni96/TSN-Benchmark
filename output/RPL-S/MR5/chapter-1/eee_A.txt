@@ -1,6 +1,0 @@
-EEE settings for enp2s0:
-	EEE status: disabled
-	Tx LPI: disabled
-	Supported EEE link modes:  Not reported
-	Advertised EEE link modes:  Not reported
-	Link partner advertised EEE link modes:  Not reported

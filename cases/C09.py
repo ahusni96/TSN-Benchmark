@@ -139,6 +139,16 @@ def run_test(A: Board, B: Board, platform: str, milestone: str) -> str:
     p1.join()
     p2.join()
 
+    LOGGER.header('Kill remaining processes')
+    A.pkill('phc2sys')
+    A.pkill('ptp4l')
+    B.pkill('phc2sys')
+    B.pkill('ptp4l')
+
+    LOGGER.header('Restart NetworkManager')
+    A.force_execute('systemctl restart NetworkManager')
+    B.force_execute('systemctl restart NetworkManager')
+
     LOGGER.header('Validating results')
     return validate_result()
 

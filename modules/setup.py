@@ -1,29 +1,36 @@
 from fabric import Result
-import re
+import glob, os, pathlib, re, shutil
 
 # Custom Imports
 import modules.directories as dir
+import modules.shared as shared
 from modules.board import Board
 from modules.logger import Log
 
 HOMEDIR = dir.get_homedir()
 
-def setup_udp_tai(board: Board):
-    pass
+def setup_udp_tai(board: Board, tx_buffers: list[int]):
 
-def setup_ubuntu(board: Board):
-    # Setup kernel
+    # Clear edited folder
+    shared.clear_folder(f'{HOMEDIR}/files/edited/')
 
-    # Setup TSN requirements
-    try:
-        board.execute(f'printf "[main]\nplugins=keyfile\nignore-carrier=yes\nno-auto-default={board.interface},{board.interface}.vlan\n\n[keyfile]\nunmanaged-devices=interface-name:{board.interface};interface-name:{board.interface}.vlan\n" > /etc/NetworkManager/conf.d/99-tsn.conf')
-    except:
-        pass
+    tx_buffer: int = 256
+    filename: str = 'udp_tai-Q'
 
-    try:
-        board.execute(f'printf "kernel.sched_rt_runtime_us=-1" >> /etc/sysctl.d/99-tsn.conf')
-    except:
-        pass
+    for i in range(len(tx_buffers)):
+        with open(f'{HOMEDIR}/files/udp_tai.c', 'r') as file:
+            buffer: str = file.read()
+            buffer = buffer.replace('<BUFFER>', str(tx_buffers[i]))
+            with open(f'{HOMEDIR}/files/edited/{filename}{i}.c', 'w') as edited:
+                edited.write(buffer)
+                edited.close()
+            file.close()
+
+    files = glob.glob(f'{HOMEDIR}/files/edited/*', recursive = True)
+    for file in files:
+        temp = pathlib.Path(file)
+        os.system(f'gcc {HOMEDIR}/files/edited/{temp.name} -o {HOMEDIR}/temp/{temp.stem} -lpthread')
+    return
 
 def setup_connman(board: Board):
     res: Result = board.execute('[ -d "/etc/connman/" ] && echo "True" || echo "False"')

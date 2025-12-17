@@ -1,4 +1,0 @@
-Pause parameters for enp2s0:
-Autonegotiate:	off
-RX:		off
-TX:		off
