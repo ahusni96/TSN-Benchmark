@@ -39,6 +39,7 @@ class Board:
 
         self.set_connection()
         self.set_home()
+        self.find_kernel()
 
     def set_connection(self):
         self.connection = Connection(
@@ -134,3 +135,10 @@ class Board:
     def set_home(self):
         # value = True if condition else False
         self.home: str = f'/root' if self.os == 'ubuntu' else f'/home/root'
+
+    def find_kernel(self):
+        res: Result = self.connection.run(
+            f'uname -r',
+            hide = True
+        )
+        self.kernel: float = float(res.stdout.replace('rt-intel', ''))

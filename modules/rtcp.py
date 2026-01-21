@@ -106,7 +106,6 @@ def setup(board: Board, device: str = 'dwmac'):
 
 
 def run(board: Board, device: str = 'dwmac'):
-
     if board.os == 'yocto':
         with board.connection.cd(f'{board.home}/rtcp-xdp/'):
             with board.connection.prefix(f'export PATH="{board.home}/msr-tools:$PATH"'):
@@ -122,23 +121,23 @@ def run(board: Board, device: str = 'dwmac'):
                 f.close()
 
 
-def timedatectl(boards: list [Board]):
-    dt = datetime.datetime.now()
-
-    A = boards[0]
-    B = boards[1]
-
-    cmd = f'timedatectl set-ntp false'
-    result: Result = A.execute(cmd)
-    result: Result = B.execute(cmd)
-
-    A.execute(f'timedatectl set-time \'{dt.strftime("%Y-%m-%d %H:%M:%S")}\'')
-    B.execute(f'timedatectl set-time \'{dt.strftime("%Y-%m-%d %H:%M:%S")}\'')
-
-    result: Result = A.execute('timedatectl')
-    LOGGER.info(result.stdout.strip())
-    result: Result = B.execute('timedatectl')
-    LOGGER.info(result.stdout.strip())
+#def timedatectl(boards: list [Board]):
+#    dt = datetime.datetime.now()
+#
+#    A = boards[0]
+#    B = boards[1]
+#
+#    cmd = f'timedatectl set-ntp false'
+#    result: Result = A.execute(cmd)
+#    result: Result = B.execute(cmd)
+#
+#    A.execute(f'timedatectl set-time \'{dt.strftime("%Y-%m-%d %H:%M:%S")}\'')
+#    B.execute(f'timedatectl set-time \'{dt.strftime("%Y-%m-%d %H:%M:%S")}\'')
+#
+#    result: Result = A.execute('timedatectl')
+#    LOGGER.info(result.stdout.strip())
+#    result: Result = B.execute('timedatectl')
+#    LOGGER.info(result.stdout.strip())
 
 
 def run_test(A: Board, B: Board, platform: str, milestone: str) -> int:
@@ -170,7 +169,7 @@ def run_test(A: Board, B: Board, platform: str, milestone: str) -> int:
 
         time.sleep(10)
 
-    start_time = time.time()
+    #start_time = time.time()
 
     run_B.start()
     time.sleep(1)
@@ -179,7 +178,7 @@ def run_test(A: Board, B: Board, platform: str, milestone: str) -> int:
     run_A.join()
     run_B.join()
 
-    LOGGER.info(f'\nTOTAL DURATION: {shared.duration(start_time, time.time())}\n')
+    #LOGGER.info(f'\nTOTAL DURATION: {shared.duration(start_time, time.time())}\n')
 
     A.pkill('phc2sys')
     B.pkill('phc2sys')
@@ -196,3 +195,4 @@ def run_test(A: Board, B: Board, platform: str, milestone: str) -> int:
     # - RTCP Max cannot be more than IFD Avg
 
     #check_result(B)
+

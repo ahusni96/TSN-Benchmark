@@ -1,8 +1,8 @@
 # System Imports
 import argparse, glob, os, shutil, sys, time
 
-# Custom Imports
-import cases.C01
+# Case Imports
+from cases.C01 import Case01
 import cases.C02
 import cases.C03
 import cases.C04
@@ -10,6 +10,8 @@ import cases.C05
 import cases.C06
 import cases.C09
 import cases.C10
+
+# Module Imports
 import modules.rtcp
 import modules.setup
 import modules.shared as shared
@@ -17,6 +19,7 @@ import modules.directories as dir
 
 from modules.options import Options
 from modules.board import Board
+from modules.runner import TestRunner
 
 HOMEDIR = dir.get_homedir()
 
@@ -180,9 +183,11 @@ def main():
             dual = bool(options.dual)
         )
 
+    testRunner = TestRunner(A, B, options.logdir, options.milestone)
+
     if bool(options.reboot):
-        A.execute('reboot')
-        B.execute('reboot')
+        A.force_execute('shutdown -r now')
+        B.force_execute('shutdown -r now')
     elif bool(options.setup):
         modules.setup.main(A, B, options.logdir, options.milestone)
     elif bool(options.rtcp):
@@ -192,7 +197,8 @@ def main():
         for item in options.chapter:
             match item.zfill(2):
                 case '01':
-                    results.append(cases.C01.run_test(A, B, options.logdir, options.milestone))
+                    testRunner.set_chapter('chapter-01')
+                    results.append(Case01(testRunner).run_test())
                 case '02':
                     results.append(cases.C02.run_test(A, B, options.logdir, options.milestone))
                 case '03':

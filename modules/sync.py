@@ -18,7 +18,7 @@ class Sync:
         for i in range(len(self.boards)):
             cmd[i] = f'ptp4l -P2Hi {self.boards[i].interface} -f ~/gPTP.cfg --step_threshold=1 -m'
 
-            if self.boards[i].controller.lower() == 'i225':
+            if self.boards[i].controller.lower() == 'i225' or self.boards[i].controller.lower() == 'i226':
                 cmd[i] += ' --first_step_threshold=0.0'
 
         try:
@@ -44,7 +44,7 @@ class Sync:
         for i in range(len(self.boards)):
             cmd[i] = f'phc2sys -s {self.boards[i].interface} -O 0 -c CLOCK_REALTIME --step_threshold=1 --transportSpecific=1 -w -m'
 
-            if self.boards[i].controller.lower() == 'i225':
+            if self.boards[i].controller.lower() == 'i225' or self.boards[i].controller.lower() == 'i226':
                 cmd[i] += ' --first_step_threshold=0.0'
 
         try:

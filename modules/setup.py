@@ -14,7 +14,7 @@ def setup_udp_tai(board: Board, tx_buffers: list[int]):
     # Clear edited folder
     shared.clear_folder(f'{HOMEDIR}/files/edited/')
 
-    tx_buffer: int = 256
+    # tx_buffer: int = 256
     filename: str = 'udp_tai-Q'
 
     for i in range(len(tx_buffers)):
@@ -30,7 +30,14 @@ def setup_udp_tai(board: Board, tx_buffers: list[int]):
     for file in files:
         temp = pathlib.Path(file)
         os.system(f'gcc {HOMEDIR}/files/edited/{temp.name} -o {HOMEDIR}/temp/{temp.stem} -lpthread')
+
+    files = glob.glob(f'{HOMEDIR}/temp/udp_tai*')
+    for file in files:
+        temp = pathlib.Path(file)
+        board.connection.put(f'{HOMEDIR}/temp/{temp.name}', 'testing/')
+
     return
+
 
 def setup_connman(board: Board):
     res: Result = board.execute('[ -d "/etc/connman/" ] && echo "True" || echo "False"')
@@ -159,5 +166,5 @@ def main(A: Board, B: Board, platform: str, milestone: str) -> int:
         setup_connman(B)
         config_kernel(B)
 
-    A.force_execute('reboot')
-    B.force_execute('reboot')
+    A.force_execute('shutdown -r now')
+    B.force_execute('shutdown -r now')
