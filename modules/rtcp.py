@@ -140,7 +140,7 @@ def run(board: Board, device: str = 'dwmac'):
 #    LOGGER.info(result.stdout.strip())
 
 
-def run_test(A: Board, B: Board, platform: str, milestone: str) -> int:
+def main(A: Board, B: Board, platform: str, milestone: str) -> int:
     global OUTDIR, LOGDIR, LOGGER, DUAL
     CHAPTER = 'rtcp'
     OUTDIR = dir.get_outdir(platform, milestone, CHAPTER)

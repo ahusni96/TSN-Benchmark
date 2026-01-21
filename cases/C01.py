@@ -12,8 +12,8 @@ from modules.runner import TestRunner
 HOMEDIR: str = dir.get_homedir()
 
 class Case01:
-    def __init__(self, tester: TestRunner):
-        self.RUNNER = tester
+    def __init__(self, runner: TestRunner):
+        self.RUNNER: TestRunner = runner
 
     def set_ingress_egress(self, board: Board) -> None:
         file = open(f'{HOMEDIR}/files/latency.csv', 'r')
@@ -188,7 +188,7 @@ class Case01:
             LOGGER.info(f'TSN Ref SW build failed from {board.side}-side')
 
 
-    def run_test(self) -> str:
+    def main(self) -> str:
         global A, B, OUTDIR, LOGDIR, LOGGER
 
         A = self.RUNNER.A

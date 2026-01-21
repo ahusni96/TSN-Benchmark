@@ -3,13 +3,13 @@ import argparse, glob, os, shutil, sys, time
 
 # Case Imports
 from cases.C01 import Case01
-import cases.C02
-import cases.C03
-import cases.C04
-import cases.C05
-import cases.C06
-import cases.C09
-import cases.C10
+from cases.C02 import Case02
+from cases.C03 import Case03
+from cases.C04 import Case04
+from cases.C05 import Case05
+from cases.C06 import Case06
+from cases.C09 import Case09
+from cases.C10 import Case10
 
 # Module Imports
 import modules.rtcp
@@ -183,38 +183,47 @@ def main():
             dual = bool(options.dual)
         )
 
-    testRunner = TestRunner(A, B, options.logdir, options.milestone)
+    runner = TestRunner(A, B, options.logdir, options.milestone)
 
     if bool(options.reboot):
         A.force_execute('shutdown -r now')
         B.force_execute('shutdown -r now')
     elif bool(options.setup):
+        runner.set_chapter('setup')
         modules.setup.main(A, B, options.logdir, options.milestone)
     elif bool(options.rtcp):
-        modules.rtcp.run_test(A, B, options.logdir, options.milestone)
+        runner.set_chapter('rtcp')
+        modules.rtcp.main(A, B, options.logdir, options.milestone)
     else:
         results: list[str] = []
         for item in options.chapter:
             match item.zfill(2):
                 case '01':
-                    testRunner.set_chapter('chapter-01')
-                    results.append(Case01(testRunner).run_test())
+                    runner.set_chapter('chapter-01')
+                    results.append(Case01(runner).main())
                 case '02':
-                    results.append(cases.C02.run_test(A, B, options.logdir, options.milestone))
+                    runner.set_chapter('chapter-02')
+                    results.append(Case02(runner).main())
                 case '03':
-                    results.append(cases.C03.run_test(A, B, options.logdir, options.milestone))
+                    runner.set_chapter('chapter-03')
+                    results.append(Case03(runner).main())
                 case '04':
-                    results.append(cases.C04.run_test(A, B, options.logdir, options.milestone))
+                    runner.set_chapter('chapter-04')
+                    results.append(Case04(runner).main())
                 case '05':
-                    results.append(cases.C05.run_test(A, B, options.logdir, options.milestone))
+                    runner.set_chapter('chapter-05')
+                    results.append(Case05(runner).main())
                 case '06':
-                    results.append(cases.C06.run_test(A, B, options.logdir, options.milestone))
+                    runner.set_chapter('chapter-06')
+                    results.append(Case06(runner).main())
                 case '09':
-                    results.append(cases.C09.run_test(A, B, options.logdir, options.milestone))
+                    runner.set_chapter('chapter-09')
+                    results.append(Case09(runner).main())
                 case '10':
-                    results.append(cases.C10.run_test(A, B, options.logdir, options.milestone))
+                    runner.set_chapter('chapter-10')
+                    results.append(Case10(runner).main())
                 case _:
-                    sys.exit(0)
+                    sys.exit(1)
 
         for r in range(len(options.chapter)):
             print(f'Case {options.chapter[r]}: {results[r]}')
