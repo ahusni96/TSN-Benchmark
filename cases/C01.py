@@ -15,6 +15,7 @@ class Case01:
     def __init__(self, runner: TestRunner):
         self.RUNNER: TestRunner = runner
 
+
     def set_ingress_egress(self, board: Board) -> None:
         file = open(f'{HOMEDIR}/files/latency.csv', 'r')
         reader = csv.DictReader(file, strict = False)
@@ -145,9 +146,9 @@ class Case01:
                 res: Result = board.execute('ls | grep gPTP.cfg')
                 if res.return_code == 0:
                     LOGGER.info(f'gPTP.cfg has been configured for {board.controller}')
-        except Exception as e:
-            print(e)
+        except:
             LOGGER.info(f'Unable to configure gPTP.cfg for {board.side}-side')
+
 
 
     def move_files(self, board: Board):
@@ -189,13 +190,14 @@ class Case01:
 
 
     def main(self) -> str:
-        global A, B, OUTDIR, LOGDIR, LOGGER
+        global A, B, OUTDIR, LOGDIR, LOGGER, RERUN
 
         A = self.RUNNER.A
         B = self.RUNNER.B
         OUTDIR = self.RUNNER.OUTDIR
         LOGDIR = self.RUNNER.LOGDIR
         LOGGER = self.RUNNER.LOGGER
+        RERUN = self.RUNNER.RERUN
 
         LOGGER.info(f'###\tChapter 1 - Setup')
 
@@ -227,24 +229,27 @@ class Case01:
         time.sleep(1)
 
 
-        LOGGER.header('Configure gPTP.cfg')
-        self.configure_gPTP(A)
-        LOGGER.info('')
-        self.configure_gPTP(B)
-        time.sleep(1)
+        if not RERUN:
+            LOGGER.header('Configure gPTP.cfg')
+            self.configure_gPTP(A)
+            LOGGER.info('')
+            self.configure_gPTP(B)
+            time.sleep(1)
 
 
-        LOGGER.header('Copy executable files')
-        self.move_files(A)
-        LOGGER.info('')
-        self.move_files(B)
-        time.sleep(1)
+        if not RERUN:
+            LOGGER.header('Copy executable files')
+            self.move_files(A)
+            LOGGER.info('')
+            self.move_files(B)
+            time.sleep(1)
 
 
-        LOGGER.header('Build IOTG-TSN-REF-SW')
-        self.build_ref_sw(A)
-        LOGGER.info('')
-        self.build_ref_sw(B)
-        time.sleep(1)
+        #if RERUN:
+        #    LOGGER.header('Build IOTG-TSN-REF-SW')
+        #    self.build_ref_sw(A)
+        #    LOGGER.info('')
+        #    self.build_ref_sw(B)
+        #    time.sleep(1)
 
         return 'PASSED'

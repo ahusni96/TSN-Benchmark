@@ -15,3 +15,4 @@ class Options:
         self.setup: bool = False
         self.rtcp: bool = False
         self.flipped: bool = False
+        self.rerun: bool = False

@@ -12,6 +12,17 @@ from invoke.exceptions import Failure
 
 HOMEDIR = dir.get_homedir()
 TSN_PATH = '/usr/share/iotg-tsn-ref-sw/'
+SLEEP = 2
+
+### Notes
+# iperf3 = 3.14-1
+#   libiperf0 = 3.14-1
+# iproute2 = 6.5.0-ppa1~noble2
+#   libbpf9999 = 0.7.0-1ppa1~noble1
+# ethtool = 6.7.1ppa1~noble3
+
+### PTL
+# ethtool -K $iface rxvlan off
 
 class Case09:
     def __init__(self, runner: TestRunner):
@@ -31,7 +42,7 @@ class Case09:
                 LOGGER.info(f'Setup {board.side}-side completed')
 
         except Failure as e:
-            LOGGER.error(e.result.stderr.strip())
+            LOGGER.error(e.result.stderr)
             LOGGER.error(f'Failed to setup from {board.side}-side')
             sys.exit(1)
         except:
@@ -53,7 +64,7 @@ class Case09:
                 LOGGER.info(f'Run {board.side}-side completed')
 
         except Failure as e:
-            LOGGER.error(e.result.stderr.strip())
+            LOGGER.error(e.result.stderr)
             LOGGER.error(f'Failed to run from {board.side}-side')
             sys.exit(1)
         except:
@@ -110,7 +121,7 @@ class Case09:
 
 
     def main(self) -> str:
-        global A, B, OUTDIR, LOGDIR, LOGGER, DUAL
+        global A, B, OUTDIR, LOGDIR, LOGGER, DUAL, RERUN
 
         A = self.RUNNER.A
         B = self.RUNNER.B
@@ -118,27 +129,29 @@ class Case09:
         LOGDIR = self.RUNNER.LOGDIR
         LOGGER = self.RUNNER.LOGGER
         DUAL = False
+        RERUN = True
 
         A.set_logger(LOGGER)
         B.set_logger(LOGGER)
 
-        LOGGER.info(f'###\tChapter 9 - Bounded Low-latency Transmit/Receive')
+        LOGGER.info(f'###\tChapter 9 - Bounded Low-latency Transmit/Receive (deprecated)')
 
-        LOGGER.header('Setting up TXRX-TSN')
-        p1 = Thread(
-            target = self.setup,
-            args = (A, 'vs1a')
-        )
-        p2 = Thread(
-            target = self.setup,
-            args = (B, 'vs1b')
-        )
+        if not RERUN:
+            LOGGER.header('Setting up TXRX-TSN')
+            p1 = Thread(
+                target = self.setup,
+                args = (A, 'vs1a')
+            )
+            p2 = Thread(
+                target = self.setup,
+                args = (B, 'vs1b')
+            )
 
-        p1.start()
-        p2.start()
+            p1.start()
+            p2.start()
 
-        p1.join()
-        p2.join()
+            p1.join()
+            p2.join()
 
         LOGGER.header('Running TXRX-TSN')
         p1 = Thread(
@@ -151,7 +164,7 @@ class Case09:
         )
 
         p1.start()
-        time.sleep(5)
+        time.sleep(SLEEP)
         p2.start()
 
         p1.join()
@@ -163,9 +176,9 @@ class Case09:
         B.pkill('phc2sys')
         B.pkill('ptp4l')
 
-        LOGGER.header('Restart NetworkManager')
-        A.force_execute('systemctl restart NetworkManager')
-        B.force_execute('systemctl restart NetworkManager')
+        #LOGGER.header('Restart NetworkManager')
+        #A.force_execute('systemctl restart NetworkManager')
+        #B.force_execute('systemctl restart NetworkManager')
 
         LOGGER.header('Validating results')
         return self.validate_result()

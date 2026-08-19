@@ -1,5 +1,6 @@
+from fabric import Result
 from modules.board import Board
-import glob, math, os, shutil
+import glob, math, os, re, shutil
 
 def duration(start, end):
     delta = end - start
@@ -45,3 +46,42 @@ def clear_folder(directory: str):
 
         if os.path.isfile(item):
             os.remove(item)
+
+def print_os_info(board: Board, side: str):
+    result: Result = board.connection.run(
+        f'dmidecode --string processor-version',
+        hide = True
+    )
+    processor = result.stdout.strip()
+
+    result: Result = board.connection.run(
+        f'dmidecode --string bios-version',
+        hide = True
+    )
+    bios = result.stdout.strip()
+
+    result: Result = board.connection.run(
+        f'dmidecode --string bios-release-date',
+        hide = True
+    )
+    bios_date = result.stdout.strip()
+
+    result: Result = board.connection.run(
+        f'uname -r',
+        hide = True
+    )
+    kernel_ver = result.stdout.strip()
+
+    result: Result = board.connection.run(
+        f'cat /etc/os-release | grep PRETTY_NAME',
+        hide = True
+    )
+    pattern = r'\"(.*?)\"'
+    match = re.search(pattern, result.stdout.strip())
+    if match:
+        os_version = match.group(1)
+        board.logger.info(f'SIDE {side} :-')
+        board.logger.info(f'Processor Version : {processor}\nBIOS Version : {bios}\nBIOS Release Date : {bios_date}')
+        board.logger.info(f'Operating System : {os_version}\nKernel : {kernel_ver}')
+    else:
+        board.logger.info('OS info not found!')

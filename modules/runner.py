@@ -2,14 +2,16 @@ from modules.board import Board
 from modules.logger import Log
 
 import modules.directories as dir
+import modules.shared as shared
 
 class TestRunner:
-    def __init__(self, a: Board, b: Board, platform: str, milestone: str):
+    def __init__(self, a: Board, b: Board, platform: str, milestone: str, rerun: bool):
         self.A: Board = a
         self.B: Board = b
         self.PLATFORM: str = platform
         self.MILESTONE: str = milestone
         self.LOGDIR: str = dir.get_logdir(platform, milestone)
+        self.RERUN = rerun
 
     def set_chapter(self, chapter: str):
         self.CHAPTER = chapter
@@ -17,3 +19,9 @@ class TestRunner:
         self.LOGGER: Log = Log(self.CHAPTER, self.LOGDIR)
         self.A.set_logger(self.LOGGER)
         self.B.set_logger(self.LOGGER)
+
+        self.LOGGER.header('Platform Information')
+        shared.print_os_info(self.A, 'A')
+        self.LOGGER.info('')
+        shared.print_os_info(self.A, 'B')
+        self.LOGGER.info('')

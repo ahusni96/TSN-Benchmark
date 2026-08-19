@@ -135,7 +135,7 @@ class Case10:
         A.set_logger(LOGGER)
         B.set_logger(LOGGER)
 
-        LOGGER.info(f'###\tChapter 10 - OPCUA Simple Publish-Subscribe')
+        LOGGER.info(f'###\tChapter 10 - OPCUA Simple Publish-Subscribe (deprecated)')
 
         LOGGER.header('Initiating OPCUA-PACKET')
         a = Thread(target=self.init, args=(A, 'opcua-pkt1a',))

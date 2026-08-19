@@ -4,6 +4,8 @@ from paramiko import SSHConfig
 
 from modules.logger import Log
 
+import re
+
 class Board:
     def __init__(
             self,
@@ -98,14 +100,14 @@ class Board:
 
     def show_ip(self):
         try:
-            res: Result = self.execute('ip -4 addr show ' + self.interface + ' | grep -oP "(?<=inet\s)\d+(\.\d+){3}"')
+            res: Result = self.execute('ip -4 addr show ' + self.interface + r' | grep -oP "(?<=inet\s)\d+(\.\d+){3}"')
             self.logger.info('IP Address: ' + res.stdout.strip())
         except:
             self.logger.error(f'Unable to show IP Address from {self.side}-side')
 
     def remove_ip(self):
         try:
-            res: Result = self.execute('ip -4 addr show ' + self.interface + ' | grep -oP "(?<=inet\s)\d+(\.\d+){3}"')
+            res: Result = self.execute('ip -4 addr show ' + self.interface + r' | grep -oP "(?<=inet\s)\d+(\.\d+){3}"')
             ip_addr = res.stdout.strip()
             self.execute(f'ip addr del {ip_addr}/24 dev {self.interface}')
         except:
@@ -142,3 +144,54 @@ class Board:
             hide = True
         )
         self.kernel: float = float(res.stdout.replace('rt-intel', ''))
+
+    def restart_interface(self):
+        self.connection.run(
+            f'ip link set dev {self.interface} down',
+            disown = True,
+            hide = True
+        )
+        self.connection.run(
+            f'ip link set dev {self.interface} up',
+            disown = True,
+            hide = True
+        )
+
+    def print_os_info(self):
+        result: Result = self.connection.run(
+            f'dmidecode --string processor-version',
+            hide = True
+        )
+        processor = result.stdout.strip()
+
+        result: Result = self.connection.run(
+            f'dmidecode --string bios-version',
+            hide = True
+        )
+        bios = result.stdout.strip()
+
+        result: Result = self.connection.run(
+            f'dmidecode --string bios-release-date',
+            hide = True
+        )
+        bios_date = result.stdout.strip()
+
+        result: Result = self.connection.run(
+            f'uname -r',
+            hide = True
+        )
+        kernel_ver = result.stdout.strip()
+
+        result: Result = self.connection.run(
+            f'cat /etc/os-release | grep PRETTY_NAME',
+            hide = True
+        )
+        pattern = r'\"(.*?)\"'
+        match = re.search(pattern, result.stdout.strip())
+        if match:
+            os_version = match.group(1)
+            self.logger.info(f'SIDE {self.side} :-')
+            self.logger.info(f'Processor Version : {processor}\nBIOS Version : {bios}\nBIOS Release Date : {bios_date}')
+            self.logger.info(f'Operating System : {os_version}\nKernel : {kernel_ver}')
+        else:
+            self.logger.info('OS info not found!')

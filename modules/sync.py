@@ -5,6 +5,8 @@ import modules.shared as shared
 from modules.board import Board
 from modules.logger import Log
 
+GPTP_DIR = "~/gPTP.cfg"
+
 class Sync:
     def __init__(self, boards: list[Board], logger: Log, outdir: str) -> None:
         self.boards = boards
@@ -16,7 +18,7 @@ class Sync:
         cmd = ['','']
 
         for i in range(len(self.boards)):
-            cmd[i] = f'ptp4l -P2Hi {self.boards[i].interface} -f ~/gPTP.cfg --step_threshold=1 -m'
+            cmd[i] = f'ptp4l -P2Hi {self.boards[i].interface} -f {GPTP_DIR} --step_threshold=1 -m'
 
             if self.boards[i].controller.lower() == 'i225' or self.boards[i].controller.lower() == 'i226':
                 cmd[i] += ' --first_step_threshold=0.0'
