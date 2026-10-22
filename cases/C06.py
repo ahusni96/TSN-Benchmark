@@ -275,7 +275,7 @@ class Case06:
         OUTDIR = self.RUNNER.OUTDIR
         LOGDIR = self.RUNNER.LOGDIR
         LOGGER = self.RUNNER.LOGGER
-        RERUN = False #self.RUNNER.RERUN
+        RERUN = True #self.RUNNER.RERUN
         DUAL = False
         OLD = False
 

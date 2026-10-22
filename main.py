@@ -10,7 +10,6 @@ from cases.C05 import Case05
 from cases.C06 import Case06
 from cases.C09 import Case09
 from cases.C10 import Case10
-from cases.rtcp import RTCP_V2 # Old Version (to be removed)
 
 # Module Imports
 import modules.setup
@@ -20,7 +19,7 @@ import modules.directories as dir
 from modules.options import Options
 from modules.board import Board
 from modules.runner import TestRunner
-from modules.rtcp import RTCP_V1
+from modules.rtcp import RTCP_V1, RTCP_V2
 
 HOMEDIR = dir.get_homedir()
 
@@ -97,7 +96,7 @@ PARSER.add_argument(
 )
 PARSER.add_argument(
     '--rtcp',
-    action = 'store_true',
+    choices = ['1ms', '125us'],
     required = False
 )
 PARSER.add_argument(
@@ -112,19 +111,9 @@ PARSER.add_argument(
     required = False
 )
 PARSER.add_argument(
-    '--workaround',
+    '--rerun',
     action = 'store_true',
     required = False
-)
-PARSER.add_argument(
-    '--run',
-    required = False,
-    default = 'default'
-)
-PARSER.add_argument(
-    '--rerun',
-    required=False,
-    action = 'store_true'
 )
 
 def main():
@@ -196,12 +185,10 @@ def main():
     elif bool(options.setup):
         runner.set_chapter('setup')
         modules.setup.main(A, B, options.logdir, options.milestone)
-    elif bool(options.rtcp):
+    elif str(options.rtcp) != '':
         runner.set_chapter('rtcp')
-        #modules.rtcp.main(A, B, options.logdir, options.milestone)
-        #RTCP_V1(runner).main()
-        #RTCP_V2(runner).main()
-        sys.exit(1)
+        RTCP_V2(runner, str(options.rtcp)).main()
+        sys.exit(0)
     else:
         results: list[str] = []
         for item in options.chapter:

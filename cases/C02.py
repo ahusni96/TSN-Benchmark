@@ -43,8 +43,8 @@ class Case02:
             ]
         ]
 
-        ptp4l = tabulate(data_01, HEADERS, 'simple_grid')
-        phc2sys = tabulate(data_02, HEADERS, 'simple_grid')
+        ptp4l = tabulate(data_01, HEADERS, tablefmt = 'github')
+        phc2sys = tabulate(data_02, HEADERS, tablefmt = 'github')
 
         LOGGER.info('\n=== PTP4L ===\n')
         LOGGER.info(ptp4l)

@@ -60,8 +60,8 @@ class Board:
     def no_logger(self) -> bool:
         return self.logger is None
 
-    def execute(self, cmd: str) -> Result:
-        if not self.no_logger():
+    def execute(self, cmd: str, hide: bool = False) -> Result:
+        if not self.no_logger() and not hide:
             self.logger.info(f'{self.side}-side:~$ {cmd}')
 
         return self.connection.run(
@@ -69,8 +69,8 @@ class Board:
             hide = True
         )
 
-    def async_execute(self, cmd: str) -> Promise:
-        if not self.no_logger():
+    def async_execute(self, cmd: str, hide: bool = False) -> Promise:
+        if not self.no_logger() and not hide:
             self.logger.info(f'{self.side}-side:~$ {cmd}')
 
         return self.connection.run(
@@ -78,8 +78,8 @@ class Board:
             asynchronous = True
         )
 
-    def force_execute(self, cmd: str) -> None:
-        if not self.no_logger():
+    def force_execute(self, cmd: str, hide: bool = False) -> None:
+        if not self.no_logger() and not hide:
             self.logger.info(f'{self.side}-side:~$ {cmd}')
 
         self.connection.run(

@@ -12,7 +12,7 @@ from invoke.exceptions import Failure
 
 HOMEDIR = dir.get_homedir()
 TSN_PATH = '/usr/share/iotg-tsn-ref-sw/'
-SLEEP = 2
+SLEEP = 3.5
 
 ### Notes
 # iperf3 = 3.14-1
@@ -40,7 +40,6 @@ class Case09:
 
             if res.return_code == 0:
                 LOGGER.info(f'Setup {board.side}-side completed')
-
         except Failure as e:
             LOGGER.error(e.result.stderr)
             LOGGER.error(f'Failed to setup from {board.side}-side')
@@ -129,12 +128,19 @@ class Case09:
         LOGDIR = self.RUNNER.LOGDIR
         LOGGER = self.RUNNER.LOGGER
         DUAL = False
-        RERUN = True
+        RERUN = False
 
         A.set_logger(LOGGER)
         B.set_logger(LOGGER)
 
         LOGGER.info(f'###\tChapter 9 - Bounded Low-latency Transmit/Receive (deprecated)')
+
+        LOGGER.header('Turn off rxvlan - PTL Only')
+        try:
+            A.execute(f'ethtool -K {A.interface} rxvlan off')
+            B.execute(f'ethtool -K {B.interface} rxvlan off')
+        except:
+            sys.exit(1)
 
         if not RERUN:
             LOGGER.header('Setting up TXRX-TSN')

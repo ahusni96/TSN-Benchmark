@@ -81,11 +81,14 @@ for ((cpu = 0; cpu < TOTAL_CPUS; cpu++)); do
   fi
 done
 
+sleep 10
+
 echo -e "\nSetting (${IFACE}-TxRx-1) affinity to CPU 1:"
-IRQ_NUM=$(grep "${IFACE}-TxRx-1" /proc/interrupts | awk '{print $1}' | sed 's/://')
+IRQ_NUM=$(cat /proc/interrupts | grep "${IFACE}-TxRx-1" | awk '{print $1}' | sed 's/://')
+echo -e "IRQ=NUM = ${IRQ_NUM}"
 if [ -n "$IRQ_NUM" ]; then
-  echo "echo 1 >/proc/irq/${IRQ_NUM}/smp_affinity_list"
-  echo 1 >/proc/irq/${IRQ_NUM}/smp_affinity_list
+  echo "echo 1 > /proc/irq/${IRQ_NUM}/smp_affinity_list"
+  echo 1 > /proc/irq/${IRQ_NUM}/smp_affinity_list
 else
   echo "Warning: Could not find IRQ for ${IFACE}-TxRx-1"
 fi

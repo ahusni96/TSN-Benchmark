@@ -130,7 +130,7 @@ class Case05:
             [shared.read_last(f'{OUTDIR}/tcpdump_B.txt', LINES).strip()]
         ]
 
-        tcpdump = tabulate(data, HEADERS, 'simple_grid')
+        tcpdump = tabulate(data, HEADERS, tablefmt = 'github')
 
         LOGGER.info(tcpdump)
         LOGGER.info('\n')
