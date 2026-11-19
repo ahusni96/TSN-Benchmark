@@ -16,3 +16,5 @@ class Options:
         self.rtcp: bool = False
         self.flipped: bool = False
         self.rerun: bool = False
+        self.stress: bool = False
+        self.test: bool = False

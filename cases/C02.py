@@ -43,8 +43,8 @@ class Case02:
             ]
         ]
 
-        ptp4l = tabulate(data_01, HEADERS, tablefmt = 'github')
-        phc2sys = tabulate(data_02, HEADERS, tablefmt = 'github')
+        ptp4l = tabulate(data_01, HEADERS, tablefmt = 'pretty', colglobalalign = 'left')
+        phc2sys = tabulate(data_02, HEADERS, tablefmt = 'pretty', colglobalalign = 'left')
 
         LOGGER.info('\n=== PTP4L ===\n')
         LOGGER.info(ptp4l)
@@ -78,7 +78,7 @@ class Case02:
         )
 
         PTP4L.start()
-        time.sleep(10)
+        time.sleep(30)
 
         LOGGER.header('Configure hardware clock')
         self.configure_hw_clock(A)
@@ -87,7 +87,7 @@ class Case02:
 
         LOGGER.header('Start phc2sys')
         PHC2SYS.start()
-        time.sleep(50)
+        time.sleep(60)
 
         LOGGER.header('Kill running processes')
         SYNC.stop_sync()

@@ -23,7 +23,7 @@ class Case01:
         board.ingress = result['ingress']
         board.egress = result['egress']
 
-        if board.controller == 'i225':
+        if board.isFoxville():
             board.ingress = ''
             board.egress = ''
 
@@ -76,6 +76,7 @@ class Case01:
     def set_timedatectl(self, board: Board, ntp = 'false', local = 'false') -> None:
         try:
             res: Result = board.execute(f'timedatectl set-ntp {ntp} && timedatectl set-local-rtc {local}')
+
             if res.return_code == 0:
                 self.show_timedatectl(board)
         except:
@@ -121,18 +122,15 @@ class Case01:
 
     def configure_gPTP(self, board: Board):
         try:
-            if board.controller.lower() == 'i225' or board.controller.lower() == 'i226':
-                cmd: str = 'cp /usr/share/iotg-tsn-ref-sw/common/gPTP.cfg /home/root/gPTP.cfg'
+            board.connection.run('rm -rf /etc/gPTP*')
+            board.connection.run('wget https://raw.githubusercontent.com/richardcochran/linuxptp/master/configs/gPTP.cfg -O /etc/gPTP.cfg', hide = True)
+        except:
+            LOGGER.info(f'Error while fetching gPTP.cfg')
 
-                if board.os == 'ubuntu':
-                    cmd = cmd.replace('/home/root/gPTP.cfg', '/root/gPTP.cfg')
-
-                res: Result = board.execute(cmd)
-                if res.return_code == 0:
-                    LOGGER.info(f'gPTP.cfg has been configured for {board.interface}')
-            else:
-                subprocess.run(f'rm -rf {HOMEDIR}/temp/gPTP.cfg', shell=True)
-                board.connection.get('/usr/share/iotg-tsn-ref-sw/common/gPTP.cfg', f'{HOMEDIR}/temp/gPTP.cfg')
+        # Most likely be dropped since I225/I226 is now the main device
+        if board.isFoxville() == False:
+            try:
+                board.connection.get('/etc/gPTP.cfg', f'{HOMEDIR}/temp/gPTP.cfg')
 
                 self.set_ingress_egress(board)
 
@@ -140,15 +138,16 @@ class Case01:
                     w.write(f'\ningressLatency\t\t{board.ingress}\n')
                     w.write(f'egressLatency\t\t{board.egress}')
 
-                board.connection.put(f'{HOMEDIR}/temp/gPTP.cfg')
+                board.connection.put(f'{HOMEDIR}/temp/gPTP.cfg', '/etc/gPTP.cfg')
+            except:
+                LOGGER.info(f'Unable to configure gPTP.cfg for {board.side}-side')
 
-                # Check file exists
-                res: Result = board.execute('ls | grep gPTP.cfg')
-                if res.return_code == 0:
-                    LOGGER.info(f'gPTP.cfg has been configured for {board.controller}')
+        try:
+            res: Result = board.connection.run('ls -l /etc/ | grep gPTP.cfg', hide = True)
+            if res.return_code == 0:
+                LOGGER.info(f'gPTP.cfg has been configured for {board.controller}')
         except:
-            LOGGER.info(f'Unable to configure gPTP.cfg for {board.side}-side')
-
+            LOGGER.info('Error in gPTP.cfg file checking')
 
 
     def move_files(self, board: Board):
@@ -207,13 +206,11 @@ class Case01:
         self.change_mac(B, '22', 'aa:00:aa:00:aa:00')
         time.sleep(1)
 
-
         LOGGER.header('Disable EEE')
         self.set_eee(A)
         LOGGER.info('')
         self.set_eee(B)
         time.sleep(1)
-
 
         LOGGER.header('Disable flow-control')
         self.set_flow_control(A)
@@ -221,29 +218,23 @@ class Case01:
         self.set_flow_control(B)
         time.sleep(1)
 
-
         LOGGER.header('Disable NTP')
         self.set_timedatectl(A)
         LOGGER.info('')
         self.set_timedatectl(B)
         time.sleep(1)
 
+        LOGGER.header('Configure gPTP.cfg')
+        self.configure_gPTP(A)
+        LOGGER.info('')
+        self.configure_gPTP(B)
+        time.sleep(1)
 
-        if not RERUN:
-            LOGGER.header('Configure gPTP.cfg')
-            self.configure_gPTP(A)
-            LOGGER.info('')
-            self.configure_gPTP(B)
-            time.sleep(1)
-
-
-        if not RERUN:
-            LOGGER.header('Copy executable files')
-            self.move_files(A)
-            LOGGER.info('')
-            self.move_files(B)
-            time.sleep(1)
-
+        LOGGER.header('Copy executable files')
+        self.move_files(A)
+        LOGGER.info('')
+        self.move_files(B)
+        time.sleep(1)
 
         #if RERUN:
         #    LOGGER.header('Build IOTG-TSN-REF-SW')

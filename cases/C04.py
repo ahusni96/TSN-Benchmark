@@ -24,14 +24,12 @@ class Case04:
     def setup_qdisc(self, board: Board):
         BASE = board.get_BASE()
 
-        if board.platform.lower() == 'ehl':
-            cmd = f'tc qdisc add dev {board.interface} parent root stab overhead 24 handle 100 taprio num_tc 8 map 0 1 2 3 4 5 6 7 7 7 7 7 7 7 7 7 queues 1@0 1@1 1@2 1@3 1@4 1@5 1@6 1@7 base-time {BASE} sched-entry S 03 5000000 sched-entry S 05 5000000 sched-entry S 09 5000000 sched-entry S 11 5000000 sched-entry S 21 2000000 sched-entry S 41 2000000 sched-entry S 81 2000000 flags 0x2 txtime-delay 0'
-        elif board.controller.lower() == 'i225':
+        if board.isFoxville():
             cmd = f'tc qdisc add dev {board.interface} parent root stab overhead 24 handle 100 taprio num_tc 4 map 0 1 2 3 3 3 3 3 3 3 3 3 3 3 3 3 queues 1@0 1@1 1@2 1@3 base-time {BASE} sched-entry S 01 5000000 sched-entry S 02 5000000 sched-entry S 04 5000000 sched-entry S 08 5000000 flags 0x2 txtime-delay 0'
         else:
             cmd = f'tc qdisc add dev {board.interface} parent root stab overhead 24 handle 100 taprio num_tc 4 map 0 1 2 3 3 3 3 3 3 3 3 3 3 3 3 3 queues 1@0 1@1 1@2 1@3 base-time {BASE} sched-entry S 01 5000000 sched-entry S 03 5000000 sched-entry S 05 5000000 sched-entry S 09 5000000 flags 0x2 txtime-delay 0'
 
-        if DUAL and board.controller.lower() == 'i225':
+        if DUAL and board.isFoxville():
             cmd = f'tc qdisc add dev {board.interface} parent root stab overhead 24 handle 100 taprio num_tc 2 map 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 queues 1@0 1@1 base-time {BASE} sched-entry S 01 5000000 sched-entry S 02 5000000 flags 0x2 txtime-delay 0'
 
         try:
@@ -186,10 +184,10 @@ class Case04:
         )
 
         PTP4L.start()
-        time.sleep(10)
+        time.sleep(30)
 
         PHC2SYS.start()
-        time.sleep(50)
+        time.sleep(60)
 
         LOGGER.header('Clear qdisc')
         A.clear_qdisk()

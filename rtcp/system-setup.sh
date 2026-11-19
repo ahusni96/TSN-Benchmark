@@ -28,6 +28,7 @@ apt install libbpf-dev libxdp-dev clang llvm libyaml-dev rt-tests libmosquitto-d
 
 # Install cpupower
 cd && rm -rf mainline-tracking
+git config --global http.version HTTP/1.1
 cd && git clone --depth 1 --branch linux/v$KERNEL_VER https://github.com/intel/mainline-tracking.git
 cd mainline-tracking/tools/power/cpupower
 make && sudo make install
@@ -39,6 +40,7 @@ wget https://raw.githubusercontent.com/richardcochran/linuxptp/master/configs/gP
 ##################################################################
 ##.....................Build RTC-Testbench........................
 rm -rf ~/RTC-Testbench
+git config --global http.version HTTP/1.1
 cd && git clone https://github.com/Linutronix/RTC-Testbench.git
 mkdir -p ~/RTC-Testbench/build
 cd ~/RTC-Testbench/build

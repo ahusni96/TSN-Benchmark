@@ -3,19 +3,50 @@ from invoke import Promise
 from paramiko import SSHConfig
 
 from modules.logger import Log
+import modules.shared as shared
 
-import re
+import re, sys
+
+DEVICES = [
+    {
+        'ID': '0x125d',
+        'Vendor': '0x8086',
+        'Model': 'I226-IT'
+    },
+    {
+        'ID': '0x125b',
+        'Vendor': '0x8086',
+        'Model': 'I226-LM'
+    },
+    {
+        'ID': '0x125c',
+        'Vendor': '0x8086',
+        'Model': 'I226-V'
+    },
+    {
+        'ID': '0x0d9f',
+        'Vendor': '0x8086',
+        'Model': 'I225-IT'
+    },
+    {
+        'ID': '0x0d9e',
+        'Vendor': '0x8086',
+        'Model': 'I225-LM'
+    },
+    {
+        'ID': '0x0d9d',
+        'Vendor': '0x8086',
+        'Model': 'I225-V'
+    }
+]
 
 class Board:
     def __init__(
             self,
             side: str,
             ip: str,
-            platform: str,
             milestone: str,
-            controller: str,
-            interface: str,
-            os: str,
+            os: str = 'ubuntu',
             user: str = 'root',
             passwd: str = '',
             dual: bool = False):
@@ -23,17 +54,13 @@ class Board:
         self.ip: str = ip
         self.user: str = user
         self.passwd: str = passwd
-        self.platform: str = platform
         self.milestone: str = milestone
-        self.controller: str = controller
         self.speed: str = '1000'
         self.mii: str = 'SGMII'
         self.ingress: str = ''
         self.egress: str = ''
-        self.interface: str = interface
         self.os: str = os
         self.logger: Log = None
-        self.pty = True
         self.dual = dual
         self.config = Config(
             ssh_config = SSHConfig()
@@ -42,13 +69,16 @@ class Board:
         self.set_connection()
         self.set_home()
         self.find_kernel()
+        self.find_interface()
+        self.isConnected()
+        shared.set_time(self)
 
     def set_connection(self):
         self.connection = Connection(
             host = self.ip,
             user = self.user,
             config = self.config,
-            connect_timeout = 120,
+            connect_timeout = 300,
             connect_kwargs = {
                 'password': self.passwd
             }
@@ -89,7 +119,6 @@ class Board:
 
     def pkill(self, process: str) -> None:
         self.force_execute(f'pkill {process}')
-
 
     def clear_qdisk(self) -> None:
         cmd = f'tc qdisc del dev {self.interface} root'
@@ -143,7 +172,12 @@ class Board:
             f'uname -r',
             hide = True
         )
-        self.kernel: float = float(res.stdout.replace('rt-intel', ''))
+        split_1 = res.stdout.split('-')[0]
+        if 'rt' in split_1:
+            split_1 = split_1.replace('rt', '')
+        split_2 = split_1.split('.')
+        temp = f'{split_2[0]}.{split_2[1]}'
+        self.kernel: float = float(temp)
 
     def restart_interface(self):
         self.connection.run(
@@ -195,3 +229,40 @@ class Board:
             self.logger.info(f'Operating System : {os_version}\nKernel : {kernel_ver}')
         else:
             self.logger.info('OS info not found!')
+
+    def find_interface(self) -> None:
+        result: Result = self.connection.run(f'ls /sys/bus/pci/devices/', hide = True)
+        devices = result.stdout.strip().split('\n')
+        for address in devices:
+            try:
+                R1: Result = self.connection.run(f'ls /sys/bus/pci/devices/{address}/net/', hide = True)
+                interface: str = R1.stdout.strip()
+            except:
+                continue
+
+            R2: Result = self.connection.run(f'cat /sys/class/net/{interface}/device/vendor', hide = True)
+            vendor: str = R2.stdout.strip()
+            R3: Result = self.connection.run(f'cat /sys/class/net/{interface}/device/device', hide = True)
+            device: str = R3.stdout.strip()
+
+            for item in DEVICES:
+                if device == item['ID'] and vendor == item['Vendor']:
+                    self.interface = interface
+                    self.vendor = vendor
+                    self.device = device
+                    self.controller = item['Model']
+
+    def isFoxville(self) -> bool:
+        for item in DEVICES:
+            if self.device == item['ID'] and self.vendor == item['Vendor']:
+                return True
+            else:
+                continue
+        return False
+
+    def isConnected(self):
+        R4: Result = self.connection.run(f'ip link show {self.interface} | grep -q UP && ethtool {self.interface} 2>/dev/null | grep -q "Link detected: yes" && echo "True" || echo "False"', hide = True)
+        isConnected: bool = bool(R4.stdout.strip())
+        if not isConnected:
+            self.logger.info(f'Please check network connection!')
+            sys.exit(1)

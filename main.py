@@ -1,5 +1,5 @@
 # System Imports
-import argparse, glob, os, shutil, sys, time
+import argparse, sys
 
 # Case Imports
 from cases.C01 import Case01
@@ -8,18 +8,15 @@ from cases.C03 import Case03
 from cases.C04 import Case04
 from cases.C05 import Case05
 from cases.C06 import Case06
-from cases.C09 import Case09
-from cases.C10 import Case10
 
 # Module Imports
-import modules.setup
 import modules.shared as shared
 import modules.directories as dir
 
 from modules.options import Options
 from modules.board import Board
 from modules.runner import TestRunner
-from modules.rtcp import RTCP_V1, RTCP_V2
+from modules.rtcp import RTCP_V2
 
 HOMEDIR = dir.get_homedir()
 
@@ -32,13 +29,6 @@ PARSER.add_argument(
     default = 'test'
 )
 PARSER.add_argument(
-    '--platform',
-    nargs = 2,
-    required = False,
-    choices = ['adln', 'adls', 'asl', 'ehl', 'rplp', 'rpls', 'tglh', 'tglu'],
-    default = 'temp temp'
-)
-PARSER.add_argument(
     '--milestone',
     required = True,
     default = 'test'
@@ -46,8 +36,8 @@ PARSER.add_argument(
 PARSER.add_argument(
     '--os',
     nargs = 2,
-    required = True,
-    default = 'yocto yocto',
+    required = False,
+    default = 'ubuntu ubuntu',
     choices = ['yocto', 'ubuntu']
 )
 PARSER.add_argument(
@@ -66,20 +56,6 @@ PARSER.add_argument(
     default = 'pass1234'
 )
 PARSER.add_argument(
-    '--controller',
-    nargs = 2,
-    required = True,
-    choices = [
-        '811E1512', '811E2110', 'GPY115', 'GPY211', 'GPY215', 'DP83867E', 'I225',
-        '811e1512', '811e2110', 'gpy115', 'gpy211', 'gpy215', 'dp83867e', 'i225'
-    ]
-)
-PARSER.add_argument(
-    '--interface',
-    nargs = 2,
-    required = True
-)
-PARSER.add_argument(
     '--dual',
     action = 'store_true',
     required = False
@@ -96,6 +72,7 @@ PARSER.add_argument(
 )
 PARSER.add_argument(
     '--rtcp',
+    default = '',
     choices = ['1ms', '125us'],
     required = False
 )
@@ -106,12 +83,17 @@ PARSER.add_argument(
     required = False
 )
 PARSER.add_argument(
-    '--flipped',
+    '--rerun',
     action = 'store_true',
     required = False
 )
 PARSER.add_argument(
-    '--rerun',
+    '--stress',
+    action = 'store_true',
+    required = False
+)
+PARSER.add_argument(
+    '--test',
     action = 'store_true',
     required = False
 )
@@ -124,70 +106,36 @@ def main():
     # Clear temp folder
     shared.clear_folder(f'{HOMEDIR}/temp/')
 
-    if not bool(options.flipped):
-        A: Board = Board(
-            side = 'A',
-            ip = options.ip[0],
-            platform = options.platform[0],
-            milestone = options.milestone,
-            controller = options.controller[0],
-            interface = options.interface[0],
-            os = options.os[0],
-            user = options.user,
-            passwd = options.passwd,
-            dual = bool(options.dual)
-        )
+    A: Board = Board(
+        side = 'A',
+        ip = options.ip[0],
+        milestone = options.milestone,
+        os = options.os[0],
+        user = options.user,
+        passwd = options.passwd,
+        dual = bool(options.dual)
+    )
 
-        B: Board = Board(
-            side = 'B',
-            ip = options.ip[1],
-            platform = options.platform[1],
-            milestone = options.milestone,
-            controller = options.controller[1],
-            interface = options.interface[1],
-            os = options.os[1],
-            user = options.user,
-            passwd = options.passwd,
-            dual = bool(options.dual)
-        )
-    else:
-        B: Board = Board(
-            side = 'B',
-            ip = options.ip[0],
-            platform = options.platform[0],
-            milestone = options.milestone,
-            controller = options.controller[0],
-            interface = options.interface[0],
-            os = options.os[0],
-            user = options.user,
-            passwd = options.passwd,
-            dual = bool(options.dual)
-        )
+    B: Board = Board(
+        side = 'B',
+        ip = options.ip[1],
+        milestone = options.milestone,
+        os = options.os[1],
+        user = options.user,
+        passwd = options.passwd,
+        dual = bool(options.dual)
+    )
 
-        A: Board = Board(
-            side = 'A',
-            ip = options.ip[1],
-            platform = options.platform[1],
-            milestone = options.milestone,
-            controller = options.controller[1],
-            interface = options.interface[1],
-            os = options.os[1],
-            user = options.user,
-            passwd = options.passwd,
-            dual = bool(options.dual)
-        )
-
-    runner = TestRunner(A, B, options.logdir, options.milestone, options.rerun)
+    runner = TestRunner(A, B, options.logdir, options.milestone, options.rerun, options.setup)
 
     if bool(options.reboot):
-        A.force_execute('reboot -f')
-        B.force_execute('reboot -f')
-    elif bool(options.setup):
-        runner.set_chapter('setup')
-        modules.setup.main(A, B, options.logdir, options.milestone)
+        A.force_execute('systemctl reboot -i')
+        B.force_execute('systemctl reboot -i')
+    elif bool(options.test):
+        A.find_interface()
     elif str(options.rtcp) != '':
-        runner.set_chapter('rtcp')
-        RTCP_V2(runner, str(options.rtcp)).main()
+        runner.set_chapter(f'rtcp-{options.rtcp}')
+        RTCP_V2(runner, str(options.rtcp), stress = options.stress).main()
         sys.exit(0)
     else:
         results: list[str] = []
@@ -211,12 +159,6 @@ def main():
                 case '06':
                     runner.set_chapter('chapter-06')
                     results.append(Case06(runner).main())
-                case '09':
-                    runner.set_chapter('chapter-09')
-                    results.append(Case09(runner).main())
-                case '10':
-                    runner.set_chapter('chapter-10')
-                    results.append(Case10(runner).main())
                 case _:
                     sys.exit(1)
             print(f'')

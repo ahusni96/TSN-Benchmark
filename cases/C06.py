@@ -1,14 +1,11 @@
 from invoke.runners import Result, Promise
 from threading import Thread
-import sys, time
+import math, sys, time, glob, os, pathlib
 
 from modules.board import Board
-from modules.logger import Log
 from modules.runner import TestRunner
-from modules.sync import Sync
 
 import modules.directories as dir
-import modules.setup as setup
 import modules.shared as shared
 
 HOMEDIR = dir.get_homedir()
@@ -16,6 +13,35 @@ HOMEDIR = dir.get_homedir()
 class Case06:
     def __init__(self, runner: TestRunner):
         self.RUNNER: TestRunner = runner
+
+    def setup_udp_tai(self, board: Board, tx_buffers: list[int]):
+        board.connection.run('mkdir -p ~/testing')
+
+        # Clear edited folder
+        shared.clear_folder(f'{HOMEDIR}/files/edited/')
+
+        # tx_buffer: int = 256
+        filename: str = 'udp_tai-Q'
+
+        for i in range(len(tx_buffers)):
+            with open(f'{HOMEDIR}/files/udp_tai.c', 'r') as file:
+                buffer: str = file.read()
+                buffer = buffer.replace('<BUFFER>', str(tx_buffers[i]))
+                with open(f'{HOMEDIR}/files/edited/{filename}{i}.c', 'w') as edited:
+                    edited.write(buffer)
+                    edited.close()
+                file.close()
+
+        files = glob.glob(f'{HOMEDIR}/files/edited/*', recursive = True)
+        for file in files:
+            temp = pathlib.Path(file)
+            os.system(f'gcc {HOMEDIR}/files/edited/{temp.name} -o {HOMEDIR}/temp/{temp.stem} -lpthread')
+
+        files = glob.glob(f'{HOMEDIR}/temp/udp_tai*')
+        for file in files:
+            temp = pathlib.Path(file)
+            board.connection.put(f'{HOMEDIR}/temp/{temp.name}', 'testing/')
+
 
     def enable_frame_preempt(self, board: Board, tool: str):
         try:
@@ -73,7 +99,7 @@ class Case06:
         res: Result = board.execute(f'ethtool --show-mm {board.interface} | grep -i verification')
         LOGGER.info(res.stdout)
         tmp = res.stdout.replace('Verification status: ', '').replace('\n', '')
-        if tmp == 'FAILED':
+        if tmp == 'FAILED' or tmp == 'INITIAL':
             return False
         else:
             return True
@@ -122,7 +148,7 @@ class Case06:
         try:
             res: Result = board.execute(f"ethtool --include-statistics --show-mm {board.interface} | sed -n '/Statistics/,$p' | sed 1d")
             shared.save_output(OUTDIR, f'FPE_fragment_{board.side}', res.stdout.strip())
-            LOGGER.info(res.stdout.rstrip())
+            LOGGER.info(res.stdout)
         except:
             LOGGER.error(f'Unable to check FPE fragment')
 
@@ -140,11 +166,26 @@ class Case06:
         except:
             LOGGER.error('Unable to start udp_tai')
 
+
     def reset_mm(self, board: Board):
         try:
             board.force_execute(f'ethtool --set-mm {board.interface} pmac-enabled off tx-enabled off verify-enabled off')
         except:
             LOGGER.error('Unable to reset ethtool mm config')
+
+
+    def verify_results(self, tx: int, rx: int):
+        # Notes:
+        # tx - packets sent (side A)
+        # rx - packets received (side B)
+
+        if tx < 1 or rx < 1:
+            return 'FAILED - No packets trasmitted/received'
+
+        if (math.ceil(rx / 1000) * 1000) != (math.ceil(tx / 1000) * 1000):
+            return 'FAILED - Too many dropped packets'
+        else:
+            return 'PASSED'
 
 
     # For 5.10 - 6.12 (ADL/RPL)
@@ -157,7 +198,7 @@ class Case06:
         self.configure_old_queue(A)
 
         LOGGER.header('Setup UDP_TAI')
-        setup.setup_udp_tai(A, [68, 68, 1250, 1250])
+        self.setup_udp_tai(A, [68, 68, 1250, 1250])
 
         LOGGER.header('Check FPE fragments (before)')
         self.check_old_fpe_fragment(A)
@@ -171,7 +212,7 @@ class Case06:
         self.check_old_fpe_fragment(B)
 
 
-    # For 6.16 and above (PTL/WCL)
+    # For kernel 6.16 and above
     def case_current(self, tool: str = 'ethtool', config: str = 'taprio'):
         if not RERUN:
             LOGGER.header(f'Reset MM Config')
@@ -232,8 +273,8 @@ class Case06:
         tmp.append(self.check_verfication_status(B))
 
         if not tmp[0] or not tmp[1]:
+            LOGGER.info('ERROR - Verification status check failed')
             sys.exit(1)
-
 
         LOGGER.header('Configure TXQ PRIO')
         if not RERUN:
@@ -243,7 +284,7 @@ class Case06:
 
         if not RERUN:
             LOGGER.header('Setup UDP_TAI')
-            setup.setup_udp_tai(A, [1250, 1250, 68, 68])
+            self.setup_udp_tai(A, [1250, 1250, 68, 68])
 
         LOGGER.header(f'Configure {config.upper()} queue')
         self.configure_queue(A, config)
@@ -275,7 +316,7 @@ class Case06:
         OUTDIR = self.RUNNER.OUTDIR
         LOGDIR = self.RUNNER.LOGDIR
         LOGGER = self.RUNNER.LOGGER
-        RERUN = True #self.RUNNER.RERUN
+        RERUN = False #self.RUNNER.RERUN
         DUAL = False
         OLD = False
 
@@ -284,16 +325,12 @@ class Case06:
 
         LOGGER.info(f'###\tChapter 6 - Qbu Frame Preemption')
 
-        #LOGGER.header('Restart Network Interface')
-        #A.restart_interface()
-        #B.restart_interface()
-
         LOGGER.header('Clear qdisc')
         A.clear_qdisk()
         B.clear_qdisk()
 
         # valid param values: [ethtool/lldptool] [taprio/mqprio]
-        if A.controller.lower() == 'i225' and B.controller.lower() == 'i225':
+        if A.isFoxville() and B.isFoxville():
             if A.kernel > 6.14 and B.kernel > 6.14 and not OLD:
                 self.case_current('ethtool', 'taprio')
             else:

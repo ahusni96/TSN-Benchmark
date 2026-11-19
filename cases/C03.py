@@ -38,7 +38,7 @@ class Case03:
     def set_traffic(self, board: Board):
         cmd = f'tc qdisc replace dev {board.interface} parent 100:2 cbs locredit -1350 hicredit 150 sendslope -900000 idleslope 100000 offload 1'
 
-        if board.controller.lower() == 'i225':
+        if board.isFoxville():
             cmd = f'tc qdisc replace dev {board.interface} parent 100:1 cbs locredit -1350 hicredit 150 sendslope -900000 idleslope 100000 offload 1'
 
         try:
@@ -51,7 +51,7 @@ class Case03:
     def start_talker(self, board: Board):
         cmd = f'./tsn-talker -d 01:AA:AA:AA:AA:AA -i {board.interface} -p 1 -s 1500'
 
-        if board.controller.lower() == 'i225':
+        if board.isFoxville():
             cmd = f'./tsn-talker -d 01:AA:AA:AA:AA:AA -i {board.interface} -p 0 -s 1500'
 
         try:
@@ -75,7 +75,7 @@ class Case03:
     def verify_packets(self, board: Board):
         cmd = f'tc -s qdisc show dev {board.interface} | grep 100:2 -A3'
 
-        if board.controller.lower() == 'i225':
+        if board.isFoxville():
             cmd = f'tc -s qdisc show dev {board.interface} | grep 100:1 -A3'
 
         try:
@@ -133,10 +133,10 @@ class Case03:
         )
 
         PTP4L.start()
-        time.sleep(10)
+        time.sleep(30)
 
         PHC2SYS.start()
-        time.sleep(20)
+        time.sleep(60)
 
         LOGGER.header('Check queues')
         self.check_queues(A)

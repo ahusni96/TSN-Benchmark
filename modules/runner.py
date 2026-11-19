@@ -5,13 +5,14 @@ import modules.directories as dir
 import modules.shared as shared
 
 class TestRunner:
-    def __init__(self, a: Board, b: Board, platform: str, milestone: str, rerun: bool):
+    def __init__(self, a: Board, b: Board, platform: str, milestone: str, rerun: bool, setup: bool = False):
         self.A: Board = a
         self.B: Board = b
         self.PLATFORM: str = platform
         self.MILESTONE: str = milestone
         self.LOGDIR: str = dir.get_logdir(platform, milestone)
         self.RERUN = rerun
+        self.SETUP = setup
 
     def set_chapter(self, chapter: str):
         self.CHAPTER = chapter

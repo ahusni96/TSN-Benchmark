@@ -1,42 +1,15 @@
+### This script was used to setup yocto os in previous releases
+### Status: Deprecated
+
 from fabric import Result
-import glob, os, pathlib, re, shutil
+import re
 
 # Custom Imports
 import modules.directories as dir
-import modules.shared as shared
 from modules.board import Board
 from modules.logger import Log
 
 HOMEDIR = dir.get_homedir()
-
-def setup_udp_tai(board: Board, tx_buffers: list[int]):
-
-    # Clear edited folder
-    shared.clear_folder(f'{HOMEDIR}/files/edited/')
-
-    # tx_buffer: int = 256
-    filename: str = 'udp_tai-Q'
-
-    for i in range(len(tx_buffers)):
-        with open(f'{HOMEDIR}/files/udp_tai.c', 'r') as file:
-            buffer: str = file.read()
-            buffer = buffer.replace('<BUFFER>', str(tx_buffers[i]))
-            with open(f'{HOMEDIR}/files/edited/{filename}{i}.c', 'w') as edited:
-                edited.write(buffer)
-                edited.close()
-            file.close()
-
-    files = glob.glob(f'{HOMEDIR}/files/edited/*', recursive = True)
-    for file in files:
-        temp = pathlib.Path(file)
-        os.system(f'gcc {HOMEDIR}/files/edited/{temp.name} -o {HOMEDIR}/temp/{temp.stem} -lpthread')
-
-    files = glob.glob(f'{HOMEDIR}/temp/udp_tai*')
-    for file in files:
-        temp = pathlib.Path(file)
-        board.connection.put(f'{HOMEDIR}/temp/{temp.name}', 'testing/')
-
-    return
 
 
 def setup_connman(board: Board):

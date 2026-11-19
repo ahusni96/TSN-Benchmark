@@ -4,7 +4,6 @@ from threading import Thread
 import math, time
 
 from modules.board import Board
-from modules.logger import Log
 from modules.runner import TestRunner
 from modules.sync import Sync
 
@@ -20,9 +19,6 @@ class Case05:
     def add_qdisc(self, board: Board):
         cmd = f'tc qdisc add dev {board.interface} handle 8001: parent root mqprio num_tc 4 map 0 1 2 3 3 3 3 3 3 3 3 3 3 3 3 3 queues 1@0 1@1 1@2 1@3 hw 0'
 
-        if board.platform.lower() == 'ehl' and board.controller.lower() != 'i225':
-            cmd = f'tc qdisc add dev {board.interface} handle 8001: parent root mqprio num_tc 4 map 0 1 2 3 3 3 3 3 3 3 3 3 3 3 3 3 queues 1@0 1@1 2@2 1@4 hw 0'
-
         if DUAL:
             cmd = f'tc qdisc add dev {board.interface} handle 8001: parent root mqprio num_tc 2 map 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 queues 1@0 1@1 hw 0'
 
@@ -35,9 +31,6 @@ class Case05:
 
     def replace_qdisc(self, board: Board):
         cmd = f'tc qdisc replace dev {board.interface} parent 8001:4 etf offload clockid CLOCK_TAI delta 500000'
-
-        if board.platform.lower() == 'ehl' and board.controller.lower() != 'i225':
-            cmd = f'tc qdisc replace dev {board.interface} parent 8001:5 etf offload clockid CLOCK_TAI delta 500000'
 
         if DUAL:
             cmd = f'tc qdisc replace dev {board.interface} parent 8001:2 etf offload clockid CLOCK_TAI delta 500000'
@@ -118,6 +111,11 @@ class Case05:
                 self.print_logs()
 
                 LOGGER.info(f'Total Lines: {len(lines)}\nPassed (+/-500ns): {100 - round(failed_percent, 2)}%\nFailed: {round(failed_percent, 2)}%')
+
+                if round(failed_percent, 2) > 5:
+                    return 'FAILED - Too many packets is outside acceptable range (5.00% MAX)'
+                else:
+                    return 'PASSED'
         except:
             LOGGER.error('Failed to validate results')
 
@@ -127,10 +125,10 @@ class Case05:
         LINES = 50
 
         data = [
-            [shared.read_last(f'{OUTDIR}/tcpdump_B.txt', LINES).strip()]
+            [shared.read_last(f'{OUTDIR}/tcpdump_B.txt', LINES)]
         ]
 
-        tcpdump = tabulate(data, HEADERS, tablefmt = 'github')
+        tcpdump = tabulate(data, HEADERS, tablefmt = 'pretty', colglobalalign = 'left')
 
         LOGGER.info(tcpdump)
         LOGGER.info('\n')
@@ -158,13 +156,14 @@ class Case05:
             target = SYNC.start_ptp4l,
             args = ()
         )
-        PTP4L.start()
-        time.sleep(5)
-
         PHC2SYS = Thread(
             target = SYNC.start_phc2sys,
             args = ()
         )
+
+        PTP4L.start()
+        time.sleep(30)
+
         PHC2SYS.start()
         time.sleep(60)
 
@@ -205,6 +204,4 @@ class Case05:
         PTP4L.join()
 
         LOGGER.header('Validate results')
-        self.validate_results()
-
-        return 'PASSED'
+        return self.validate_results()
